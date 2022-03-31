@@ -9,14 +9,6 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    username: {
-      type: DataTypes.STRING,
-      isNotEmail(value) {
-        if (Validator.isEmail(value)) {
-          throw new Error('Cannot be an email.');
-        }
-      }
-    },
     email: DataTypes.STRING,
     imageProfile: DataTypes.TEXT,
     hashedPassword: DataTypes.STRING.BINARY,
@@ -37,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
 
-  User.login = async function ({ username, password }) {
+  User.login = async function ({ email, password }) {
     const user = await User.scope('loginUser').findOne({
-      where: { username }
+      where: { email }
     });
 
     if (user && user.validatePassword(password)) {
@@ -47,12 +39,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-  User.signup = async function ({ firstName, lastName, username, email, imageProfile, password }) {
+  User.signup = async function ({ firstName, lastName, email, imageProfile, password }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       firstName,
       lastName,
-      username,
       email,
       imageProfile,
       hashedPassword
@@ -65,8 +56,8 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.toSafeObject = function () {
-    const { id, username, imageProfile, email } = this;
-    return { id, username, imageProfile, email };
+    const { id, imageProfile, email } = this;
+    return { id, imageProfile, email };
   };
 
   User.prototype.validatePassword = function (password) {

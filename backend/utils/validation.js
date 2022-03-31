@@ -1,5 +1,4 @@
 const { validationResult } = require('express-validator');
-const { ResultWithContext } = require('express-validator/src/chain');
 
 const handleValidationErrors = (req, _res, next) => {
     const validationErrors = validationResult(req);

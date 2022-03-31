@@ -10,13 +10,10 @@ const router = express.Router();
 
 //  L O G I N   V A L I D A T O R
 const validateLogin = [
-    check('username')
+    check('email')
         .exists({ checkFalsy: true })
-        .notEmpty()
-        .withMessage('Please provide a valid username')
-        .not()
         .isEmail()
-        .withMessage('Username cannot be an email.'),
+        .withMessage('Please provide a valid email.'),
     check('password')
         .exists({ checkFalsy: true })
         .notEmpty()
@@ -26,9 +23,9 @@ const validateLogin = [
 
 //   L O G I N
 router.post('/', validateLogin, asyncHandler(async (req, res, next) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.login({ username, password });
+    const user = await User.login({ email, password });
 
     if (!user) {
         const err = new Error('Login failed');
