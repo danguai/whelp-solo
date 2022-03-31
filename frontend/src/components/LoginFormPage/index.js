@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import * as sessionActions from '../../store/session';
 
@@ -29,30 +29,55 @@ const LoginFormPage = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Email
-                <input
-                    type='text'
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Password
-                <input
-                    type='password'
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <button type='submit'>Login</button>
-        </form>
+        <div className='login__form__container'>
+            <div>
+                <div className='login__form__box'>
+                    <div className='login__title'>
+                        Log In to Whelp
+                    </div>
+                    <div className='login__subtitle'>
+                        New to Whelp?
+                        <Link className='switching' to='/signup'>
+                            Sign Up
+                        </Link>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                        <div>
+
+                            <input
+                                className='input__login'
+                                type='email'
+                                value={email}
+                                placeholder='Email'
+                                onChange={e => setEmail(e.target.value)}
+                                required
+                            />
+                            <input
+                                className='input__login'
+                                type='password'
+                                value={password}
+                                placeholder='Password'
+                                onChange={e => setPassword(e.target.value)}
+                                required
+                            />
+
+                        </div>
+                        <button
+                            className='red__button'
+                            type='submit'
+                        >
+                            Log In
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <img className='image' src={require('../../images/login_dog.png')} />
+            </div>
+        </div>
     )
 };
 

@@ -1,13 +1,27 @@
 .navigation__bar {
-    /* top: 0; */
-    height: 50px;
+    height: 68px;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     position: fixed;
     top: 0;
-    background-color:  rgb(255, 255, 255);
+}
+
+.navigation__bar__red {
+    height: 68px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background: rgb(180, 40, 46, 1);
+}
+
+.whelp__logo__white {
+    width: 150px;
+    height: auto;
 }
 
 .session__user {
