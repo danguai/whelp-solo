@@ -7,6 +7,8 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import NavigationRed from "./components/Navigation/NavBar-Red";
+import Splashpage from "./components/Splashpage";
+
 
 import * as sessionActions from './store/session';
 
@@ -18,18 +20,23 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  const isNavigationRed = () => {
-    // if ()
-  };
+  let navBar;
+  const path = window.location.pathname;
+
+  if (path === '/login' || path === '/signup') {
+    navBar = (<NavigationRed />)
+  } else {
+    navBar = (<Navigation isLoaded={isLoaded} />)
+  }
 
   return (
     <>
-      {isNavigationRed ?
-        <NavigationRed />
-        :
-        <Navigation isLoaded={isLoaded} />}
+      {navBar}
       {isLoaded && (
         <Switch>
+          <Route exact path='/'>
+            <Splashpage />
+          </Route>
           <Route path='/login'>
             <LoginFormPage />
           </Route>
