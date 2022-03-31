@@ -10,7 +10,7 @@ const LoginFormPage = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
@@ -21,7 +21,7 @@ const LoginFormPage = () => {
     const handleSubmit = e => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ username, password }))
+        return dispatch(sessionActions.login({ email, password }))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -34,11 +34,11 @@ const LoginFormPage = () => {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
-                Username
+                Email
                 <input
                     type='text'
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     required
                 />
             </label>

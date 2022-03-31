@@ -18,13 +18,6 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isLength({ min: 4, max: 50 })
         .withMessage('Last Name should be between 4 and 50 characters long'),
-    check('username')
-        .exists({ checkFalsy: true })
-        .not()
-        .isEmail()
-        .withMessage('Username cannot be an email.')
-        .isLength({ min: 4, max: 30 })
-        .withMessage('Please provide a username with at least 4 characters.'),
     check('email')
         .exists({ checkFalsy: true })
         .isEmail()
@@ -52,7 +45,6 @@ router.post('/', validateSignup, asyncHandler(async (req, res) => {
     const {
         firstName,
         lastName,
-        username,
         email,
         imageProfile,
         password
@@ -62,7 +54,6 @@ router.post('/', validateSignup, asyncHandler(async (req, res) => {
         {
             firstName,
             lastName,
-            username,
             email,
             imageProfile,
             password

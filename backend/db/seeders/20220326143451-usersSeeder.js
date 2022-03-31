@@ -8,7 +8,6 @@ module.exports = {
     const demoUser = {
       firstName: 'Juan',
       lastName: 'Perez',
-      username: 'TheBreeder',
       email: 'puppy@breeder.com',
       imageProfile: '',
       hashedPassword: bcrypt.hashSync('password'),
