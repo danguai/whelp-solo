@@ -1,13 +1,26 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { login } from '../../store/session';
 
 import ProfileButton from './ProfileButton';
+
 import './Navigation.css';
 
 const Navigation = ({ isLoaded }) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const sessionUser = useSelector(state => state.session.user);
-    console.log('SESSION USER:', sessionUser);
+
+    const demoUserOnClick = async () => {
+        await dispatch(login({
+            email: 'puppy@breeder.com',
+            password: 'password'
+        }));
+        history.push('/');
+    };
 
     let sessionLinks;
 
@@ -20,23 +33,35 @@ const Navigation = ({ isLoaded }) => {
     } else {
         sessionLinks = (
             <>
-                {/* <button>
-                    Demo User
-                </button> */}
-                <button>
-                    Log In
-                </button>
-                <button>
-                    Sign Up
-                </button>
+                <ul className='session__user'>
+                    <button
+                        onClick={demoUserOnClick}>
+                        Demo User
+                    </button>
+                    <li>
+                        <Link to='/login'>
+                            <button>
+                                Log In
+                            </button>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='/signup'>
+                            <button>
+                                Sign Up
+                            </button>
+                        </Link>
+                    </li>
+                </ul>
+
             </>
         )
     }
 
     return (
         <div>
-            <nav>
-                <div>
+            <nav className="navigation__bar">
+                <div className=''>
                     {sessionLinks}
                 </div>
             </nav>

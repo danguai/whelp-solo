@@ -12,7 +12,6 @@ const SignupFormPage = () => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [imageProfile, setImageProfile] = useState('');
     const [password, setPassword] = useState('');
@@ -32,10 +31,10 @@ const SignupFormPage = () => {
             return dispatch(sessionActions.signup({
                 firstName,
                 lastName,
-                username,
                 email,
                 imageProfile,
-                password
+                password,
+                confirmPassword
             }))
                 .catch(async res => {
                     const data = await res.json();
@@ -44,7 +43,6 @@ const SignupFormPage = () => {
         }
         return setErrors([`Confirm Password should match Password`]);
     };
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -66,15 +64,6 @@ const SignupFormPage = () => {
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Username
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
                     required
                 />
             </label>

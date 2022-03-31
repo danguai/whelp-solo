@@ -42,12 +42,14 @@ const validateSignup = [
 
 //   S I G N   U P
 router.post('/', validateSignup, asyncHandler(async (req, res) => {
+    console.log(req.body);
     const {
         firstName,
         lastName,
         email,
         imageProfile,
-        password
+        password,
+        confirmPassword
     } = req.body;
 
     const user = await User.signup(
@@ -56,7 +58,8 @@ router.post('/', validateSignup, asyncHandler(async (req, res) => {
             lastName,
             email,
             imageProfile,
-            password
+            password,
+            confirmPassword
         }
     );
 

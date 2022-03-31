@@ -1,0 +1,9 @@
+.navigation__bar {
+    border: 1px red solid;
+}
+
+.session__user {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
