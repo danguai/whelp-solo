@@ -1,0 +1,35 @@
+.user__menu__button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    border: 0;
+    width: auto;
+    padding: 0 20px;
+    height: 35px;
+    background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(205, 205, 205) 100%);
+}
+
+.user__menu__button:hover {
+    cursor: pointer;
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(205, 205, 205) 100%);
+}
+
+.dropdown__menu__options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    top: 40px;
+    right: 228px;
+    width: 150px;
+    height: 100px;
+    background-color: white;
+    list-style-type: none;
+    padding-right: 10px;
+    margin: 10px 20px;
+    border-radius: 2px;
+    z-index: 500;
+}

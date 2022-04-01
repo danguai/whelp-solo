@@ -39,19 +39,20 @@ const Navigation = ({ isLoaded }) => {
             <>
                 <ul className='session__user'>
                     <button
+                        className='button__demo all__buttons'
                         onClick={demoUserOnClick}>
-                        Demo User
+                        Demo
                     </button>
                     <li className='buttons__space'>
                         <Link to='/login'>
-                            <button className='login__button'>
+                            <button className='button__login all__buttons'>
                                 Log In
                             </button>
                         </Link>
                     </li>
                     <li>
                         <Link to='/signup'>
-                            <button>
+                            <button className='button__signup all__buttons'>
                                 Sign Up
                             </button>
                         </Link>
@@ -65,12 +66,14 @@ const Navigation = ({ isLoaded }) => {
     return (
         <div className="navigation__bar">
             <div className='menu__top__left'>
-                <div className='review__navbar'>
+                <a href='/reviews'
+                    className='review__navbar'>
                     Write a Review
-                </div>
-                <div className='business__navbar'>
+                </a>
+                <a href='/breeders'
+                    className='business__navbar'>
                     Whelp for Business
-                </div>
+                </a>
             </div>
             <div className='buttons__sessions'>
                 {sessionLinks}

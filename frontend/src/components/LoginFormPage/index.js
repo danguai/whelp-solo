@@ -64,7 +64,7 @@ const LoginFormPage = () => {
                             />
                         </div>
                         <button
-                            className='red__button login__button'
+                            className='red__button login__button all__buttons'
                             type='submit'
                         >
                             Log In
