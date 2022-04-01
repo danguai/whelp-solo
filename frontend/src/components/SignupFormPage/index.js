@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import * as sessionActions from '../../store/session';
 
@@ -45,65 +45,97 @@ const SignupFormPage = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                First Name
-                <input
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Last Name
-                <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Email
-                <input
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-            <label className='signup__label'>
-                Image Profile
-                <input
-                    type="text"
-                    value={imageProfile}
-                    onChange={(e) => setImageProfile(e.target.value)}
-                />
-            </label>
-            <label>
-                Password
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Confirm Password
-                <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Sign Up</button>
-        </form>
+        <div className='signup__form__container'>
+            <div>
+                <img className='signup__image' src={require('../../images/signup_dog.png')} />
+            </div>
+            <div>
+                <div className='signup__form__box'>
+                    <div className='signup__title'>
+                        Sign Up for Whelp
+                    </div>
+                    <form className='signup__form' onSubmit={handleSubmit}>
+                        <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                        <div className='signup__full__name'>
+                            <div>
+                                <input
+                                    placeholder='First Name'
+                                    className='input__signup'
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    placeholder='Last Name'
+                                    className='input__signup'
+                                    type="text"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <input
+                                placeholder='Email'
+                                className='input__signup'
+                                type="text"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className='signup__label'>
+                            <input
+                                placeholder='Image Profile'
+                                className='input__signup'
+                                type="text"
+                                value={imageProfile}
+                                onChange={(e) => setImageProfile(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                placeholder='Password'
+                                className='input__signup'
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <input
+                                placeholder='Confirm Password'
+                                className='input__signup'
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button
+                            className='red__button signup__button'
+                            type="submit"
+                        >
+                            Sign Up
+                        </button>
+                        <div className='signup__subtitle'>
+                            Already on Whelp?
+                            <Link className='switching' to='/login'>
+                                Log In
+                            </Link>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     );
 };
 

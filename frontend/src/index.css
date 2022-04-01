@@ -10,3 +10,16 @@ body {
     /* width : 1920px; */
     /* height : 1080px; */
 }
+
+.red__button {
+    font-weight: bold;
+    color: white;
+    background : rgba(180, 40, 46, 1);
+    border: 1px rgba(180, 40, 46, 1) solid;
+    border-radius: 5px;
+}
+
+::placeholder {
+    padding-left: 10px;
+    color: rgb(155, 155, 155)
+}

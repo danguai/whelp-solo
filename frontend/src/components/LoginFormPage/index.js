@@ -41,12 +41,11 @@ const LoginFormPage = () => {
                             Sign Up
                         </Link>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form className='login__form' onSubmit={handleSubmit}>
                         <ul>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
-                        <div>
-
+                        <div className='login__form' >
                             <input
                                 className='input__login'
                                 type='email'
@@ -63,10 +62,9 @@ const LoginFormPage = () => {
                                 onChange={e => setPassword(e.target.value)}
                                 required
                             />
-
                         </div>
                         <button
-                            className='red__button'
+                            className='red__button login__button'
                             type='submit'
                         >
                             Log In
@@ -75,7 +73,7 @@ const LoginFormPage = () => {
                 </div>
             </div>
             <div>
-                <img className='image' src={require('../../images/login_dog.png')} />
+                <img className='login__image' src={require('../../images/login_dog.png')} />
             </div>
         </div>
     )
