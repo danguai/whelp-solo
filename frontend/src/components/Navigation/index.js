@@ -42,9 +42,9 @@ const Navigation = ({ isLoaded }) => {
                         onClick={demoUserOnClick}>
                         Demo User
                     </button>
-                    <li>
+                    <li className='buttons__space'>
                         <Link to='/login'>
-                            <button>
+                            <button className='login__button'>
                                 Log In
                             </button>
                         </Link>

@@ -46,3 +46,7 @@
 .menu__top__left {
     display: flex;
 }
+
+.buttons__space {
+    padding: 0 10px;
+}
