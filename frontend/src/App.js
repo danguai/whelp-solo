@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -14,18 +14,23 @@ import * as sessionActions from './store/session';
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  console.log('LOCATION', location);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   let navBar;
-  const path = window.location.pathname;
+
+  const path = location.pathname;
 
   if (path === '/login' || path === '/signup') {
+    console.log('LOGIN PAGE');
     navBar = (<NavigationRed />)
   } else {
+    console.log('SPLASHPAGE');
     navBar = (<Navigation isLoaded={isLoaded} />)
   }
 
