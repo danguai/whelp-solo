@@ -62,7 +62,7 @@ const SignupFormPage = () => {
                             <div>
                                 <input
                                     placeholder='First Name'
-                                    className='input__signup'
+                                    className='full__input__signup'
                                     type="text"
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
@@ -72,7 +72,7 @@ const SignupFormPage = () => {
                             <div>
                                 <input
                                     placeholder='Last Name'
-                                    className='input__signup'
+                                    className='full__input__signup'
                                     type="text"
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
@@ -90,19 +90,10 @@ const SignupFormPage = () => {
                                 required
                             />
                         </div>
-                        <div className='signup__label'>
-                            <input
-                                placeholder='Image Profile'
-                                className='input__signup'
-                                type="text"
-                                value={imageProfile}
-                                onChange={(e) => setImageProfile(e.target.value)}
-                            />
-                        </div>
                         <div>
                             <input
                                 placeholder='Password'
-                                className='input__signup'
+                                className='input__signup password'
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -125,11 +116,13 @@ const SignupFormPage = () => {
                         >
                             Sign Up
                         </button>
-                        <div className='signup__subtitle'>
-                            Already on Whelp?
-                            <Link className='switching' to='/login'>
-                                Log In
-                            </Link>
+                        <div className='align__right'>
+                            <div className='signup__subtitle'>
+                                Already on Whelp?
+                                <Link className='switching' to='/login'>
+                                    Log In
+                                </Link>
+                            </div>
                         </div>
                     </form>
                 </div>

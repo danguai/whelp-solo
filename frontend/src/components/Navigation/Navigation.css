@@ -27,6 +27,7 @@
 .session__user {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .session__user > li {
@@ -45,4 +46,37 @@
 
 .menu__top__left {
     display: flex;
+}
+
+.buttons__space {
+    padding: 0 10px;
+}
+
+.button__login {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.all__buttons:hover {
+ cursor: pointer;
+}
+
+.button__demo {
+    color: white;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255, 0.25);
+    padding: 7px;
+    border: white 1px solid;
+    border-radius: 3px;
+}
+
+.button__signup {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    padding: 7px;
+    border: white 1px solid;
+    border-radius: 3px;
 }

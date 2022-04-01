@@ -14,6 +14,10 @@ const ProfileButton = () => {
 
     const sessionUser = useSelector(state => state.session.user);
 
+    // console.log(sessionUser);
+
+    const fullName = `${sessionUser.firstName} ${sessionUser.lastName.slice(0, 1)}.`;
+
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -36,12 +40,16 @@ const ProfileButton = () => {
 
     return (
         <div>
-            <button onClick={openMenu}>
+            <button
+                className="user__menu__box"
+                onClick={openMenu}
+            >
                 Profile Button
             </button>
             {showMenu && (
-                <ul>
-                    <li>{sessionUser.email}</li>
+                <ul className='dropdown__menu__options'>
+                    {/* <li>{sessionUser.email}</li> */}
+                    <li>{fullName}</li>
                     <li>
                         <button onClick={logout}>
                             Log Out

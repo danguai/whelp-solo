@@ -6,7 +6,19 @@ const Splashpage = () => {
     return (
         <div>
             <div className='bg__image__container'>
-                <img className="background__image" src={'https://images.unsplash.com/photo-1525253013412-55c1a69a5738?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80'} />
+                <div className='logo__search__content'>
+                    <a href='/'>
+                        <img className='whelp__logo' src={require('../../images/whelp-logo.png')} />
+                    </a>
+                    <div className='splashpage__searchbar'>
+                        <form id="search__form">
+                            <input className='searchbar' type="search" />
+                            <button className='magnifier__search__button all__buttons' >
+                                <img className='magnifier' src={require('../../images/magnifier.png')} />
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div>
                 Whelpers
