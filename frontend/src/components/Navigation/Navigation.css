@@ -1,9 +1,48 @@
 .navigation__bar {
-    border: 1px red solid;
+    height: 68px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+}
+
+.navigation__bar__red {
+    height: 68px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background: rgb(180, 40, 46, 1);
+}
+
+.whelp__logo__white {
+    width: 150px;
+    height: auto;
 }
 
 .session__user {
     display: flex;
     justify-content: center;
+}
+
+.session__user > li {
     list-style: none;
+}
+
+.review__navbar {
+    padding: 0 25px;
+    color: rgb(0, 0, 0)
+}
+
+.business__navbar {
+    padding: 0 25px;
+    color: rgb(0, 0, 0)
+}
+
+.menu__top__left {
+    display: flex;
 }

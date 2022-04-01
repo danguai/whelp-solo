@@ -22,6 +22,10 @@ const Navigation = ({ isLoaded }) => {
         history.push('/');
     };
 
+    let redNavBar;
+
+
+
     let sessionLinks;
 
     if (sessionUser) {
@@ -59,12 +63,18 @@ const Navigation = ({ isLoaded }) => {
     }
 
     return (
-        <div>
-            <nav className="navigation__bar">
-                <div className=''>
-                    {sessionLinks}
+        <div className="navigation__bar">
+            <div className='menu__top__left'>
+                <div className='review__navbar'>
+                    Write a Review
                 </div>
-            </nav>
+                <div className='business__navbar'>
+                    Whelp for Business
+                </div>
+            </div>
+            <div className='buttons__sessions'>
+                {sessionLinks}
+            </div>
         </div>
     )
 };
