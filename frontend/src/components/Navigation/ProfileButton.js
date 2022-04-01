@@ -14,9 +14,17 @@ const ProfileButton = () => {
 
     const sessionUser = useSelector(state => state.session.user);
 
-    // console.log(sessionUser);
-
     const fullName = `${sessionUser.firstName} ${sessionUser.lastName.slice(0, 1)}.`;
+
+    const userProfile = sessionUser && (
+        sessionUser.imageProfile ?
+            <img
+                src={'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80'}
+            /> :
+            <img
+                src={require('../../images/user_template.png')}
+            />
+    );
 
     const openMenu = () => {
         if (showMenu) return;
@@ -41,21 +49,35 @@ const ProfileButton = () => {
     return (
         <div>
             <button
-                className="user__menu__box"
+                className="user__profile__button"
                 onClick={openMenu}
             >
-                Profile Button
+                <div className="user__button">
+                    {userProfile}
+                </div>
+                <div className="arrow__down">
+                    <img className='arrow__down__image' src={require('../../images/arrow-down.png')} />
+                </div>
             </button>
             {showMenu && (
-                <ul className='dropdown__menu__options'>
-                    {/* <li>{sessionUser.email}</li> */}
-                    <li>{fullName}</li>
-                    <li>
-                        <button onClick={logout}>
-                            Log Out
-                        </button>
-                    </li>
-                </ul>
+                <div className="dropdown__menu">
+                    <ul className='dropdown__menu__options'>
+                        <div className="user__image__dropdown">
+                            {userProfile}
+                        </div>
+                        <div className="user__info">
+                            <li>{fullName}</li>
+                            <li>
+                                <button
+                                    className="logout__button"
+                                    onClick={logout}
+                                >
+                                    Log Out
+                                </button>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
             )}
         </div>
     )
