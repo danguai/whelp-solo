@@ -7,6 +7,8 @@ module.exports = {
       name: 'Rumer',
       description: "The oldest of them all",
       birthday: new Date(),
+      userId: 2,
+      litterId: 4,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -14,6 +16,8 @@ module.exports = {
     const puppy_02 = {
       name: 'Scout',
       description: "The middle pup",
+      userId: 2,
+      litterId: 4,
       birthday: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -22,6 +26,8 @@ module.exports = {
     const puppy_03 = {
       name: 'Tallullahs',
       description: "The youngest and craziest",
+      userId: 2,
+      litterId: 4,
       birthday: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),

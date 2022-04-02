@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     imageHeader: DataTypes.TEXT,
     description: DataTypes.TEXT,
-    address: DataTypes.TEXT
+    address: DataTypes.TEXT,
+    userId: DataTypes.INTEGER,
   }, {});
 
   Litter.associate = function (models) {

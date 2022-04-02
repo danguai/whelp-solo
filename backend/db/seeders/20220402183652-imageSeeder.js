@@ -7,6 +7,7 @@ module.exports = {
       image_02: 'https://images.unsplash.com/photo-1620189507187-1ecc7e2e9cff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
       image_03: 'https://images.unsplash.com/photo-1601979031925-424e53b6caaa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
       image_04: 'https://images.unsplash.com/photo-1602250798140-fb1513d8f6a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
+      puppyId: 7,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -16,6 +17,7 @@ module.exports = {
       image_02: 'https://images.unsplash.com/photo-1530667912788-f976e8ee0bd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80',
       image_03: '',
       image_04: '',
+      puppyId: 8,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -25,6 +27,7 @@ module.exports = {
       image_02: 'https://images.unsplash.com/photo-1589441161120-8781d5644435?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2525&q=80',
       image_03: 'https://images.unsplash.com/photo-1524641234638-4c303747c310?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80',
       image_04: '',
+      puppyId: 9,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

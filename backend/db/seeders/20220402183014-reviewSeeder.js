@@ -7,6 +7,8 @@ module.exports = {
       title: 'Great Litter',
       message: 'So cute',
       score: 5,
+      userId: 3,
+      litterId: 4,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

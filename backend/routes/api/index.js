@@ -10,9 +10,9 @@ router.use('/users', usersRouter);
 
 router.use('/litter', litterRouter);
 
-router.post('/test', (req, res) => {
-    res.json({ requestBody: req.body });
-});
+// router.post('/test', (req, res) => {
+//     res.json({ requestBody: req.body });
+// });
 
 
 
