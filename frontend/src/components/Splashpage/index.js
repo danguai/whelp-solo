@@ -1,5 +1,7 @@
 import React from 'react';
 
+import LitterAll from '../LitterAll';
+
 import './Splashpage.css';
 
 const Splashpage = () => {
@@ -22,6 +24,7 @@ const Splashpage = () => {
             </div>
             <div>
                 Whelpers
+                {/* <LitterAll /> */}
             </div>
         </div>
     )

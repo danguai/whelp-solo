@@ -2,9 +2,11 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import sessionReducer from './session';
+import litterReducer from './litter';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
+    litter: litterReducer,
 });
 
 let enhancer;

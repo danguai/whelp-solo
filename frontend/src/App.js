@@ -8,6 +8,9 @@ import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import NavigationRed from "./components/Navigation/NavBar-Red";
 import Splashpage from "./components/Splashpage";
+import Litter from "./components/LitterForm";
+import LitterPage from "./components/LitterPage";
+import LitterAll from "./components/LitterAll";
 
 
 import * as sessionActions from './store/session';
@@ -17,7 +20,7 @@ function App() {
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log('LOCATION', location);
+  // console.log('LOCATION', location);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -27,10 +30,10 @@ function App() {
   const path = location.pathname;
 
   if (path === '/login' || path === '/signup') {
-    console.log('LOGIN PAGE');
-    navBar = (<NavigationRed />)
+    // console.log('LOGIN PAGE');
+    navBar = (<NavigationRed isLoaded={isLoaded} />)
   } else {
-    console.log('SPLASHPAGE');
+    // console.log('SPLASHPAGE');
     navBar = (<Navigation isLoaded={isLoaded} />)
   }
 
@@ -47,6 +50,15 @@ function App() {
           </Route>
           <Route path='/signup'>
             <SignupFormPage />
+          </Route>
+          <Route exact path='/litter'>
+            <Litter />
+          </Route>
+          <Route exact path='/litter-all'>
+            <LitterAll />
+          </Route>
+          <Route exact path='/litter/:id'>
+            <LitterPage />
           </Route>
         </Switch>
       )}

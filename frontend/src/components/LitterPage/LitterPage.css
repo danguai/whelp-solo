@@ -1,0 +1,8 @@
+.litter__bg__image {
+    /* background-image:linear-gradient(180deg, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.75) 100%); */
+    /* background-size: cover;
+    background-position: center; */
+    width: 100%;
+    height: 600px;
+    z-index: 1000;
+}
