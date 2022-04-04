@@ -18,3 +18,10 @@
     font-size: 40px;
     font-weight: bold;
 }
+
+.white__paw__score {
+    position: absolute;
+    margin: 300px 0 0 150px;
+    font-size: 40px;
+    font-weight: bold;
+}

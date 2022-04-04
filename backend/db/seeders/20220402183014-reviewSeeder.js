@@ -7,13 +7,23 @@ module.exports = {
       title: 'Great Litter',
       message: 'So cute',
       score: 5,
-      userId: 3,
-      litterId: 4,
+      userId: 2,
+      litterId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
 
-    return queryInterface.bulkInsert('Reviews', [review_01_WillisMoore], {});
+    const review_02_TwoSiblings = {
+      title: 'Great Litter',
+      message: 'So cute',
+      score: 5,
+      userId: 1,
+      litterId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    return queryInterface.bulkInsert('Reviews', [review_01_WillisMoore, review_02_TwoSiblings], {});
 
   },
 

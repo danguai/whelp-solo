@@ -26,6 +26,11 @@ const LitterPage = () => {
             <div className='litter__name'>
                 {litter.name}
             </div>
+            <div>
+                <div>
+                    <img className='white__paw__score' src={require('../../images/Paw-Score.png')} />
+                </div>
+            </div>
             <div className='gradient'>
                 <img
                     className='litter__bg__image'
