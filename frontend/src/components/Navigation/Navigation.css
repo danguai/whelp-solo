@@ -6,6 +6,7 @@
     align-items: center;
     position: fixed;
     top: 0;
+    background: rgb(255, 255, 255, 0.25);
 }
 
 .navigation__bar__red {
@@ -44,7 +45,7 @@
     align-items: center;
 }
 
-.session__user > li {
+.session__user>li {
     list-style: none;
 }
 
@@ -74,7 +75,7 @@
 }
 
 .all__buttons:hover {
- cursor: pointer;
+    cursor: pointer;
 }
 
 .button__demo {
@@ -111,14 +112,14 @@
 }
 
 .magnifier__search__button__navbar {
-    width : 44px;
-    height : 34px;
+    width: 44px;
+    height: 34px;
     background: rgb(180, 40, 46, 1);
     border: 1px rgb(180, 40, 46, 1) solid;
     border-radius: 5px;
 }
 
-.magnifier__search__button__navbar > img {
+.magnifier__search__button__navbar>img {
     width: 20px;
     height: auto;
 }

@@ -15,8 +15,9 @@ const LitterPage = () => {
 
     const [active, setActive] = useState('false');
 
-    // const sessionUser = useSelector(state => state.session.user);
+
     const litter = useSelector(state => state.litter?.litter);
+    const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(readLitter(id));
@@ -35,6 +36,10 @@ const LitterPage = () => {
     };
 
     if (!litter) return null;
+
+    const litterOwner = litter.userId === sessionUser?.id;
+
+    const canWriteReview = sessionUser && !litterOwner;
 
     return (
         <div>
@@ -76,17 +81,25 @@ const LitterPage = () => {
                 </div>
             </div>
             <div>
-                <Link to='/litter-edit'
+                {litterOwner && <Link to='/litter-edit'
                     className='edit__litter__button'>
-                    Edit Litter
-                </Link>
-                <button
+                    <button>
+                        Edit Litter
+                    </button>
+                </Link>}
+                {litterOwner && <button
                     className='delete__litter__button'
                     onClick={removeLitter}
                     type='submit'
                 >
                     Delete Litter
-                </button>
+                </button>}
+                {canWriteReview && <Link to='/reviews'
+                    className='edit__litter__button'>
+                    <button>
+                        Leave a Review
+                    </button>
+                </Link>}
             </div>
             <div className='gradient'>
                 <img

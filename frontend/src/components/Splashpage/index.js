@@ -29,10 +29,15 @@ const Splashpage = () => {
                     </div>
                 </div>
             </div>
-            <div>
-                New Litters
-                <Litters />
+            <div className='new__litters__container'>
+                <div className='new__litters__title'>
+                    New Litters
+                </div>
+                <div>
+                    <Litters />
+                </div>
             </div>
+
         </div>
     )
 };

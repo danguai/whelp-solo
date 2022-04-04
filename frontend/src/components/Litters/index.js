@@ -21,14 +21,20 @@ const Litters = () => {
     if (!litters) return null;
 
     return (
-        <div>
+        <div id='all__litters'>
             <ul className='recent__litters'>
                 {litters.map(litter =>
                     <li
-                        key={litter.id}>
+                        key={litter.id}
+                        className='each__litter__container'>
                         <NavLink to={`/litter/${litter.id}`}>
-                            <div>
-                                {litter.name}
+                            <div className="find__your__place__photo">
+                                <div>
+                                    <img className='place__photo' src={litter.imageHeader} />
+                                </div>
+                                <div className="litter__title">
+                                    {litter.name}
+                                </div>
                             </div>
                         </NavLink>
                     </li>
