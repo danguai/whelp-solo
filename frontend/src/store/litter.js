@@ -5,6 +5,7 @@ const CREATE_LITTER = 'litter/CREATE_LITTER';
 const READ_LITTER = 'litter/READ_LITTER';
 const READ_LITTERS = 'litter/READ_LITTERS';
 const UPDATE_LITTER = 'litter/UPDATE_LITTER';
+const DELETE_LITTER = 'litter/DELETE_LITTER';
 
 //  A C T I O N S
 const createLitterAction = litter => {
@@ -32,6 +33,12 @@ const updateLitterAction = litter => {
     return {
         type: UPDATE_LITTER,
         payload: litter
+    };
+};
+
+const deleteLitterAction = () => {
+    return {
+        type: DELETE_LITTER
     };
 };
 
@@ -119,6 +126,15 @@ export const updateLitter = litter => async dispatch => {
     }
 };
 
+//  D E L E T E   L I T T E R
+export const deleteLitter = id => async dispatch => {
+    const response = await csrfFetch(`/api/litter/${id}`, {
+        method: 'DELETE'
+    });
+    dispatch(deleteLitterAction());
+    return response;
+};
+
 let initialState = { litter: null };
 
 const litterReducer = (state = initialState, action) => {
@@ -139,6 +155,10 @@ const litterReducer = (state = initialState, action) => {
         case UPDATE_LITTER:
             newState = Object.assign({}, state);
             newState.litter = action.payload;
+            return newState;
+        case DELETE_LITTER:
+            newState = Object.assign({}, state);
+            newState.litter = null;
             return newState;
         default:
             return state;

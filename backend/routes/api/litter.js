@@ -78,7 +78,17 @@ router.put('/:id', requireAuth, asyncHandler(async (req, res) => {
     const litter = await Litter.findByPk(id);
 
     return res.json(litter);
+}));
 
+//  D E L E T E   L I T T E R
+router.delete('/:id', asyncHandler(async (req, res) => {
+    const litter = await Litter.findByPk(req.params.id);
+
+    if (!litter) throw new Error('Can not find litter.');
+
+    await Litter.destroy({ where: { id: litter.id } });
+
+    return res.json({ id: litter.id });
 }));
 
 
