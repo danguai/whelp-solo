@@ -15,7 +15,10 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const { name,
         imageHeader,
         description,
-        address
+        address,
+        city,
+        state,
+        zipcode
     } = req.body;
 
     const userId = req.user.id;
@@ -27,6 +30,9 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
                 imageHeader,
                 description,
                 address,
+                city,
+                state,
+                zipcode,
                 userId
             });
         return res.json({ litter });
