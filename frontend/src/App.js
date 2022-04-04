@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation, useParams } from 'react-router-dom';
 
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
+
 import Navigation from "./components/Navigation";
 import NavigationRed from "./components/Navigation/NavBar-Red";
+import NavigationLitter from "./components/Navigation/NavBar-Litter";
+
 import Splashpage from "./components/Splashpage";
+
 import Litter from "./components/LitterForm";
 import LitterPage from "./components/LitterPage";
-import LitterAll from "./components/LitterAll";
+import Litters from "./components/Litters";
 
 
 import * as sessionActions from './store/session';
@@ -19,6 +23,8 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const litter = useSelector(state => state.litter?.litter);
 
   // console.log('LOCATION', location);
   useEffect(() => {
@@ -32,6 +38,10 @@ function App() {
   if (path === '/login' || path === '/signup') {
     // console.log('LOGIN PAGE');
     navBar = (<NavigationRed isLoaded={isLoaded} />)
+  } else if (path == `/litter/${litter?.id}`) {
+    // console.log('SPLASHPAGE');
+    navBar = (<NavigationLitter isLoaded={isLoaded} />)
+
   } else {
     // console.log('SPLASHPAGE');
     navBar = (<Navigation isLoaded={isLoaded} />)
@@ -54,8 +64,8 @@ function App() {
           <Route exact path='/litter'>
             <Litter />
           </Route>
-          <Route exact path='/litter-all'>
-            <LitterAll />
+          <Route exact path='/litters'>
+            <Litters />
           </Route>
           <Route exact path='/litter/:id'>
             <LitterPage />

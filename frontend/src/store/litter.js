@@ -1,10 +1,9 @@
-import Litter from '../components/LitterForm';
 import { csrfFetch } from './csrf';
 
 //  C O N S T A N T S
 const CREATE_LITTER = 'litter/CREATE_LITTER';
-const READ_ONE_LITTER = 'litter/READ_ONE_LITTER';
-const READ_ALL_LITTER = 'litter/READ_ALL_LITTER';
+const READ_LITTER = 'litter/READ_LITTER';
+const READ_LITTERS = 'litter/READ_LITTERS';
 const UPDATE_LITTER = 'litter/UPDATE_LITTER';
 
 //  A C T I O N S
@@ -15,17 +14,17 @@ const createLitterAction = litter => {
     };
 };
 
-const readOneLitterAction = litter => {
+const readLitterAction = litter => {
     return {
-        type: READ_ONE_LITTER,
+        type: READ_LITTER,
         payload: litter
     };
 };
 
-const readAllLitterAction = allLitter => {
+const readLittersAction = litters => {
     return {
-        type: READ_ALL_LITTER,
-        arrOfLitter: allLitter
+        type: READ_LITTERS,
+        arrOfLitters: litters
     };
 };
 
@@ -74,26 +73,26 @@ export const createLitter = litter => async dispatch => {
 };
 
 //  R E A D   O N E   L I T T E R   T H U N K
-export const readOneLitter = id => async dispatch => {
+export const readLitter = id => async dispatch => {
     const response = await csrfFetch(`/api/litter/${id}`);
 
-    console.log('RESPONSE ONE LITTER', response);
+    // console.log('RESPONSE ONE LITTER', response);
 
     if (response.ok) {
-        const oneLitter = await response.json();
-        dispatch(readOneLitterAction(oneLitter));
+        const litter = await response.json();
+        dispatch(readLitterAction(litter));
     }
 };
 
 //  R E A D   A L L   L I T T E R   T H U N K
-export const readAllLitter = () => async dispatch => {
+export const readLitters = () => async dispatch => {
     const response = await csrfFetch(`/api/litter`);
 
     console.log('ALL LITTER IS INEVITABLE', response);
 
     if (response.ok) {
-        const allLitter = await response.json();
-        dispatch(readAllLitterAction(allLitter));
+        const litters = await response.json();
+        dispatch(readLittersAction(litters));
     }
 };
 
@@ -123,13 +122,13 @@ const litterReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.litter = action.payload;
             return newState;
-        case READ_ONE_LITTER:
+        case READ_LITTER:
             newState = Object.assign({}, state);
             newState.litter = action.payload;
             return newState;
-        case READ_ALL_LITTER:
+        case READ_LITTERS:
             newState = Object.assign({}, state);
-            newState.litterList = action.arrOfLitter;
+            newState.littersList = action.arrOfLitters;
             return newState;
         case UPDATE_LITTER:
             newState = Object.assign({}, state);

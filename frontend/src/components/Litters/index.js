@@ -2,28 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { readAllLitter } from '../../store/litter';
+import { readLitters } from '../../store/litter';
 // import * as sessionActions from '../../store/session';
 
-import './LitterAll.css';
+import './Litters.css';
 
-const LitterAll = () => {
+const Litters = () => {
     const dispatch = useDispatch();
 
-    const allLitter = useSelector(state => state.litter?.litterList);
+    const litters = useSelector(state => state.litter?.littersList);
 
-    console.log('ALL LITTER', allLitter);
+    console.log('LITTERS LIST', litters);
 
     useEffect(() => {
-        dispatch(readAllLitter());
+        dispatch(readLitters());
     }, [dispatch]);
 
 
     return (
         <div>
-            Litter All Page
+            Litters Page
             <ul>
-                {allLitter.map(litter =>
+                {litters.map(litter =>
                     <li
                         key={litter.id}>
                         <NavLink to={`/litter/${litter.id}`}>
@@ -38,4 +38,4 @@ const LitterAll = () => {
     )
 };
 
-export default LitterAll;
+export default Litters;
