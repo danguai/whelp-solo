@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { readLitter, updateLitter } from '../../store/litter';
+import { readLitter, deleteLitter } from '../../store/litter';
 // import * as sessionActions from '../../store/session';
 
 import './LitterPage.css';
@@ -11,6 +11,7 @@ import './score.css';
 const LitterPage = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [active, setActive] = useState('false');
 
@@ -21,11 +22,16 @@ const LitterPage = () => {
         dispatch(readLitter(id));
     }, [dispatch]);
 
-    let countScore = 0;
+    // let sumScore = 0;
 
     const handleToggle = () => {
-
         setActive(!active);
+    };
+
+
+    const removeLitter = () => {
+        dispatch(deleteLitter(litter.id));
+        history.push('/');
     };
 
     if (!litter) return null;
@@ -74,6 +80,13 @@ const LitterPage = () => {
                     className='edit__litter__button'>
                     Edit Litter
                 </Link>
+                <button
+                    className='delete__litter__button'
+                    onClick={removeLitter}
+                    type='submit'
+                >
+                    Delete Litter
+                </button>
             </div>
             <div className='gradient'>
                 <img
