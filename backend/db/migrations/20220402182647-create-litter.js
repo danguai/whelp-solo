@@ -22,7 +22,19 @@ module.exports = {
       },
       address: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING(255)
+      },
+      city: {
+        allowNull: false,
+        type: Sequelize.STRING(85)
+      },
+      state: {
+        allowNull: false,
+        type: Sequelize.STRING(60)
+      },
+      zipcode: {
+        allowNull: false,
+        type: Sequelize.STRING(5)
       },
       userId: {
         allowNull: false,

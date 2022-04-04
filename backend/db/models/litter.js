@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     imageHeader: DataTypes.TEXT,
     description: DataTypes.TEXT,
-    address: DataTypes.TEXT,
+    address: DataTypes.STRING,
+    city: DataTypes.STRING,
+    state: DataTypes.STRING,
+    zipcode: DataTypes.STRING,
     userId: DataTypes.INTEGER,
   }, {});
 
