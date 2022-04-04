@@ -8,7 +8,7 @@ import './Splashpage.css';
 
 const Splashpage = () => {
 
-    const litters = useSelector(state => state);
+    const litters = useSelector(state => state.litter?.littersList);
 
     console.log('LITTERS', litters);
 
@@ -29,10 +29,15 @@ const Splashpage = () => {
                     </div>
                 </div>
             </div>
-            <div>
-                Whelpers
-                {/* <Litters /> */}
+            <div className='new__litters__container'>
+                <div className='new__litters__title'>
+                    New Litters
+                </div>
+                <div>
+                    <Litters />
+                </div>
             </div>
+
         </div>
     )
 };

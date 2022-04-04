@@ -1,8 +1,6 @@
 * {
     margin: 0;
     font-family: 'Helvetica';
-    /* color: white; */
-    /* padding: 5px; */
 }
 
 body {
@@ -14,7 +12,7 @@ body {
 .red__button {
     font-weight: bold;
     color: white;
-    background : rgba(180, 40, 46, 1);
+    background: rgba(180, 40, 46, 1);
     border: 1px rgba(180, 40, 46, 1) solid;
     border-radius: 5px;
 }
