@@ -43,6 +43,9 @@ export const createLitter = litter => async dispatch => {
         imageHeader,
         description,
         address,
+        city,
+        state,
+        zipcode,
         userId
     } = litter;
 
@@ -54,6 +57,9 @@ export const createLitter = litter => async dispatch => {
                 imageHeader,
                 description,
                 address,
+                city,
+                state,
+                zipcode,
                 userId
             })
         });
@@ -64,7 +70,7 @@ export const createLitter = litter => async dispatch => {
                 return Promise.reject(data);
             }
             dispatch(createLitterAction(data.litter));
-            return data.place;
+            return data.litter;
         }
     } catch (e) {
         console.log('ERROR', e);

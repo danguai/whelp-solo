@@ -12,7 +12,7 @@ import NavigationLitter from "./components/Navigation/NavBar-Litter";
 
 import Splashpage from "./components/Splashpage";
 
-import Litter from "./components/LitterForm";
+import LitterForm from "./components/LitterForm";
 import LitterPage from "./components/LitterPage";
 import Litters from "./components/Litters";
 
@@ -62,7 +62,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path='/litter'>
-            <Litter />
+            <LitterForm />
           </Route>
           <Route exact path='/litters'>
             <Litters />

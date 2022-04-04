@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { createLitter, updateLitter } from '../../store/litter';
+import { updateLitter } from '../../store/litter';
 // import * as sessionActions from '../../store/session';
 
 import './Litter.css';
 
-const Litter = () => {
+const LitterForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -37,8 +37,8 @@ const Litter = () => {
             zipcode
         };
 
-        const createdLitter = await dispatch(createLitter(newLitter));
-        history.push(`/litter/${createdLitter.id}`);
+        await dispatch(updateLitter(newLitter));
+        history.push(`/litter/${litter.id}`);
 
     };
 
@@ -122,4 +122,4 @@ const Litter = () => {
     )
 };
 
-export default Litter;
+export default LitterForm;

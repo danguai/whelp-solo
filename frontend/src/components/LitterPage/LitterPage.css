@@ -8,8 +8,8 @@
 }
 
 .gradient {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.75) 100%);
-  z-index: -1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.75) 100%);
+    z-index: -1;
 }
 
 .litter__name {
@@ -17,11 +17,5 @@
     margin: 300px 0 0 150px;
     font-size: 40px;
     font-weight: bold;
-}
-
-.white__paw__score {
-    position: absolute;
-    margin: 300px 0 0 150px;
-    font-size: 40px;
-    font-weight: bold;
+    color: white;
 }

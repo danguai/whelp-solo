@@ -1,0 +1,83 @@
+.paws__score {
+    position: absolute;
+    margin: 350px 0 0 150px;
+}
+
+.one__paw__score__gray {
+    position: absolute;
+    width: 25px;
+    background: rgba(204, 204, 204, 1);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.one__paw__score__gray:hover {
+    background: rgba(221, 140, 31, 1);
+    cursor: pointer;
+}
+
+.one__paw__score__yellow {
+    position: absolute;
+    width: 25px;
+    background: rgba(221, 140, 31, 1);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.one__paw__score__yellow:hover {
+    cursor: pointer;
+}
+
+.two__paw__score__gray {
+    position: absolute;
+    width: 25px;
+    background: rgba(204, 204, 204, 1);
+    margin-left: 40px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.two__paw__score__gray:hover {
+    background: rgba(211, 115, 35, 1);
+    cursor: pointer;
+}
+
+.two__paw__score__yellow__orange {
+    position: absolute;
+    width: 25px;
+    background: rgba(211, 115, 35, 1);
+    margin-left: 40px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.two__paw__score__yellow__orange:hover {
+    cursor: pointer;
+}
+
+.three__paw__score__gray {
+    position: absolute;
+    width: 25px;
+    background: rgba(204, 204, 204, 1);
+    margin-left: 80px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.four__paw__score__gray {
+    position: absolute;
+    width: 25px;
+    background: rgba(204, 204, 204, 1);
+    margin-left: 120px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.five__paw__score__gray {
+    position: absolute;
+    width: 25px;
+    background: rgba(204, 204, 204, 1);
+    margin-left: 160px;
+    padding: 5px;
+    border-radius: 5px;
+}
