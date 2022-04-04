@@ -18,11 +18,11 @@ const Litters = () => {
         dispatch(readLitters());
     }, [dispatch]);
 
+    if (!litters) return null;
 
     return (
         <div>
-            Litters Page
-            <ul>
+            <ul className='recent__litters'>
                 {litters.map(litter =>
                     <li
                         key={litter.id}>

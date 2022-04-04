@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
 
 import * as sessionActions from '../../store/session';
 
@@ -67,6 +68,11 @@ const ProfileButton = () => {
                         </div>
                         <div className="user__info">
                             <li>{fullName}</li>
+                            {/* <li>
+                                <Link to='/litters'>
+                                    Your Litters
+                                </Link>
+                            </li> */}
                             <li>
                                 <button
                                     className="logout__button"
