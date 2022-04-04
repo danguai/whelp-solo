@@ -8,8 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     litterId: DataTypes.INTEGER,
   }, {});
   Review.associate = function (models) {
-    Review.belongsTo(models.User, { foreignKey: 'userId', onDelete: "cascade", foreignKeyConstraint: true });
-    Review.belongsTo(models.Litter, { foreignKey: 'litterId', onDelete: "cascade", foreignKeyConstraint: true });
+    Review.belongsTo(models.User, { foreignKey: 'userId' });
+    Review.belongsTo(models.Litter, { foreignKey: 'litterId' });
+    // Review.belongsTo(models.User, { foreignKey: 'userId', onDelete: "cascade", foreignKeyConstraint: true });
+    // Review.belongsTo(models.Litter, { foreignKey: 'litterId', onDelete: "cascade", foreignKeyConstraint: true });
 
   };
   return Review;

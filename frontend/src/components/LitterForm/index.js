@@ -31,7 +31,7 @@ const Litter = () => {
             address,
         };
 
-        dispatch(createLitter(newLitter));
+        await dispatch(createLitter(newLitter));
         history.push(`/litter/${litter.id}`);
 
     };

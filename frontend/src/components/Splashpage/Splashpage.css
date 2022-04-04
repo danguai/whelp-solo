@@ -29,20 +29,20 @@
     height: auto;
 }
 
-.splashpage__searchbar {
+.splashpage__searchbar__container {
     margin-top: 50px;
     border-radius: 10px;
     /* border: 5px blue solid; */
 }
 
-#search__form {
+#search__form__splashpage {
     display: flex;
     align-items: center;
     border-radius: 5px;
     background: rgb(255, 255, 255, 0.75);
 }
 
-.searchbar {
+.searchbar__splashpage {
     width: 856px;
     height: 44px;
     border: none;
@@ -50,7 +50,7 @@
     background: transparent;
 }
 
-.magnifier__search__button {
+.magnifier__search__button__splashpage {
     width : 64px;
     height : 44px;
     background: rgb(180, 40, 46, 1);
@@ -58,7 +58,7 @@
     border-radius: 5px;
 }
 
-.magnifier__search__button > img {
+.magnifier__search__button__splashpage > img {
     width: 20px;
     height: auto;
 }

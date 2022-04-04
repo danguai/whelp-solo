@@ -1,10 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-import LitterAll from '../LitterAll';
+import Litters from '../Litters';
 
 import './Splashpage.css';
 
+
 const Splashpage = () => {
+
+    const litters = useSelector(state => state);
+
+    console.log('LITTERS', litters);
+
     return (
         <div>
             <div className='bg__image__container'>
@@ -12,10 +19,10 @@ const Splashpage = () => {
                     <a href='/'>
                         <img className='whelp__logo' src={require('../../images/whelp-logo.png')} />
                     </a>
-                    <div className='splashpage__searchbar'>
-                        <form id="search__form">
-                            <input className='searchbar' type="search" />
-                            <button className='magnifier__search__button all__buttons' >
+                    <div className='splashpage__searchbar__container'>
+                        <form id="search__form__splashpage">
+                            <input className='searchbar__splashpage' type="search" />
+                            <button className='magnifier__search__button__splashpage all__buttons' >
                                 <img className='magnifier' src={require('../../images/magnifier.png')} />
                             </button>
                         </form>
@@ -24,7 +31,7 @@ const Splashpage = () => {
             </div>
             <div>
                 Whelpers
-                {/* <LitterAll /> */}
+                {/* <Litters /> */}
             </div>
         </div>
     )

@@ -40,7 +40,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
     try {
         const id = +req.params.id;
         const oneLitter = await Litter.findByPk(id);
-        console.log('INSIDE READ ONE - BE', oneLitter);
+        // console.log('INSIDE READ ONE - BE', oneLitter);
         return res.json(oneLitter);
     } catch (e) {
         console.log('ERROR IN ONE LITTER', e);
@@ -51,7 +51,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
 router.get('/', asyncHandler(async (_req, res) => {
     try {
         const allLitter = await Litter.findAll();
-        console.log('INSIDE READ ALL - BE', allLitter);
+        // console.log('INSIDE READ ALL - BE', allLitter);
         return res.json(allLitter);
     } catch (e) {
         console.log('ERROR IN ALL LITTER', e);
