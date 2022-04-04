@@ -7,7 +7,7 @@ import { updateLitter } from '../../store/litter';
 
 import './Litter.css';
 
-const Litter = () => {
+const LitterForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -122,4 +122,4 @@ const Litter = () => {
     )
 };
 
-export default Litter;
+export default LitterForm;

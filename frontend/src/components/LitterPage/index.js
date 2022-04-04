@@ -45,8 +45,9 @@ const LitterPage = () => {
                 </div>
                 <div>
                     <img
-                        className='two__paw__score__gray'
+                        className={active ? 'two__paw__score__gray' : 'two__paw__score__yellow__orange'}
                         src={require('../../images/Paw-Score.png')}
+                        onClick={handleToggle}
                     />
                 </div>
                 <div>

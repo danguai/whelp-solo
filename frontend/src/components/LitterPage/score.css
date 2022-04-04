@@ -37,6 +37,24 @@
     border-radius: 5px;
 }
 
+.two__paw__score__gray:hover {
+    background: rgba(211, 115, 35, 1);
+    cursor: pointer;
+}
+
+.two__paw__score__yellow__orange {
+    position: absolute;
+    width: 25px;
+    background: rgba(211, 115, 35, 1);
+    margin-left: 40px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.two__paw__score__yellow__orange:hover {
+    cursor: pointer;
+}
+
 .three__paw__score__gray {
     position: absolute;
     width: 25px;

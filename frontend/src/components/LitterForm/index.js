@@ -37,8 +37,8 @@ const Litter = () => {
             zipcode
         };
 
-        await dispatch(createLitter(newLitter));
-        history.push(`/litter/${litter.id}`);
+        const createdLitter = await dispatch(createLitter(newLitter));
+        history.push(`/litter/${createdLitter.id}`);
 
     };
 
