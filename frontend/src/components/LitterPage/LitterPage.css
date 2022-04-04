@@ -19,3 +19,9 @@
     font-weight: bold;
     color: white;
 }
+
+
+.edit__litter__button {
+    position: absolute;
+    margin: 400px 0 0 150px;
+}

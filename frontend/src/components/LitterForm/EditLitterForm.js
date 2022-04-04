@@ -7,27 +7,29 @@ import { updateLitter } from '../../store/litter';
 
 import './Litter.css';
 
-const LitterForm = () => {
+const EditLitterForm = () => {
+
     const dispatch = useDispatch();
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
     const litter = useSelector(state => state.litter?.litter);
 
-    const [name, setName] = useState('');
-    const [imageHeader, setImageHeader] = useState('');
-    const [description, setDescription] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [zipcode, setZipcode] = useState('');
+    const [name, setName] = useState(litter.name);
+    const [imageHeader, setImageHeader] = useState(litter.imageHeader);
+    const [description, setDescription] = useState(litter.description);
+    const [address, setAddress] = useState(litter.address);
+    const [city, setCity] = useState(litter.city);
+    const [state, setState] = useState(litter.state);
+    const [zipcode, setZipcode] = useState(litter.zipcode);
 
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newLitter = {
+        const editedLitter = {
+            ...litter,
             name,
             imageHeader,
             description,
@@ -37,8 +39,8 @@ const LitterForm = () => {
             zipcode
         };
 
-        await dispatch(updateLitter(newLitter));
-        history.push(`/litter/${litter.id}`);
+        const updatedLitter = await dispatch(updateLitter(editedLitter));
+        history.push(`/litter/${updatedLitter.id}`);
 
     };
 
@@ -114,7 +116,7 @@ const LitterForm = () => {
                         className='red__button signup__button'
                         type="submit"
                     >
-                        New Litter
+                        Save Changes
                     </button>
                 </form>
             </div>
@@ -122,4 +124,4 @@ const LitterForm = () => {
     )
 };
 
-export default LitterForm;
+export default EditLitterForm;

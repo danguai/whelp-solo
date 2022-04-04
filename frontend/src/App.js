@@ -13,6 +13,7 @@ import NavigationLitter from "./components/Navigation/NavBar-Litter";
 import Splashpage from "./components/Splashpage";
 
 import LitterForm from "./components/LitterForm";
+import EditLitterForm from "./components/LitterForm/EditLitterForm";
 import LitterPage from "./components/LitterPage";
 import Litters from "./components/Litters";
 
@@ -63,6 +64,9 @@ function App() {
           </Route>
           <Route exact path='/litter'>
             <LitterForm />
+          </Route>
+          <Route exact path='/litter-edit'>
+            <EditLitterForm />
           </Route>
           <Route exact path='/litters'>
             <Litters />
