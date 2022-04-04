@@ -22,10 +22,6 @@ const Navigation = ({ isLoaded }) => {
         history.push('/');
     };
 
-    let redNavBar;
-
-
-
     let sessionLinks;
 
     if (sessionUser) {
@@ -70,9 +66,9 @@ const Navigation = ({ isLoaded }) => {
                     className='review__navbar'>
                     Write a Review
                 </a>
-                <a href='/breeders'
+                <a href='/litter'
                     className='business__navbar'>
-                    Whelp for Business
+                    Create New Litter
                 </a>
             </div>
             <div className='buttons__sessions'>
