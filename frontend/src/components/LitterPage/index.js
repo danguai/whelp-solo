@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { readLitter } from '../../store/litter';
+import { readLitter, updateLitter } from '../../store/litter';
 // import * as sessionActions from '../../store/session';
 
 import './LitterPage.css';
@@ -68,6 +68,12 @@ const LitterPage = () => {
                         src={require('../../images/Paw-Score.png')}
                     />
                 </div>
+            </div>
+            <div>
+                <Link to='/litter-edit'
+                    className='edit__litter__button'>
+                    Edit Litter
+                </Link>
             </div>
             <div className='gradient'>
                 <img
