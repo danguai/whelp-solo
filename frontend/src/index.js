@@ -13,6 +13,7 @@ import { restoreCSRF, csrfFetch } from './store/csrf';
 
 import * as sessionActions from './store/session';
 import * as litterActions from './store/litter';
+import * as puppiesActions from './store/puppies';
 
 const store = configureStore();
 
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   window.sessionActions = sessionActions;
   window.litterActions = litterActions;
+  window.puppiesActions = puppiesActions;
 }
 
 function Root() {

@@ -19,7 +19,6 @@ import Litters from "./components/Litters";
 
 import PuppyForm from "./components/PuppyForm";
 
-
 import * as sessionActions from './store/session';
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
 
   const litter = useSelector(state => state.litter?.litter);
 
-  // console.log('LOCATION', location);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -72,7 +70,7 @@ function App() {
           <Route exact path='/litter/:id'>
             <LitterPage />
           </Route>
-          <Route exact path='/puppies'>
+          <Route exact path='/litter/:id/new-puppy'>
             <PuppyForm />
           </Route>
         </Switch>

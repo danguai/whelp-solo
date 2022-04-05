@@ -12,7 +12,9 @@ const PuppyForm = () => {
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
-    const litter = useSelector(state => state.litter?.litter);
+    const litterId = useSelector(state => state.litter?.litter.id);
+
+    // console.log('LITTER ID', litterId);
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -33,9 +35,17 @@ const PuppyForm = () => {
             day
         };
 
+        console.log('NEW PUPPY', newPuppy);
+
         const createdPuppy = await dispatch(createPuppy(newPuppy));
-        history.push(`/puppies/${createdPuppy.id}`);
+
+        console.log('CREATED PUPPY', createdPuppy);
+
+        history.push(`/litter/${litterId}`);
     };
+
+    if (!litterId) return null;
+
 
     return (
         <div>
@@ -91,7 +101,7 @@ const PuppyForm = () => {
                         className='red__button signup__button'
                         type="submit"
                     >
-                        New Litter
+                        New Puppy
                     </button>
                 </form>
             </div>

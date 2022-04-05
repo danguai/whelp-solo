@@ -5,7 +5,7 @@ import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 import { updateLitter } from '../../store/litter';
 // import * as sessionActions from '../../store/session';
 
-import './Litter.css';
+import './LitterForm.css';
 
 const EditLitterForm = () => {
 

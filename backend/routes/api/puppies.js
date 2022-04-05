@@ -22,22 +22,19 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const userId = req.user.id;
     const litterId = req.params.litterId;
 
-    console.log('LITTER ID', litterId);
-    try {
-        const puppy = await Puppy.create(
-            {
-                name,
-                description,
-                year,
-                month,
-                day,
-                userId,
-                litterId
-            });
-        return res.json({ puppy });
-    } catch (e) {
-        console.log(e);
-    }
+    const puppy = await Puppy.create(
+        {
+            name,
+            description,
+            year,
+            month,
+            day,
+            userId,
+            litterId
+        });
+
+    return res.json({ puppy });
+
 }));
 
 module.exports = router;

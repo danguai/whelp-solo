@@ -56,6 +56,8 @@ export const createLitter = litter => async dispatch => {
         userId
     } = litter;
 
+    console.log('LITTER IN THUNK', litter);
+
     try {
         const response = await csrfFetch('/api/litter', {
             method: 'POST',
@@ -80,7 +82,7 @@ export const createLitter = litter => async dispatch => {
             return data.litter;
         }
     } catch (e) {
-        console.log('ERROR', e);
+        console.log('CREATE LITTER ERROR', e);
     }
     return Promise.reject();
 };

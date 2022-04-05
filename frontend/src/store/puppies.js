@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf';
 
 //  C O N S T A N T S
-const CREATE_PUPPY = 'litter/CREATE_PUPPY';
+const CREATE_PUPPY = 'puppies/CREATE_PUPPY';
 
 //  A C T I O N S
 const createPuppyAction = puppy => {
@@ -24,33 +24,38 @@ export const createPuppy = puppy => async dispatch => {
         litterId
     } = puppy;
 
-    try {
-        const response = await csrfFetch(`/api/litter/${litterId}/puppies`, {
-            method: 'POST',
-            body: JSON.stringify(
-                {
-                    name,
-                    description,
-                    year,
-                    month,
-                    day,
-                    userId,
-                    litterId
-                })
-        });
+    console.log("PUPPY-PUPPY: ", puppy);
+    // try {
+    const response = await csrfFetch(`/api/litter/${litterId}/puppies`, {
+        method: 'POST',
+        body: JSON.stringify(
+            {
+                name,
+                description,
+                year,
+                month,
+                day,
+                userId,
+                litterId
+            })
+    });
 
-        if (response.ok) {
-            const data = await response.json();
+    console.log("RESPONSE CREATE PUPPY: ", response);
 
-            if (data.errors) {
-                return Promise.reject(data);
-            }
-            dispatch(createPuppyAction(data.puppy));
-            return response;
+    if (response.ok) {
+        const data = await response.json();
+
+        console.log('DATA', data);
+        if (data.errors) {
+            return Promise.reject(data);
         }
-    } catch (e) {
-        console.log('CREATE PUPPY ERROR: ', e);
+        dispatch(createPuppyAction(data.puppy));
+        return response;
     }
+    // } catch (e) {
+    //     console.log('CREATE PUPPY ERROR: ', e);
+    // }
+    // return Promise.reject();
 };
 
 //  R E A D   O N E   P U P P Y   T H U N K
@@ -58,7 +63,7 @@ export const createPuppy = puppy => async dispatch => {
 //   U P D A T E   P U P P Y   T H U N K
 //  D E L E T E   P U P P Y   T H U N K
 
-//  R E D U C E R
+//  R E D U C E R S
 const initialState = { puppiesList: [] };
 
 const puppiesReducer = (state = initialState, action) => {
