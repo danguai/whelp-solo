@@ -37,4 +37,15 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 
 }));
 
+//   R E A D   P U P P I E S
+router.get('/', requireAuth, asyncHandler(async (req, res) => {
+    try {
+        const puppies = await Puppy.findAll();
+        return res.json(puppies);
+    } catch {
+        console.log('ERROR READING ALL PUPPIES', e);
+    }
+}));
+
+
 module.exports = router;
