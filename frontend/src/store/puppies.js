@@ -24,38 +24,36 @@ export const createPuppy = puppy => async dispatch => {
         litterId
     } = puppy;
 
-    console.log("PUPPY-PUPPY: ", puppy);
-    // try {
-    const response = await csrfFetch(`/api/litter/${litterId}/puppies`, {
-        method: 'POST',
-        body: JSON.stringify(
-            {
-                name,
-                description,
-                year,
-                month,
-                day,
-                userId,
-                litterId
-            })
-    });
+    try {
+        const response = await csrfFetch(`/api/litter/${litterId}/puppies`, {
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    name,
+                    description,
+                    year,
+                    month,
+                    day,
+                    userId,
+                    litterId
+                })
+        });
 
-    console.log("RESPONSE CREATE PUPPY: ", response);
+        if (response.ok) {
+            const data = await response.json();
 
-    if (response.ok) {
-        const data = await response.json();
-
-        console.log('DATA', data);
-        if (data.errors) {
-            return Promise.reject(data);
+            console.log('DATA', data);
+            if (data.errors) {
+                return Promise.reject(data);
+            }
+            dispatch(createPuppyAction(data.puppy));
+            return data.puppy;
         }
-        dispatch(createPuppyAction(data.puppy));
-        return response;
+
+    } catch (e) {
+        console.log('CREATE PUPPY ERROR: ', e);
     }
-    // } catch (e) {
-    //     console.log('CREATE PUPPY ERROR: ', e);
-    // }
-    // return Promise.reject();
+    return Promise.reject();
 };
 
 //  R E A D   O N E   P U P P Y   T H U N K

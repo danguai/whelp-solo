@@ -14,6 +14,7 @@ const PuppyForm = () => {
     const sessionUser = useSelector(state => state.session.user);
     const litterId = useSelector(state => state.litter?.litter.id);
 
+    // console.log('SESSION USER', session);
     // console.log('LITTER ID', litterId);
 
     const [name, setName] = useState('');
@@ -32,20 +33,23 @@ const PuppyForm = () => {
             description,
             year,
             month,
-            day
+            day,
+            litterId
         };
 
-        console.log('NEW PUPPY', newPuppy);
+        try {
 
-        const createdPuppy = await dispatch(createPuppy(newPuppy));
+            const createdPuppy = await dispatch(createPuppy(newPuppy));
 
-        console.log('CREATED PUPPY', createdPuppy);
+            console.log('CREATED PUPPY', createdPuppy);
 
-        history.push(`/litter/${litterId}`);
+            history.push(`/litter/${litterId}`);
+        } catch (e) {
+            console.log('IS IT HERE?', e);
+        }
     };
 
     if (!litterId) return null;
-
 
     return (
         <div>
