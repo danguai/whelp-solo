@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 
 import sessionReducer from './session';
 import litterReducer from './litter';
+import puppiesReducer from './puppies';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     litter: litterReducer,
+    puppies: puppiesReducer
 });
 
 let enhancer;

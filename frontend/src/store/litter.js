@@ -109,7 +109,7 @@ export const readLitters = () => async dispatch => {
     }
 };
 
-//   U P D A T E   L I T T E R
+//   U P D A T E   L I T T E R   T H U N K
 export const updateLitter = litter => async dispatch => {
     const response = await csrfFetch(`/api/litter/${litter.id}`, {
         method: 'PUT',
@@ -126,7 +126,7 @@ export const updateLitter = litter => async dispatch => {
     }
 };
 
-//  D E L E T E   L I T T E R
+//  D E L E T E   L I T T E R   T H U N K
 export const deleteLitter = id => async dispatch => {
     const response = await csrfFetch(`/api/litter/${id}`, {
         method: 'DELETE'
@@ -135,6 +135,8 @@ export const deleteLitter = id => async dispatch => {
     return response;
 };
 
+
+//  R E D U C E R
 let initialState = { litter: null };
 
 const litterReducer = (state = initialState, action) => {

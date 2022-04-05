@@ -14,7 +14,9 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const {
         name,
         description,
-        birthday
+        year,
+        month,
+        day,
     } = req.body;
 
     const userId = req.user.id;
@@ -26,7 +28,9 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
             {
                 name,
                 description,
-                birthday,
+                year,
+                month,
+                day,
                 userId,
                 litterId
             });

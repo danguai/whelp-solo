@@ -17,6 +17,8 @@ import EditLitterForm from "./components/LitterForm/EditLitterForm";
 import LitterPage from "./components/LitterPage";
 import Litters from "./components/Litters";
 
+import PuppyForm from "./components/PuppyForm";
+
 
 import * as sessionActions from './store/session';
 
@@ -37,15 +39,11 @@ function App() {
   const path = location.pathname;
 
   if (path === '/login' || path === '/signup') {
-    // console.log('LOGIN PAGE');
     navBar = (<NavigationRed isLoaded={isLoaded} />)
-  } else if (path == `/litter/${litter?.id}`) {
-    // console.log('SPLASHPAGE');
-    navBar = (<NavigationLitter isLoaded={isLoaded} />)
-
-  } else {
-    // console.log('SPLASHPAGE');
+  } else if (path == '/') {
     navBar = (<Navigation isLoaded={isLoaded} />)
+  } else {
+    navBar = (<NavigationLitter isLoaded={isLoaded} />)
   }
 
   return (
@@ -73,6 +71,9 @@ function App() {
           </Route>
           <Route exact path='/litter/:id'>
             <LitterPage />
+          </Route>
+          <Route exact path='/puppies'>
+            <PuppyForm />
           </Route>
         </Switch>
       )}

@@ -101,6 +101,14 @@ const LitterPage = () => {
                     </button>
                 </Link>}
             </div>
+            <div>
+                {litterOwner && <Link to='/puppy'
+                    className='new__puppy__button'>
+                    <button>
+                        New Pup
+                    </button>
+                </Link>}
+            </div>
             <div className='gradient'>
                 <img
                     className='litter__bg__image'

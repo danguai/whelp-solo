@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const Puppy = sequelize.define('Puppy', {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
-    birthday: DataTypes.DATE,
+    year: DataTypes.STRING,
+    month: DataTypes.STRING,
+    day: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     litterId: DataTypes.INTEGER,
   }, {});
