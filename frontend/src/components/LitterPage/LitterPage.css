@@ -34,3 +34,19 @@
     position: absolute;
     margin: 430px 0 0 150px;
 }
+
+.new__puppies__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new__puppies__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 25px;
+    font-weight: bold;
+}

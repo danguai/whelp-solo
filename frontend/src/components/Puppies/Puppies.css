@@ -1,0 +1,48 @@
+/* #all__litters {
+    display: flex;
+    justify-content: center;
+} */
+
+.recent__puppies {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 220px 220px 220px 220px;
+    grid-auto-flow: row dense;
+}
+
+.each__puppy__container {
+    width: 220px;
+    height: 220px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.place__photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    /* border: 1px rgb(255, 255, 255, 0.25) solid; */
+    /* transition: box-shadow 0.25s ease-in-out; */
+}
+
+/* .place__photo:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.25s ease-in-out;
+} */
+
+.find__your__place__photo {
+    display: flex;
+    flex-direction: column;
+}
+
+.puppy__title {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    margin-top: 5px;
+}

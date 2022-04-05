@@ -116,8 +116,8 @@ const LitterPage = () => {
                     src={litter.imageHeader}
                 />
             </div>
-            <div>
-                <div>
+            <div className='new__puppies__container'>
+                <div className='new__puppies__title'>
                     Pups
                 </div>
                 <div>

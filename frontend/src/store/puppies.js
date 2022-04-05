@@ -89,6 +89,10 @@ const puppiesReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.puppiesList.push(action.payload);
             return newState;
+        case READ_PUPPIES:
+            newState = Object.assign({}, state);
+            newState.puppiesList = action.payload;
+            return newState;
         default:
             return state;
     }
