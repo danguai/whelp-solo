@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 //  C O N S T A N T S
 const CREATE_PUPPY = 'puppies/CREATE_PUPPY';
+const READ_PUPPIES = 'puppies/READ_PUPPIES';
 
 //  A C T I O N S
 const createPuppyAction = puppy => {
@@ -9,6 +10,13 @@ const createPuppyAction = puppy => {
         type: CREATE_PUPPY,
         payload: puppy
     };
+};
+
+const readPuppiesAction = puppies => {
+    return {
+        type: READ_PUPPIES,
+        payload: puppies
+    }
 };
 
 //  T H U N K S
@@ -58,6 +66,16 @@ export const createPuppy = puppy => async dispatch => {
 
 //  R E A D   O N E   P U P P Y   T H U N K
 //  R E A D   A L L   P U P P I E S   T H U N K
+export const readPuppies = litterId => async dispatch => {
+    const response = await csrfFetch(`/api/litter/${litterId}/puppies`);
+
+    if (response.ok) {
+        const puppies = await response.json();
+        dispatch(readPuppiesAction(puppies));
+    }
+
+};
+
 //   U P D A T E   P U P P Y   T H U N K
 //  D E L E T E   P U P P Y   T H U N K
 
@@ -70,6 +88,10 @@ const puppiesReducer = (state = initialState, action) => {
         case CREATE_PUPPY:
             newState = Object.assign({}, state);
             newState.puppiesList.push(action.payload);
+            return newState;
+        case READ_PUPPIES:
+            newState = Object.assign({}, state);
+            newState.puppiesList = action.payload;
             return newState;
         default:
             return state;
