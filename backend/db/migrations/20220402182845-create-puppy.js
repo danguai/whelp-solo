@@ -16,9 +16,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      birthday: {
+      year: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING(4)
+      },
+      month: {
+        allowNull: false,
+        type: Sequelize.STRING(2)
+      },
+      day: {
+        allowNull: false,
+        type: Sequelize.STRING(2)
       },
       userId: {
         allowNull: false,

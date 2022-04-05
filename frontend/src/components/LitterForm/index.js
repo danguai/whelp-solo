@@ -5,9 +5,9 @@ import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 import { createLitter, updateLitter } from '../../store/litter';
 // import * as sessionActions from '../../store/session';
 
-import './Litter.css';
+import './LitterForm.css';
 
-const Litter = () => {
+const LitterForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -37,11 +37,14 @@ const Litter = () => {
             zipcode
         };
 
+        // console.log('NEW LITTER: ', newLitter);
+
         const createdLitter = await dispatch(createLitter(newLitter));
+
+        // console.log('CREATED LITTER: ', createdLitter);
+
         history.push(`/litter/${createdLitter.id}`);
-
     };
-
 
     return (
         <div>
@@ -122,4 +125,4 @@ const Litter = () => {
     )
 };
 
-export default Litter;
+export default LitterForm;

@@ -12,8 +12,6 @@ const Litters = () => {
 
     const litters = useSelector(state => state.litter?.littersList);
 
-    console.log('LITTERS LIST', litters);
-
     useEffect(() => {
         dispatch(readLitters());
     }, [dispatch]);

@@ -2,48 +2,54 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { updateLitter } from '../../store/litter';
+import { createPuppy } from '../../store/puppies';
 // import * as sessionActions from '../../store/session';
 
-import './LitterForm.css';
+import './PuppyForm.css';
 
-const EditLitterForm = () => {
-
+const PuppyForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
-    const litter = useSelector(state => state.litter?.litter);
+    const litterId = useSelector(state => state.litter?.litter.id);
 
-    const [name, setName] = useState(litter.name);
-    const [imageHeader, setImageHeader] = useState(litter.imageHeader);
-    const [description, setDescription] = useState(litter.description);
-    const [address, setAddress] = useState(litter.address);
-    const [city, setCity] = useState(litter.city);
-    const [state, setState] = useState(litter.state);
-    const [zipcode, setZipcode] = useState(litter.zipcode);
+    // console.log('SESSION USER', session);
+    // console.log('LITTER ID', litterId);
+
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
 
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const editedLitter = {
-            ...litter,
+        const newPuppy = {
             name,
-            imageHeader,
             description,
-            address,
-            city,
-            state,
-            zipcode
+            year,
+            month,
+            day,
+            litterId
         };
 
-        const updatedLitter = await dispatch(updateLitter(editedLitter));
-        history.push(`/litter/${updatedLitter.id}`);
+        try {
 
+            const createdPuppy = await dispatch(createPuppy(newPuppy));
+
+            console.log('CREATED PUPPY', createdPuppy);
+
+            history.push(`/litter/${litterId}`);
+        } catch (e) {
+            console.log('IS IT HERE?', e);
+        }
     };
 
+    if (!litterId) return null;
 
     return (
         <div>
@@ -60,15 +66,6 @@ const EditLitterForm = () => {
                     </div>
                     <div>
                         <input
-                            placeholder='Image'
-                            type="text"
-                            value={imageHeader}
-                            onChange={(e) => setImageHeader(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <input
                             placeholder='Description'
                             type="text"
                             value={description}
@@ -78,45 +75,37 @@ const EditLitterForm = () => {
                     </div>
                     <div>
                         <input
-                            placeholder='Address'
+                            placeholder='Month'
                             type="text"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            value={month}
+                            onChange={(e) => setMonth(e.target.value)}
                             required
                         />
                     </div>
                     <div>
                         <input
-                            placeholder='City'
+                            placeholder='Day'
                             type="text"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
+                            value={day}
+                            onChange={(e) => setDay(e.target.value)}
                             required
                         />
                     </div>
                     <div>
                         <input
-                            placeholder='State'
+                            placeholder='Year'
                             type="text"
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
+                            value={year}
+                            onChange={(e) => setYear(e.target.value)}
                             required
                         />
                     </div>
-                    <div>
-                        <input
-                            placeholder='Zipcode'
-                            type="text"
-                            value={zipcode}
-                            onChange={(e) => setZipcode(e.target.value)}
-                            required
-                        />
-                    </div>
+
                     <button
                         className='red__button signup__button'
                         type="submit"
                     >
-                        Save Changes
+                        New Puppy
                     </button>
                 </form>
             </div>
@@ -124,4 +113,5 @@ const EditLitterForm = () => {
     )
 };
 
-export default EditLitterForm;
+
+export default PuppyForm;

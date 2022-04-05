@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
 import { readLitter, deleteLitter } from '../../store/litter';
+
+import Puppies from '../Puppies';
 // import * as sessionActions from '../../store/session';
 
 import './LitterPage.css';
@@ -28,7 +30,6 @@ const LitterPage = () => {
     const handleToggle = () => {
         setActive(!active);
     };
-
 
     const removeLitter = () => {
         dispatch(deleteLitter(litter.id));
@@ -101,6 +102,14 @@ const LitterPage = () => {
                     </button>
                 </Link>}
             </div>
+            <div>
+                {litterOwner && <Link to={`/litter/${litter.id}/new-puppy`}
+                    className='new__puppy__button'>
+                    <button>
+                        New Pup
+                    </button>
+                </Link>}
+            </div>
             <div className='gradient'>
                 <img
                     className='litter__bg__image'
@@ -108,8 +117,14 @@ const LitterPage = () => {
                 />
             </div>
             <div>
-                Pups
+                <div>
+                    Pups
+                </div>
+                <div>
+                    <Puppies />
+                </div>
             </div>
+
         </div>
     )
 };
