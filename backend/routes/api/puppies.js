@@ -6,19 +6,21 @@ const { requireAuth } = require('../../utils/auth');
 const { Puppy } = require('../../db/models');
 
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 
 //  C R E A T E   P U P P Y
 router.post('/', requireAuth, asyncHandler(async (req, res) => {
-    const { name,
+    const {
+        name,
         description,
         birthday
     } = req.body;
 
     const userId = req.user.id;
-    const litterId = req.litter.id;
+    const litterId = req.params.litterId;
 
+    console.log('LITTER ID', litterId);
     try {
         const puppy = await Puppy.create(
             {

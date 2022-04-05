@@ -11,7 +11,7 @@ router.use('/users', usersRouter);
 
 router.use('/litter', litterRouter);
 
-router.use('/puppies', puppiesRouter);
+router.use('/litter/:litterId/puppies', puppiesRouter);
 
 // router.post('/test', (req, res) => {
 //     res.json({ requestBody: req.body });

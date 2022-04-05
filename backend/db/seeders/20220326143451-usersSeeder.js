@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
+
+
     const demoUser = {
       firstName: 'Juan',
       lastName: 'Perez',
