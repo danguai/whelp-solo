@@ -21,17 +21,11 @@ const PuppyPage = () => {
     const sessionUser = useSelector(state => state.session.user);
     const puppies = useSelector(state => state.puppies.puppiesList);
 
-    console.log('PUPPY ID', puppyId);
-
-    // console.log('litter', litter);
-
-    let thisPuppy = puppies.filter(puppy => {
+    let thisPuppy = (puppies.filter(puppy => {
         if (puppyId == puppy.id) {
             return puppy;
         }
-    });
-
-    console.log('THIS PUPPY', thisPuppy);
+    })[0]);
 
     useEffect(() => {
         dispatch(readLitter(litterId));
@@ -57,7 +51,7 @@ const PuppyPage = () => {
     return (
         <div>
             <div className='puppy__name'>
-                {thisPuppy[0].name}
+                {thisPuppy.name}
             </div>
             <div className='paws__score'>
 

@@ -60,7 +60,7 @@ router.get('/', requireAuth, asyncHandler(async (req, res) => {
 
 //  U P D A T E   P U P P Y
 router.put('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
-    const id = req.param.puppyId;
+    const id = req.params.puppyId;
 
     delete req.body.id;
 
@@ -70,18 +70,20 @@ router.put('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
         plain: true
     })
 
-    return res.json(puppy)
+    return res.json(puppy);
 }));
 
 //   D E L E T E  P U P P Y
 router.delete('/:puppyId', asyncHandler(async (req, res) => {
     const puppy = await Puppy.findByPk(req.params.puppyId);
 
+    console.log('PUPPY iN DELETE', puppy);
+
     if (!puppy) throw new Error(`Can't find puppy`);
 
     await Puppy.destroy({ where: { id: puppy.id } });
 
-    return res.json({ id: puppy.id })
+    return res.json({ id: puppy.id });
 }));
 
 module.exports = router;
