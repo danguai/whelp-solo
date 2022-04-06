@@ -10,7 +10,7 @@ const Splashpage = () => {
 
     const litters = useSelector(state => state.litter?.littersList);
 
-    console.log('LITTERS', litters);
+    // console.log('LITTERS', litters);
 
     return (
         <div>

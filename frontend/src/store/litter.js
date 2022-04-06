@@ -56,8 +56,6 @@ export const createLitter = litter => async dispatch => {
         userId
     } = litter;
 
-    console.log('LITTER IN THUNK', litter);
-
     try {
         const response = await csrfFetch('/api/litter', {
             method: 'POST',
@@ -103,7 +101,7 @@ export const readLitter = id => async dispatch => {
 export const readLitters = () => async dispatch => {
     const response = await csrfFetch(`/api/litter`);
 
-    console.log('ALL LITTER IS INEVITABLE', response);
+    // console.log('ALL LITTER IS INEVITABLE', response);
 
     if (response.ok) {
         const litters = await response.json();

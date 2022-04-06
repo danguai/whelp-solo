@@ -18,6 +18,9 @@ import LitterPage from "./components/LitterPage";
 import Litters from "./components/Litters";
 
 import PuppyForm from "./components/PuppyForm";
+import EditPuppyForm from "./components/PuppyForm/EditPuppyForm";
+import PuppyPage from "./components/PuppyPage";
+import Puppies from "./components/Puppies";
 
 import * as sessionActions from './store/session';
 
@@ -27,6 +30,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const litter = useSelector(state => state.litter?.litter);
+
+  // console.log('LITTER APP', litter);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -64,14 +69,20 @@ function App() {
           <Route exact path='/litter-edit'>
             <EditLitterForm />
           </Route>
-          <Route exact path='/litters'>
+          {/* <Route exact path='/litters'>
             <Litters />
-          </Route>
+          </Route> */}
           <Route exact path='/litter/:id'>
             <LitterPage />
           </Route>
           <Route exact path='/litter/:id/new-puppy'>
             <PuppyForm />
+          </Route>
+          <Route exact path='/puppies/:puppyId'>
+            <PuppyPage />
+          </Route>
+          <Route exact path='/puppies/:puppyId/puppy-edit'>
+            <EditPuppyForm />
           </Route>
         </Switch>
       )}

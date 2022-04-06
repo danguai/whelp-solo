@@ -46,7 +46,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
     try {
         const id = +req.params.id;
         const oneLitter = await Litter.findByPk(id);
-        // console.log('INSIDE READ ONE - BE', oneLitter);
+        // console.log('INSIDE READ ONE - BE', oneLitter.id);
         return res.json(oneLitter);
     } catch (e) {
         console.log('ERROR IN ONE LITTER', e);
