@@ -8,22 +8,29 @@ import { updatePuppy } from '../../store/puppies';
 import './PuppyForm.css';
 
 const EditPuppyForm = () => {
+    const { litterId, puppyId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
     const litter = useSelector(state => state.litter?.litter);
-    const puppy = useSelector(state => state.puppies)
+    const puppies = useSelector(state => state.puppies.puppiesList)
 
     // console.log('SESSION USER', session);
     console.log('LITTER ID', litter);
-    console.log('PUPPIES: ', puppy);
+    console.log('PUPPIES: ', puppies);
 
-    const [name, setName] = useState(puppy.name);
-    const [description, setDescription] = useState(puppy.description);
-    const [day, setDay] = useState(puppy.day);
-    const [month, setMonth] = useState(puppy.month);
-    const [year, setYear] = useState(puppy.year);
+    let thisPuppy = (puppies.filter(puppy => {
+        if (puppyId == puppy.id) {
+            return puppy;
+        }
+    })[0]);
+
+    const [name, setName] = useState(thisPuppy.name);
+    const [description, setDescription] = useState(thisPuppy.description);
+    const [day, setDay] = useState(thisPuppy.day);
+    const [month, setMonth] = useState(thisPuppy.month);
+    const [year, setYear] = useState(thisPuppy.year);
 
     const [errors, setErrors] = useState([]);
 
@@ -31,7 +38,7 @@ const EditPuppyForm = () => {
         e.preventDefault();
 
         const editedPuppy = {
-            ...puppy,
+            ...thisPuppy,
             name,
             description,
             year,
@@ -41,7 +48,7 @@ const EditPuppyForm = () => {
         };
 
         const updatedPuppy = await dispatch(updatePuppy(editedPuppy));
-        history.push(`/litters/${litter.id}/puppies/${updatedPuppy.id}`);
+        history.push(`/puppies/${updatedPuppy.id}`);
 
     };
 
@@ -101,7 +108,7 @@ const EditPuppyForm = () => {
                         className='red__button signup__button'
                         type="submit"
                     >
-                        New Puppy
+                        Save Changes
                     </button>
                 </form>
             </div>
