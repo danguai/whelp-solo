@@ -2,7 +2,10 @@ import { csrfFetch } from './csrf';
 
 //  C O N S T A N T S
 const CREATE_PUPPY = 'puppies/CREATE_PUPPY';
+const READ_PUPPY = 'puppies/READ_PUPPY';
 const READ_PUPPIES = 'puppies/READ_PUPPIES';
+const UPDATE_PUPPY = 'puppies/UPDATE_PUPPY';
+const DELETE_PUPPY = 'puppies/DELETE_PUPPY';
 
 //  A C T I O N S
 const createPuppyAction = puppy => {
@@ -12,10 +15,31 @@ const createPuppyAction = puppy => {
     };
 };
 
+const readPuppyAction = puppy => {
+    return {
+        type: READ_PUPPY,
+        payload: puppy
+    };
+};
+
 const readPuppiesAction = puppies => {
     return {
         type: READ_PUPPIES,
-        payload: puppies
+        arrOfPups: puppies
+    };
+};
+
+const updatePuppyAction = puppy => {
+    return {
+        type: UPDATE_PUPPY,
+        payload: puppy
+    }
+};
+
+const deletePuppyAction = puppy => {
+    return {
+        type: DELETE_PUPPY,
+        payload: puppy
     }
 };
 
@@ -50,7 +74,6 @@ export const createPuppy = puppy => async dispatch => {
         if (response.ok) {
             const data = await response.json();
 
-            console.log('DATA', data);
             if (data.errors) {
                 return Promise.reject(data);
             }
@@ -65,6 +88,16 @@ export const createPuppy = puppy => async dispatch => {
 };
 
 //  R E A D   O N E   P U P P Y   T H U N K
+export const readPuppy = (litterId, puppyId) => async dispatch => {
+    const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppyId}`);
+
+    if (response.ok) {
+        const puppy = await response.json();
+        dispatch(readPuppyAction(puppy));
+    }
+
+};
+
 //  R E A D   A L L   P U P P I E S   T H U N K
 export const readPuppies = litterId => async dispatch => {
     const response = await csrfFetch(`/api/litter/${litterId}/puppies`);
@@ -77,7 +110,38 @@ export const readPuppies = litterId => async dispatch => {
 };
 
 //   U P D A T E   P U P P Y   T H U N K
+export const updatePuppy = puppy => async dispatch => {
+    const { litterId } = puppy;
+
+    const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppy.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(puppy)
+    });
+
+    if (response) {
+        const puppy = await response.json();
+        dispatch(updatePuppyAction(puppy));
+        return puppy;
+    }
+};
+
 //  D E L E T E   P U P P Y   T H U N K
+export const deletePuppy = puppy => async dispatch => {
+    const { litterId } = puppy;
+
+    const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppy.id}`, {
+        method: 'DELETE'
+    });
+
+    if (response) {
+        const resJson = await response.json();
+        dispatch(deletePuppyAction(resJson));
+        return resJson;
+    }
+};
 
 //  R E D U C E R S
 const initialState = { puppiesList: [] };
@@ -89,9 +153,24 @@ const puppiesReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.puppiesList.push(action.payload);
             return newState;
+        case READ_PUPPY:
+            newState = Object.assign({}, state);
+            newState.puppy = action.payload;
+            return newState;
         case READ_PUPPIES:
             newState = Object.assign({}, state);
-            newState.puppiesList = action.payload;
+            newState.puppiesList = action.arrOfPups;
+            return newState;
+        case UPDATE_PUPPY:
+            newState = Object.assign({}, state);
+            const puppyIndex = newState.puppiesList.findIndex(pup => pup.id === action.payload.id)
+            newState.puppiesList[puppyIndex] = action.payload;
+            return newState;
+        case DELETE_PUPPY:
+            newState = Object.assign({}, state);
+            newState.puppiesList = newState
+                .puppiesList
+                .filter(puppy => action.payload.id !== puppy.id);
             return newState;
         default:
             return state;

@@ -34,7 +34,7 @@ const Puppies = () => {
                     <li
                         key={puppy.id}
                         className='each__puppy__container'>
-                        <NavLink to={`${litter.id}/puppies/${puppy.id}`}>
+                        <NavLink to={`/puppies/${puppy.id}`}>
                             <div className="find__your__place__photo">
                                 <div>
                                     <img className='place__photo' src={require('../../images/puppy-temp.png')} />
