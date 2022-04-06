@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { readLitter, deleteLitter } from '../../store/litter';
 import { readPuppy, deletePuppy } from '../../store/puppies';
 
 import Puppies from '../Puppies';
@@ -12,6 +11,8 @@ import './PuppyPage.css';
 
 const PuppyPage = () => {
     const { litterId, puppyId } = useParams();
+
+    console.log(puppyId);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -28,7 +29,7 @@ const PuppyPage = () => {
     })[0]);
 
     // useEffect(() => {
-    //     dispatch(readLitter(litter.id));
+    //     dispatch(readPuppy(puppyId));
     // }, [dispatch]);
 
     // const handleToggle = () => {

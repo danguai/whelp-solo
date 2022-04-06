@@ -8,17 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      image_01: {
+      image: {
         allowNull: false,
-        type: Sequelize.TEXT
-      },
-      image_02: {
-        type: Sequelize.TEXT
-      },
-      image_03: {
-        type: Sequelize.TEXT
-      },
-      image_04: {
         type: Sequelize.TEXT
       },
       puppyId: {

@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     litterId: DataTypes.INTEGER,
   }, {});
   Puppy.associate = function (models) {
-    Puppy.belongsTo(models.User, { foreignKey: 'userId' });
-    Puppy.belongsTo(models.Litter, { foreignKey: 'litterId' });
-    // Puppy.belongsTo(models.User, { foreignKey: 'userId', onDelete: "cascade", foreignKeyConstraint: true });
-    // Puppy.belongsTo(models.Litter, { foreignKey: 'litterId', onDelete: "cascade", foreignKeyConstraint: true });
+    // Puppy.belongsTo(models.User, { foreignKey: 'userId' });
+    // Puppy.belongsTo(models.Litter, { foreignKey: 'litterId' });
+    Puppy.belongsTo(models.User, { foreignKey: 'userId', onDelete: "cascade", foreignKeyConstraint: true });
+    Puppy.belongsTo(models.Litter, { foreignKey: 'litterId', onDelete: "cascade", foreignKeyConstraint: true });
 
     Puppy.hasMany(models.Image, { foreignKey: 'puppyId' });
 
