@@ -41,7 +41,7 @@ const EditPuppyForm = () => {
         };
 
         const updatedPuppy = await dispatch(updatePuppy(editedPuppy));
-        // history.push(`/litter/${litterId}/puppies/${updatedPuppy.id}`);
+        history.push(`/litters/${litter.id}/puppies/${updatedPuppy.id}`);
 
     };
 

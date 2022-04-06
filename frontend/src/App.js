@@ -81,7 +81,7 @@ function App() {
           <Route path='/puppies/:puppyId'>
             <PuppyPage />
           </Route>
-          <Route path='/puppies/:puppyId'>
+          <Route path='/puppies/:puppyId/puppy-edit'>
             <EditPuppyForm />
           </Route>
         </Switch>

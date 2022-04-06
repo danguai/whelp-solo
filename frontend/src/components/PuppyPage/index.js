@@ -27,9 +27,9 @@ const PuppyPage = () => {
         }
     })[0]);
 
-    useEffect(() => {
-        dispatch(readLitter(litterId));
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(readLitter(litter.id));
+    // }, [dispatch]);
 
     // const handleToggle = () => {
     //     setActive(!active);
@@ -37,7 +37,7 @@ const PuppyPage = () => {
 
     const removePuppy = () => {
         dispatch(deletePuppy(thisPuppy.id));
-        history.push('/');
+        history.push(`/litter/${litter.id}`);
     };
 
     // if (!litter) return null;
@@ -57,12 +57,12 @@ const PuppyPage = () => {
 
             </div>
             <div>
-                {/* {litterOwner && <Link to={`/${puppy.id}/puppy-edit`}
+                {litterOwner && <Link to={`/puppies/${thisPuppy.id}/puppy-edit`}
                     className='edit__puppy__button'>
                     <button>
                         Edit Puppy
                     </button>
-                </Link>} */}
+                </Link>}
                 {litterOwner && <button
                     className='delete__puppy__button'
                     onClick={removePuppy}

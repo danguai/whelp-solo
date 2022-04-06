@@ -41,7 +41,12 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 router.get('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
     try {
         const id = +req.params.id;
+
+        console.log('BACKEND ID', id);
+
         const puppy = await Puppy.findByPk(id);
+
+        console.log('BACKEND PUPPY', puppy);
         return res.json(puppy);
     } catch {
         console.log('ERROR READING ONE PUPPY', e);
