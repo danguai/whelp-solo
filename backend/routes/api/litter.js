@@ -5,9 +5,6 @@ const { requireAuth } = require('../../utils/auth');
 
 const { Litter } = require('../../db/models');
 
-// const { check } = require('express-validator');
-// const { handleValidationErrors } = require('../../utils/validation');
-
 const router = express.Router();
 
 //  C R E A T E   L I T T E R

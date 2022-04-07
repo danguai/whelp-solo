@@ -17,7 +17,39 @@ body {
     border-radius: 5px;
 }
 
+.red__button__disabled {
+    font-weight: bold;
+    color: white;
+    background: rgb(195, 159, 161);
+    border: 1px rgba(195, 159, 161) solid;
+    cursor: not-allowed;
+    border-radius: 5px;
+}
+
 ::placeholder {
     padding-left: 6px;
     color: rgb(155, 155, 155)
 }
+
+.errors_style {
+    font-weight: bold;
+    font-size: 9px;
+    color: red;
+    padding: 2px 0 5px 5px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* .litter__button__disabled {
+    margin-top: 20px;
+    cursor: not-allowed;
+    background: linear-gradient(180deg, rgba(194, 68, 84, 0.25) 0%, rgba(128, 42, 71, 0.25) 100%);
+    width: 284px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px;
+    border-color: black;
+    color: white;
+} */

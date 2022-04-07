@@ -1,3 +1,74 @@
-.create__litter__containter {
-    margin-top: 150px;
+.litter__form__container {
+    margin-top: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.litter__form__box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: auto;
+    /* padding: 20px 0; */
+    margin-right: 350px;
+    /* border: 1px red solid; */
+}
+
+.litter__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.new__litter__title {
+    font-weight: bold;
+    font-size: 23px;
+    padding-bottom: 6px;
+    color: rgb(180, 40, 46, 1);
+    text-shadow: 0 0 15px rgb(255, 255, 255);
+}
+
+.litter__subtitle {
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(50, 50, 50, 1);
+    margin-bottom: 10px;
+}
+
+.litter__image {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* margin-left: 250px; */
+    /* padding-right: 350px; */
+    /* padding-bottom: 350px; */
+    position: relative;
+    /* width: 75%; */
+    height: auto;
+    z-index: -1;
+}
+
+.switching {
+    margin-left: 5px;
+    text-decoration: none;
+    color: rgb(66, 113, 176);
+}
+
+.input__litter {
+    width: 280px;
+    height: 24px;
+    margin: 5px 0;
+    border: 1px rgba(153, 153, 153, 1) solid;
+    border-radius: 5px;
+    background: rgb(255, 255, 255, 0.9);
+}
+
+.litter__button {
+    margin-top: 30px;
+    width: 284px;
+    height: 40px;
 }

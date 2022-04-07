@@ -20,19 +20,41 @@
     color: rgb(0, 0, 0);
 }
 
+.puppy__description {
+    position: absolute;
+    margin: 350px 0 0 150px;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+}
+
+.puppy__birthday {
+    position: absolute;
+    margin: 370px 0 0 150px;
+    font-size: 13px;
+    color: rgb(0, 0, 0);
+}
+
+.puppy__age {
+    position: absolute;
+    margin: 385px 0 0 150px;
+    font-size: 10px;
+    color: rgb(0, 0, 0);
+    font: bolder;
+}
+
 .edit__puppy__button {
     position: absolute;
-    margin: 400px 0 0 150px;
+    margin: 410px 0 0 150px;
 }
 
 .delete__puppy__button {
     position: absolute;
-    margin: 400px 0 0 250px;
+    margin: 410px 0 0 250px;
 }
 
 .new__puppy__button {
     position: absolute;
-    margin: 430px 0 0 150px;
+    margin: 440px 0 0 150px;
 }
 
 .new__puppies__container {

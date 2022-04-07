@@ -4,10 +4,9 @@ const asyncHandler = require('express-async-handler');
 const { requireAuth } = require('../../utils/auth');
 
 const { Puppy } = require('../../db/models');
-
+const { Image } = require('../../db/models');
 
 const router = express.Router({ mergeParams: true });
-
 
 //  C R E A T E   P U P P Y
 router.post('/', requireAuth, asyncHandler(async (req, res) => {
@@ -41,12 +40,14 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 router.get('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
     try {
         const id = +req.params.id;
-
-        console.log('BACKEND ID', id);
-
         const puppy = await Puppy.findByPk(id);
 
-        console.log('BACKEND PUPPY', puppy);
+        const images = await Image.findAll({
+            where: { puppyId: puppy.id }
+        });
+
+        console.log('IMAGES:', images);
+
         return res.json(puppy);
     } catch {
         console.log('ERROR READING ONE PUPPY', e);
@@ -57,6 +58,9 @@ router.get('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
 router.get('/', requireAuth, asyncHandler(async (req, res) => {
     try {
         const puppies = await Puppy.findAll();
+
+        // console.log('PUPPIES IN BE:', puppies);
+
         return res.json(puppies);
     } catch {
         console.log('ERROR READING ALL PUPPIES', e);

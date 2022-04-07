@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { readLitter, deleteLitter } from '../../store/litter';
 import { readPuppy, deletePuppy } from '../../store/puppies';
 
 import Puppies from '../Puppies';
@@ -12,6 +11,8 @@ import './PuppyPage.css';
 
 const PuppyPage = () => {
     const { litterId, puppyId } = useParams();
+
+    console.log(puppyId);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -28,7 +29,7 @@ const PuppyPage = () => {
     })[0]);
 
     // useEffect(() => {
-    //     dispatch(readLitter(litter.id));
+    //     dispatch(readPuppy(puppyId));
     // }, [dispatch]);
 
     // const handleToggle = () => {
@@ -40,7 +41,10 @@ const PuppyPage = () => {
         history.push(`/litter/${litter.id}`);
     };
 
-    // if (!litter) return null;
+    const newDate = new Date().toJSON().slice(0, 10).split('-');
+
+    const age = newDate[0] - thisPuppy.year;
+
 
     const litterOwner = litter.userId === sessionUser?.id;
 
@@ -53,6 +57,16 @@ const PuppyPage = () => {
             <div className='puppy__name'>
                 {thisPuppy.name}
             </div>
+            <div className='puppy__age'>
+                {`Age: ${age}`}
+            </div>
+            <div className='puppy__description'>
+                {thisPuppy.description}
+            </div>
+            <div className='puppy__birthday'>
+                {`Date of Birth: ${thisPuppy.month} / ${thisPuppy.day} / ${thisPuppy.year}`}
+            </div>
+
             <div className='paws__score'>
 
             </div>
