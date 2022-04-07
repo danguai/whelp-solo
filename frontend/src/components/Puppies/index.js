@@ -28,30 +28,28 @@ const Puppies = () => {
     if (!puppies) return null;
 
     return (
-        <div className='login__form__container'>
 
-
-            <div id='all__litters'>
-                <ul className='recent__litters'>
-                    {puppiesList.map(puppy =>
-                        <li
-                            key={puppy.id}
-                            className='each__puppy__container'>
-                            <NavLink to={`/puppies/${puppy.id}`}>
-                                <div className="find__your__place__photo">
-                                    <div>
-                                        <img className='place__photo' src={require('../../images/puppy-temp.png')} />
-                                    </div>
-                                    <div className="puppy__title">
-                                        {puppy.name}
-                                    </div>
+        <div id='all__litters'>
+            <ul className='recent__litters'>
+                {puppiesList.map(puppy =>
+                    <li
+                        key={puppy.id}
+                        className='each__puppy__container'>
+                        <NavLink to={`/puppies/${puppy.id}`}>
+                            <div className="find__your__place__photo">
+                                <div>
+                                    <img className='place__photo' src={require('../../images/puppy-temp.png')} />
                                 </div>
-                            </NavLink>
-                        </li>
-                    )}
-                </ul>
-            </div>
+                                <div className="puppy__title">
+                                    {puppy.name}
+                                </div>
+                            </div>
+                        </NavLink>
+                    </li>
+                )}
+            </ul>
         </div>
+
     )
 };
 

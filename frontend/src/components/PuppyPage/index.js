@@ -54,6 +54,14 @@ const PuppyPage = () => {
 
     return (
         <div>
+            <div>
+                <Link to={`/litter/${litter.id}`}
+                    className='back__to__litter__button'>
+                    <button>
+                        Back to Litter
+                    </button>
+                </Link>
+            </div>
             <div className='puppy__name'>
                 {thisPuppy.name}
             </div>
