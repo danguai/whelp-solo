@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   Review.associate = function (models) {
     // Review.belongsTo(models.User, { foreignKey: 'userId' });
     // Review.belongsTo(models.Litter, { foreignKey: 'litterId' });
-    Review.belongsTo(models.User, { foreignKey: 'userId', onDelete: "cascade", foreignKeyConstraint: true });
-    Review.belongsTo(models.Litter, { foreignKey: 'litterId', onDelete: "cascade", foreignKeyConstraint: true });
+    // Review.belongsTo(models.User, { foreignKey: 'userId', onDelete: "cascade", foreignKeyConstraint: true });
+    // Review.belongsTo(models.Litter, { foreignKey: 'litterId', onDelete: "cascade", hooks: true });
 
   };
   return Review;
