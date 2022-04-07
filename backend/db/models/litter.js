@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Litter.associate = function (models) {
     // Litter.belongsTo(models.User, { foreignKey: 'userId' });
-    Litter.belongsTo(models.User, { foreignKey: 'userId', onDelete: "cascade", foreignKeyConstraint: true });
+    Litter.belongsTo(models.User, { foreignKey: 'userId' });
 
-    Litter.hasMany(models.Review, { foreignKey: 'litterId' });
+    // Litter.hasMany(models.Review, { foreignKey: 'litterId', onDelete: "CASCADE" });
     Litter.hasMany(models.Puppy, { foreignKey: 'litterId' });
 
   };

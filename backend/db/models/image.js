@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Image.associate = function (models) {
     // Image.belongsTo(models.Puppy, { foreignKey: 'puppyId' });
-    Image.belongsTo(models.Puppy, { foreignKey: 'puppyId', onDelete: "cascade", foreignKeyConstraint: true });
+    // Image.belongsTo(models.Puppy, { foreignKey: 'puppyId' });
   };
   return Image;
 };

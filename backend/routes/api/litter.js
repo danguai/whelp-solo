@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { requireAuth } = require('../../utils/auth');
 
 const { Litter } = require('../../db/models');
+const { Puppy } = require('../../db/models');
 
 const router = express.Router();
 
@@ -82,6 +83,14 @@ router.delete('/:id', asyncHandler(async (req, res) => {
     const litter = await Litter.findByPk(req.params.id);
 
     if (!litter) throw new Error('Can not find litter.');
+
+    const puppies = await Puppy.findAll({});
+
+    puppies.forEach(async puppy => {
+        if (puppy.litterId === litter.id) {
+            await Puppy.destroy({ where: { id: puppy.id } })
+        }
+    });
 
     await Litter.destroy({ where: { id: litter.id } });
 
