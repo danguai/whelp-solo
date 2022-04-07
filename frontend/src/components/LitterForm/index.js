@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
+import {
+    validateLitterName,
+    validateLitterDescription,
+    validateImageHeader,
+    validateAddress,
+    validateCity,
+    validateState,
+    validateZipcode
+} from '../../utils/validation';
+
 import { createLitter, updateLitter } from '../../store/litter';
 // import * as sessionActions from '../../store/session';
 
@@ -22,7 +32,23 @@ const LitterForm = () => {
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
 
-    const [errors, setErrors] = useState([]);
+    const [nameError, setNameError] = useState('');
+    const [imageHeaderError, setImageHeaderError] = useState('');
+    const [descriptionError, setDescriptionError] = useState('');
+    const [addressError, setAddressError] = useState('');
+    const [cityError, setCityError] = useState('');
+    const [stateError, setStateError] = useState('');
+    const [zipcodeError, setZipcodeError] = useState('');
+
+    const checkingErrors = (
+        nameError ||
+        imageHeaderError ||
+        descriptionError ||
+        addressError ||
+        cityError ||
+        stateError ||
+        zipcodeError
+    );
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,91 +63,145 @@ const LitterForm = () => {
             zipcode
         };
 
-        // console.log('NEW LITTER: ', newLitter);
-
         const createdLitter = await dispatch(createLitter(newLitter));
-
-        // console.log('CREATED LITTER: ', createdLitter);
-
         history.push(`/litter/${createdLitter.id}`);
     };
 
     return (
         <div>
-            <div className='create__litter__containter'>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <input
-                            placeholder='Name'
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder='Image'
-                            type="text"
-                            value={imageHeader}
-                            onChange={(e) => setImageHeader(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder='Description'
-                            type="text"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder='Address'
-                            type="text"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder='City'
-                            type="text"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder='State'
-                            type="text"
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder='Zipcode'
-                            type="text"
-                            value={zipcode}
-                            onChange={(e) => setZipcode(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button
-                        className='red__button signup__button'
-                        type="submit"
-                    >
+            <div className='litter__form__container'>
+                <div>
+                    <img className='litter__image' src={require('../../images/new_litter_pups.png')} />
+                </div>
+                <div className='litter__form__box'>
+                    <div className='new__litter__title'>
                         New Litter
-                    </button>
-                </form>
+                    </div>
+                    <form className='litter__form' onSubmit={handleSubmit}>
+                        <div>
+                            <input
+                                className='input__litter'
+                                placeholder='Name'
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                onBlur={() => {
+                                    const error = validateLitterName(name)
+                                    if (error) setNameError(error)
+                                }}
+                                onFocus={() => { setNameError('') }}
+                                required
+                            />
+                        </div>
+                        {nameError && <div className="errors_style">{nameError}</div>}
+                        <div>
+                            <input
+                                className='input__litter'
+                                placeholder='Image'
+                                type="text"
+                                value={imageHeader}
+                                onChange={(e) => setImageHeader(e.target.value)}
+                                onBlur={() => {
+                                    const error = validateImageHeader(imageHeader)
+                                    if (error) setImageHeaderError(error)
+                                }}
+                                onFocus={() => { setImageHeaderError('') }}
+                                required
+                            />
+                        </div>
+                        {imageHeaderError && <div className="errors_style">{imageHeaderError}</div>}
+                        <div className='litter__form__area'>
+                            <textarea
+                                className='input__litter'
+                                placeholder='Description'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                onBlur={() => {
+                                    const error = validateLitterDescription(description)
+                                    if (error) setDescriptionError(error)
+                                }}
+                                onFocus={() => { setDescriptionError('') }}
+                                required
+                            />
+                        </div>
+                        {descriptionError && <div className="errors_style">{descriptionError}</div>}
+                        <div>
+                            <input
+                                className='input__litter'
+                                placeholder='Address'
+                                type="text"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                                onBlur={() => {
+                                    const error = validateAddress(address)
+                                    if (error) setAddressError(error)
+                                }}
+                                onFocus={() => { setAddressError('') }}
+                                required
+                            />
+                        </div>
+                        {addressError && <div className="errors_style">{addressError}</div>}
+                        <div>
+                            <input
+                                className='input__litter'
+                                placeholder='City'
+                                type="text"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                onBlur={() => {
+                                    const error = validateCity(city)
+                                    if (error) setCityError(error)
+                                }}
+                                onFocus={() => { setCityError('') }}
+                                required
+                            />
+                        </div>
+                        {cityError && <div className="errors_style">{cityError}</div>}
+                        <div>
+                            <input
+                                className='input__litter'
+                                placeholder='State'
+                                type="text"
+                                value={state}
+                                onChange={(e) => setState(e.target.value)}
+                                onBlur={() => {
+                                    const error = validateState(state)
+                                    if (error) setStateError(error)
+                                }}
+                                onFocus={() => { setStateError('') }}
+                                required
+                            />
+                        </div>
+                        {stateError && <div className="errors_style">{stateError}</div>}
+                        <div>
+                            <input
+                                className='input__litter'
+                                placeholder='Zipcode'
+                                type="text"
+                                value={zipcode}
+                                onChange={(e) => setZipcode(e.target.value)}
+                                onBlur={() => {
+                                    const error = validateZipcode(zipcode)
+                                    if (error) setZipcodeError(error)
+                                }}
+                                onFocus={() => { setZipcodeError('') }}
+                                required
+                            />
+                        </div>
+                        {zipcodeError && <div className="errors_style">{zipcodeError}</div>}
+                        <button
+                            className={checkingErrors ? 'red__button__disabled litter__button all__buttons' : 'red__button litter__button all__buttons'}
+                            disabled={checkingErrors}
+                            type="submit"
+                        >
+                            New Litter
+                        </button>
+                    </form>
+
+                </div>
             </div>
-        </div>
+
+        </div >
     )
 };
 

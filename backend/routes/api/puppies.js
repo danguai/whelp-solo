@@ -6,41 +6,10 @@ const { requireAuth } = require('../../utils/auth');
 const { Puppy } = require('../../db/models');
 const { Image } = require('../../db/models');
 
-
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-
 const router = express.Router({ mergeParams: true });
 
-//  L I T T E R   V A L I D A T O R
-const validatePuppy = [
-    check('name')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 50 })
-        .withMessage("Puppy's Name should not be longer than 50 characters"),
-    check('year')
-        .exists({ checkFalsy: true })
-        .isNumeric()
-        .withMessage('Year must be a number')
-        .isLength({ max: 4 })
-        .withMessage('Year should not be more than 4 numbers'),
-    check('month')
-        .exists({ checkFalsy: true })
-        .isNumeric()
-        .withMessage('Month must be a number')
-        .isLength({ max: 2 })
-        .withMessage('Month should not be more than 2 numbers'),
-    check('day')
-        .exists({ checkFalsy: true })
-        .isNumeric()
-        .withMessage('Day must be a number')
-        .isLength({ max: 2 })
-        .withMessage('Day should not be more than 2 numbers'),
-    handleValidationErrors
-];
-
 //  C R E A T E   P U P P Y
-router.post('/', requireAuth, validatePuppy, asyncHandler(async (req, res) => {
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const {
         name,
         description,
@@ -99,7 +68,7 @@ router.get('/', requireAuth, asyncHandler(async (req, res) => {
 }));
 
 //  U P D A T E   P U P P Y
-router.put('/:puppyId', requireAuth, validatePuppy, asyncHandler(async (req, res) => {
+router.put('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
     const id = req.params.puppyId;
 
     delete req.body.id;

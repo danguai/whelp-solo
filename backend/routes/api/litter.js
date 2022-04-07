@@ -5,43 +5,10 @@ const { requireAuth } = require('../../utils/auth');
 
 const { Litter } = require('../../db/models');
 
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-
 const router = express.Router();
 
-//  L I T T E R   V A L I D A T O R
-const validateLitter = [
-    check('name')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 50 })
-        .withMessage("Puppy's Name should not be longer than 50 characters"),
-    check('address')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 255 })
-        .withMessage('Address should not be more than 255 characters'),
-    check('city')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 85 })
-        .withMessage('City should not be more than 85 characters'),
-    check('state')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 60 })
-        .withMessage('State should not be more than 60 characters'),
-    check('country')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 60 })
-        .withMessage('Country should not be more than 60 characters'),
-    check('zipcode')
-        .exists({ checkFalsy: true })
-        .isLength({ min: 5, max: 5 })
-        .withMessage('It should be a valid zipcode'),
-    handleValidationErrors
-];
-
-
 //  C R E A T E   L I T T E R
-router.post('/', requireAuth, validateLitter, asyncHandler(async (req, res) => {
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const { name,
         imageHeader,
         description,
@@ -95,7 +62,7 @@ router.get('/', asyncHandler(async (_req, res) => {
 }));
 
 //  U P D A T E   L I T T E R
-router.put('/:id', requireAuth, validateLitter, asyncHandler(async (req, res) => {
+router.put('/:id', requireAuth, asyncHandler(async (req, res) => {
     const id = req.body.id;
     delete req.body.id;
 

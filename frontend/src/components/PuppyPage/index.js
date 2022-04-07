@@ -41,7 +41,10 @@ const PuppyPage = () => {
         history.push(`/litter/${litter.id}`);
     };
 
-    // if (!litter) return null;
+    const newDate = new Date().toJSON().slice(0, 10).split('-');
+
+    const age = newDate[0] - thisPuppy.year;
+
 
     const litterOwner = litter.userId === sessionUser?.id;
 
@@ -54,6 +57,16 @@ const PuppyPage = () => {
             <div className='puppy__name'>
                 {thisPuppy.name}
             </div>
+            <div className='puppy__age'>
+                {`Age: ${age}`}
+            </div>
+            <div className='puppy__description'>
+                {thisPuppy.description}
+            </div>
+            <div className='puppy__birthday'>
+                {`Date of Birth: ${thisPuppy.month} / ${thisPuppy.day} / ${thisPuppy.year}`}
+            </div>
+
             <div className='paws__score'>
 
             </div>
