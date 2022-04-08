@@ -50,6 +50,7 @@ const LitterForm = () => {
         zipcodeError
     );
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 

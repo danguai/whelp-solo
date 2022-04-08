@@ -5,6 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 
 const { Litter } = require('../../db/models');
 const { Puppy } = require('../../db/models');
+const { Image } = require('../../db/models');
 
 const router = express.Router();
 
@@ -85,9 +86,17 @@ router.delete('/:id', asyncHandler(async (req, res) => {
     if (!litter) throw new Error('Can not find litter.');
 
     const puppies = await Puppy.findAll({});
+    const images = await Image.findAll({});
 
     puppies.forEach(async puppy => {
         if (puppy.litterId === litter.id) {
+            console.log(puppy.id);
+
+            images.forEach(async image => {
+                if (puppy.id === image.puppyId) {
+                    await Image.destroy({ where: { puppyId: puppy.id } })
+                }
+            })
             await Puppy.destroy({ where: { id: puppy.id } })
         }
     });

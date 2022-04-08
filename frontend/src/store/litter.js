@@ -36,10 +36,10 @@ const updateLitterAction = litter => {
     };
 };
 
-const deleteLitterAction = litter => {
+const deleteLitterAction = litterId => {
     return {
         type: DELETE_LITTER,
-        payload: litter
+        payload: litterId
     };
 };
 
@@ -134,15 +134,13 @@ export const deleteLitter = litterId => async dispatch => {
         method: 'DELETE'
     });
 
-    console.log('RESPONSE', response);
     if (response.ok) {
         const resJson = await response.json();
-        dispatch(deleteLitterAction(resJson));
+        dispatch(deleteLitterAction(litterId));
         return resJson;
     }
 
 };
-
 
 //  R E D U C E R
 let initialState = { litter: null };
@@ -169,6 +167,8 @@ const litterReducer = (state = initialState, action) => {
         case DELETE_LITTER:
             newState = Object.assign({}, state);
             newState.litter = null;
+            newState.littersList = newState.littersList
+                .filter(litter => litter.id !== action.payload);
             return newState;
         default:
             return state;
