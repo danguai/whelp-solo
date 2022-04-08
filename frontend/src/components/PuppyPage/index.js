@@ -35,7 +35,7 @@ const PuppyPage = () => {
         }
     }));
 
-    console.log('WHAT HAPPEN', thisPuppyImages);
+    // console.log('WHAT HAPPEN', thisPuppyImages);
 
     useEffect(() => {
         dispatch(readImages());
@@ -109,17 +109,17 @@ const PuppyPage = () => {
                 } */}
             </div>
             <div id='all__litters'>
-                <div className='recent__litters'>
+                <ul className='recent__litters'>
                     {thisPuppyImages.map(puppy =>
-                        <div className='each__puppy__container' >
+                        <li key={puppy.id} className='each__puppy__container' >
                             <div className="find__your__place__photo">
                                 <div>
                                     <img className='place__photo' src={puppy.image} />
                                 </div>
                             </div>
-                        </div>
+                        </li>
                     )}
-                </div>
+                </ul>
             </div>
 
         </div>

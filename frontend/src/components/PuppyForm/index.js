@@ -11,6 +11,7 @@ import {
 } from '../../utils/validation';
 
 import { createPuppy } from '../../store/puppies';
+import { createImage } from '../../store/images';
 // import * as sessionActions from '../../store/session';
 
 import './PuppyForm.css';
@@ -20,7 +21,7 @@ const PuppyForm = () => {
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
-    const litterId = useSelector(state => state.litter?.litter.id);
+    const litterId = useSelector(state => state.litter?.litter.id)
 
     // console.log('SESSION USER', session);
     // console.log('LITTER ID', litterId);
@@ -30,6 +31,8 @@ const PuppyForm = () => {
     const [day, setDay] = useState('');
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
+
+    const [image, setImage] = useState('');
 
     const [nameError, setNameError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
@@ -59,9 +62,23 @@ const PuppyForm = () => {
         };
 
         try {
-
             const createdPuppy = await dispatch(createPuppy(newPuppy));
-            history.push(`/litter/${litterId}`);
+
+            if (createdPuppy) {
+
+                console.log('createdPuppy', createdPuppy);
+
+                const newImage = {
+                    image,
+                    puppyId: createdPuppy.id
+                }
+
+                console.log('NEWIMAGE', newImage);
+
+                await dispatch(createImage(newImage));
+            }
+
+            history.push(`/puppies/${createdPuppy.id}`);
         } catch (e) {
             console.log('IS IT HERE?', e);
         }
@@ -160,6 +177,22 @@ const PuppyForm = () => {
                             />
                         </div>
                         {yearError && <div className="errors_style">{yearError}</div>}
+                        <div className='puppy__form__area'>
+                            <input
+                                className='input__puppy'
+                                placeholder='First Image'
+                                type="text"
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                            // onBlur={() => {
+                            //     const error = validateYear(year)
+                            //     if (error) setYearError(error)
+                            // }}
+                            // onFocus={() => { setYearError('') }}
+                            // required
+                            />
+                        </div>
+                        {/* {yearError && <div className="errors_style">{yearError}</div>} */}
 
                         <button
                             className={checkingErrors ? 'red__button__disabled puppy__button all__buttons' : 'red__button puppy__button all__buttons'}

@@ -36,24 +36,6 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 
 }));
 
-// //  C R E A T E   I M A G E S
-// router.post('/', requireAuth, asyncHandler(async (req, res) => {
-//     const {
-//         image
-//     } = req.body;
-
-//     const puppyId = req.params;
-
-//     console.log('ESTE ES EL PUPPY ID ===================+++++++++++++++++++====', puppyId);
-//     const puppyImage = await Image.create(
-//         {
-//             image,
-//             puppyId
-//         });
-//     return res.json({ puppyImage });
-// }));
-
-
 //   R E A D   P U P P Y
 router.get('/:puppyId', asyncHandler(async (req, res) => {
     try {
