@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
 import { readPuppy, deletePuppy } from '../../store/puppies';
+import { readImages } from '../../store/images';
 
 import Puppies from '../Puppies';
 // import * as sessionActions from '../../store/session';
@@ -21,6 +22,11 @@ const PuppyPage = () => {
     const litter = useSelector(state => state.litter?.litter);
     const sessionUser = useSelector(state => state.session.user);
     const puppies = useSelector(state => state.puppies.puppiesList);
+    const images = useSelector(state => state.images);
+
+
+    console.log('IMAGES', images);
+
 
     let thisPuppy = (puppies.filter(puppy => {
         if (puppyId == puppy.id) {

@@ -14,6 +14,7 @@ import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
 import * as litterActions from './store/litter';
 import * as puppiesActions from './store/puppies';
+import * as imagesActions from './store/images';
 
 const store = configureStore();
 
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
   window.litterActions = litterActions;
   window.puppiesActions = puppiesActions;
+  window.imagesActions = imagesActions;
 }
 
 function Root() {

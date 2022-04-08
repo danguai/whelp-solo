@@ -36,9 +36,10 @@ const updateLitterAction = litter => {
     };
 };
 
-const deleteLitterAction = () => {
+const deleteLitterAction = litter => {
     return {
-        type: DELETE_LITTER
+        type: DELETE_LITTER,
+        payload: litter
     };
 };
 
@@ -127,12 +128,19 @@ export const updateLitter = litter => async dispatch => {
 };
 
 //  D E L E T E   L I T T E R   T H U N K
-export const deleteLitter = id => async dispatch => {
-    const response = await csrfFetch(`/api/litter/${id}`, {
+export const deleteLitter = litterId => async dispatch => {
+
+    const response = await csrfFetch(`/api/litter/${litterId}`, {
         method: 'DELETE'
     });
-    dispatch(deleteLitterAction());
-    return response;
+
+    console.log('RESPONSE', response);
+    if (response.ok) {
+        const resJson = await response.json();
+        dispatch(deleteLitterAction(resJson));
+        return resJson;
+    }
+
 };
 
 
