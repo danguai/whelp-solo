@@ -24,18 +24,18 @@ const router = express.Router();
 //     return res.json({ puppyImage });
 // }));
 
-//   R E A D   O N E   I M A G E
-router.get('/:imageId', asyncHandler(async (req, res) => {
-    try {
-        const id = +req.params.imageId;
+// //   R E A D   O N E   I M A G E
+// router.get('/:imageId', asyncHandler(async (req, res) => {
+//     try {
+//         const id = +req.params.imageId;
 
-        const image = await Image.findByPk(id);
-        // console.log('INSIDE READ ONE - BE', oneImage.id);
-        return res.json(image);
-    } catch (e) {
-        console.log('ERROR IN ONE IMAGE', e);
-    }
-}));
+//         const image = await Image.findByPk(id);
+//         // console.log('INSIDE READ ONE - BE', oneImage.id);
+//         return res.json(image);
+//     } catch (e) {
+//         console.log('ERROR IN ONE IMAGE', e);
+//     }
+// }));
 
 //   R E A D   I M A G E S
 router.get('/', asyncHandler(async (req, res) => {

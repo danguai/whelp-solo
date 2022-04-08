@@ -53,7 +53,6 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = models => {
     User.hasMany(models.Litter, { foreignKey: 'userId', onDelete: "cascade", hooks: true });
-    User.hasMany(models.Review, { foreignKey: 'userId', onDelete: "cascade", hooks: true });
     User.hasMany(models.Puppy, { foreignKey: 'userId', onDelete: "cascade", hooks: true });
   };
 

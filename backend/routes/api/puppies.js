@@ -104,9 +104,15 @@ router.put('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
 router.delete('/:puppyId', asyncHandler(async (req, res) => {
     const puppy = await Puppy.findByPk(req.params.puppyId);
 
-    console.log('PUPPY iN DELETE', puppy);
-
     if (!puppy) throw new Error(`Can't find puppy`);
+
+    const images = await Image.findAll();
+
+    images.forEach(async image => {
+        if (puppy.id === image.puppyId) {
+            await Image.destroy({ where: { puppyId: puppy.id } })
+        }
+    })
 
     await Puppy.destroy({ where: { id: puppy.id } });
 
