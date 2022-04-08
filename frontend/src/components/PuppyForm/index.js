@@ -61,14 +61,20 @@ const PuppyForm = () => {
             litterId
         };
 
-        const newImage = {
-            image,
-            puppyId: newPuppy.id
-        }
-
         try {
             const createdPuppy = await dispatch(createPuppy(newPuppy));
+
             if (createdPuppy) {
+
+                console.log('createdPuppy', createdPuppy);
+
+                const newImage = {
+                    image,
+                    puppyId: createdPuppy.id
+                }
+
+                console.log('NEWIMAGE', newImage);
+
                 await dispatch(createImage(newImage));
             }
 

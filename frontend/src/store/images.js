@@ -25,11 +25,10 @@ const readImagesAction = images => {
 
 //  T H U N K S
 //  C R E A T E   I M A G E   T H U N K
-export const createImage = image => async dispatch => {
-    const { image, puppyId } = image;
-
+export const createImage = imageTest => async dispatch => {
+    const { image, puppyId } = imageTest;
     try {
-        const response = await csrfFetch('/api/puppies', {
+        const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
             method: 'POST',
             body: JSON.stringify({ image, puppyId })
         });
