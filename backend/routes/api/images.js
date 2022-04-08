@@ -7,22 +7,20 @@ const { Image } = require('../../db/models');
 
 const router = express.Router();
 
-//  C R E A T E   P U P P Y
-// router.post('/', requireAuth, asyncHandler(async (req, res) => {
-//     const {
-//         image
-//     } = req.body;
+//  C R E A T E   I M A G E
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
+    const { image } = req.body;
 
-//     const puppyId = req.params;
+    const puppyId = +req.params.id;
 
-//     console.log('ESTE ES EL PUPPY ID ===================+++++++++++++++++++====', puppyId);
-//     const puppyImage = await Image.create(
-//         {
-//             image,
-//             puppyId
-//         });
-//     return res.json({ puppyImage });
-// }));
+    console.log('ESTE ES EL PUPPY ID ===================+++++++++++++++++++====', puppyId);
+    const puppyImage = await Image.create(
+        {
+            image,
+            puppyId
+        });
+    return res.json({ puppyImage });
+}));
 
 // //   R E A D   O N E   I M A G E
 // router.get('/:imageId', asyncHandler(async (req, res) => {
