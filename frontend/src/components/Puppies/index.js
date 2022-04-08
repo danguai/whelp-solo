@@ -45,8 +45,8 @@ const Puppies = () => {
 
     }
 
-    console.log('puppiesList', puppiesList);
-    console.log('puppiesImagesList', puppiesImagesList);
+    // console.log('puppiesList', puppiesList);
+    // console.log('puppiesImagesList', puppiesImagesList);
 
     useEffect(() => {
         dispatch(readPuppies());

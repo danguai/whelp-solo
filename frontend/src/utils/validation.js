@@ -81,7 +81,9 @@ export const validateDay = (day) => {
 export const validateYear = (year) => {
     if (!year) return `Please provide the year of Birth.`;
 
-    if (year < 2015 || year > 2023) return `Please provide a Year between 2005 & 2022`;
+    if (year < 2015) return `Please provide a Year between 2015 & 2022`;
+
+    if (year > 2022) return `You can't find a puppy in the future!`;
     return '';
 };
 
