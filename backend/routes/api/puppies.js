@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { requireAuth } = require('../../utils/auth');
 
 const { Puppy } = require('../../db/models');
+const { Image } = require('../../db/models');
 
 const router = express.Router({ mergeParams: true });
 
@@ -35,8 +36,26 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 
 }));
 
+// //  C R E A T E   I M A G E S
+// router.post('/', requireAuth, asyncHandler(async (req, res) => {
+//     const {
+//         image
+//     } = req.body;
+
+//     const puppyId = req.params;
+
+//     console.log('ESTE ES EL PUPPY ID ===================+++++++++++++++++++====', puppyId);
+//     const puppyImage = await Image.create(
+//         {
+//             image,
+//             puppyId
+//         });
+//     return res.json({ puppyImage });
+// }));
+
+
 //   R E A D   P U P P Y
-router.get('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:puppyId', asyncHandler(async (req, res) => {
     try {
         const id = +req.params.id;
         const puppy = await Puppy.findByPk(id);
@@ -48,10 +67,23 @@ router.get('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
 }));
 
 //   R E A D   P U P P I E S
-router.get('/', requireAuth, asyncHandler(async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
     const puppies = await Puppy.findAll();
     return res.json(puppies);
 }));
+
+//  R E A D   I M A G E S
+// router.get('/images', asyncHandler(async (req, res) => {
+//     try {
+
+//         const images = await Image.findAll();
+
+//         // console.log('images BE', images);
+//         return res.json(images);
+//     } catch (e) {
+//         console.log('READ IMAGES BACK END', e)
+//     }
+// }));
 
 //  U P D A T E   P U P P Y
 router.put('/:puppyId', requireAuth, asyncHandler(async (req, res) => {

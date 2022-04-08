@@ -13,7 +13,6 @@ import './PuppyPage.css';
 const PuppyPage = () => {
     const { litterId, puppyId } = useParams();
 
-    console.log(puppyId);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -22,11 +21,7 @@ const PuppyPage = () => {
     const litter = useSelector(state => state.litter?.litter);
     const sessionUser = useSelector(state => state.session.user);
     const puppies = useSelector(state => state.puppies.puppiesList);
-    const images = useSelector(state => state.images);
-
-
-    console.log('IMAGES', images);
-
+    const images = useSelector(state => state.images?.imagesList);
 
     let thisPuppy = (puppies.filter(puppy => {
         if (puppyId == puppy.id) {
@@ -34,9 +29,17 @@ const PuppyPage = () => {
         }
     })[0]);
 
-    // useEffect(() => {
-    //     dispatch(readPuppy(puppyId));
-    // }, [dispatch]);
+    let thisPuppyImages = (images.filter(image => {
+        if (puppyId == image.puppyId) {
+            return image;
+        }
+    }));
+
+    console.log('WHAT HAPPEN', thisPuppyImages);
+
+    useEffect(() => {
+        dispatch(readImages());
+    }, [dispatch]);
 
     // const handleToggle = () => {
     //     setActive(!active);
@@ -47,14 +50,12 @@ const PuppyPage = () => {
         history.push(`/litter/${litter.id}`);
     };
 
-    const newDate = new Date().toJSON().slice(0, 10).split('-');
+    if (!thisPuppy) return null;
 
+    const newDate = new Date().toJSON().slice(0, 10).split('-');
     const age = newDate[0] - thisPuppy.year;
 
-
     const litterOwner = litter.userId === sessionUser?.id;
-
-    // const puppy
 
     // const canWriteReview = sessionUser && !litterOwner;
 
@@ -98,9 +99,31 @@ const PuppyPage = () => {
                 >
                     Delete Puppy
                 </button>}
-
             </div>
+            <div className='gradient'>
+                {thisPuppyImages[0].image ?
+                    <img className='litter__bg__image' src={thisPuppyImages[0].image}
+                    /> :
+                    <img className='litter__bg__image' src={require('../../images/puppy-temp.png')}
+                    />
+                }
+                <img
 
+                />
+            </div>
+            <div id='all__litters'>
+                <div className='recent__litters'>
+                    {thisPuppyImages.map(puppy =>
+                        <div className='each__puppy__container' >
+                            <div className="find__your__place__photo">
+                                <div>
+                                    <img className='place__photo' src={puppy.image} />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
 
         </div>
     )

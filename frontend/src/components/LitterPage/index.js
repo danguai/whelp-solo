@@ -17,7 +17,6 @@ const LitterPage = () => {
 
     const [active, setActive] = useState('false');
 
-
     const litter = useSelector(state => state.litter?.litter);
     const sessionUser = useSelector(state => state.session.user);
 
@@ -44,6 +43,14 @@ const LitterPage = () => {
 
     return (
         <div>
+            <div>
+                <Link to={`/`}
+                    className='back__to__litter__button'>
+                    <button>
+                        All Litters
+                    </button>
+                </Link>
+            </div>
             <div className='litter__name'>
                 {litter.name}
             </div>

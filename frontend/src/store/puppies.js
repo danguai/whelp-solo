@@ -92,7 +92,6 @@ export const createPuppy = puppy => async dispatch => {
 export const readPuppy = (litterId, puppyId) => async dispatch => {
     const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppyId}`);
 
-    console.log('LITTER ID: ', litterId, 'PUPPY ID: ', puppyId);
     if (response.ok) {
         const puppy = await response.json();
         dispatch(readPuppyAction(puppy));

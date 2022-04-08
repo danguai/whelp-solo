@@ -15,12 +15,12 @@ import Splashpage from "./components/Splashpage";
 import LitterForm from "./components/LitterForm";
 import EditLitterForm from "./components/LitterForm/EditLitterForm";
 import LitterPage from "./components/LitterPage";
-import Litters from "./components/Litters";
+// import Litters from "./components/Litters";
 
 import PuppyForm from "./components/PuppyForm";
 import EditPuppyForm from "./components/PuppyForm/EditPuppyForm";
 import PuppyPage from "./components/PuppyPage";
-import Puppies from "./components/Puppies";
+// import Puppies from "./components/Puppies";
 
 import * as sessionActions from './store/session';
 
