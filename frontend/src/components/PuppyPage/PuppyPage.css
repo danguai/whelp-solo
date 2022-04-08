@@ -42,6 +42,11 @@
     font: bolder;
 }
 
+.back__to__litter__button {
+    position: absolute;
+    margin: 260px 0 0 150px;
+}
+
 .edit__puppy__button {
     position: absolute;
     margin: 410px 0 0 150px;

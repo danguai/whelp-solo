@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     Puppy.belongsTo(models.User, { foreignKey: 'userId' });
     Puppy.belongsTo(models.Litter, { foreignKey: 'litterId' });
 
-    // Puppy.hasMany(models.Image, { foreignKey: 'puppyId' });
+    Puppy.hasMany(models.Image, { foreignKey: 'puppyId' });
 
   };
   return Puppy;

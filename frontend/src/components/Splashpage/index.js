@@ -20,12 +20,12 @@ const Splashpage = () => {
                         <img className='whelp__logo' src={require('../../images/whelp-logo.png')} />
                     </a>
                     <div className='splashpage__searchbar__container'>
-                        <form id="search__form__splashpage">
+                        {/* <form id="search__form__splashpage">
                             <input className='searchbar__splashpage' type="search" />
                             <button className='magnifier__search__button__splashpage all__buttons' >
                                 <img className='magnifier' src={require('../../images/magnifier.png')} />
                             </button>
-                        </form>
+                        </form> */}
                     </div>
                 </div>
             </div>

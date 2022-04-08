@@ -4,7 +4,6 @@ const asyncHandler = require('express-async-handler');
 const { requireAuth } = require('../../utils/auth');
 
 const { Puppy } = require('../../db/models');
-const { Image } = require('../../db/models');
 
 const router = express.Router({ mergeParams: true });
 
@@ -42,12 +41,6 @@ router.get('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
         const id = +req.params.id;
         const puppy = await Puppy.findByPk(id);
 
-        const images = await Image.findAll({
-            where: { puppyId: puppy.id }
-        });
-
-        console.log('IMAGES:', images);
-
         return res.json(puppy);
     } catch {
         console.log('ERROR READING ONE PUPPY', e);
@@ -56,15 +49,8 @@ router.get('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
 
 //   R E A D   P U P P I E S
 router.get('/', requireAuth, asyncHandler(async (req, res) => {
-    try {
-        const puppies = await Puppy.findAll();
-
-        // console.log('PUPPIES IN BE:', puppies);
-
-        return res.json(puppies);
-    } catch {
-        console.log('ERROR READING ALL PUPPIES', e);
-    }
+    const puppies = await Puppy.findAll();
+    return res.json(puppies);
 }));
 
 //  U P D A T E   P U P P Y

@@ -67,12 +67,12 @@ const NavigationLitter = ({ isLoaded }) => {
                 </a>
             </div>
             <div className='nav__bar__searchbar'>
-                <form id="search__form__navbar">
+                {/* <form id="search__form__navbar">
                     <input className='searchbar__navbar' type="search" />
                     <button className='magnifier__search__button__navbar all__buttons' >
                         <img className='magnifier' src={require('../../images/magnifier.png')} />
                     </button>
-                </form>
+                </form> */}
             </div>
             <div className='menu__top__left'>
                 <a href='/reviews'

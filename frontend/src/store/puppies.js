@@ -7,6 +7,7 @@ const READ_PUPPIES = 'puppies/READ_PUPPIES';
 const UPDATE_PUPPY = 'puppies/UPDATE_PUPPY';
 const DELETE_PUPPY = 'puppies/DELETE_PUPPY';
 
+
 //  A C T I O N S
 const createPuppyAction = puppy => {
     return {
@@ -107,7 +108,6 @@ export const readPuppies = litterId => async dispatch => {
         const puppies = await response.json();
         dispatch(readPuppiesAction(puppies));
     }
-
 };
 
 //   U P D A T E   P U P P Y   T H U N K
@@ -131,10 +131,8 @@ export const updatePuppy = puppy => async dispatch => {
 
 //  D E L E T E   P U P P Y   T H U N K
 export const deletePuppy = puppyId => async dispatch => {
-
     const puppyObj = readPuppyAction(puppyId);
 
-    console.log(puppyObj);
     const litterId = puppyObj.litterId;
     const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppyId}`, {
         method: 'DELETE'
@@ -142,7 +140,7 @@ export const deletePuppy = puppyId => async dispatch => {
 
     if (response) {
         const resJson = await response.json();
-        dispatch(deletePuppyAction(resJson));
+        dispatch(deletePuppyAction());
         return resJson;
     }
 };
