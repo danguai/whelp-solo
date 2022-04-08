@@ -31,6 +31,19 @@ const Puppies = () => {
         }
     });
 
+    const imageForPuppy = () => {
+        puppies.forEach(puppy => {
+            if (puppy.litterId === litter.id) {
+                images.forEach(image => {
+                    if (puppy.id === image.puppyId) {
+                        puppiesImagesList.push(image);
+                    }
+                });
+                puppiesList.push(puppy);
+            }
+        });
+
+    }
 
     console.log('puppiesList', puppiesList);
     console.log('puppiesImagesList', puppiesImagesList);

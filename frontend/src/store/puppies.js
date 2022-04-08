@@ -129,17 +129,15 @@ export const updatePuppy = puppy => async dispatch => {
 };
 
 //  D E L E T E   P U P P Y   T H U N K
-export const deletePuppy = puppyId => async dispatch => {
-    const puppyObj = readPuppyAction(puppyId);
+export const deletePuppy = (puppyId, litterId) => async dispatch => {
 
-    const litterId = puppyObj.litterId;
     const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppyId}`, {
         method: 'DELETE'
     });
 
     if (response) {
         const resJson = await response.json();
-        dispatch(deletePuppyAction());
+        dispatch(deletePuppyAction({ id: puppyId }));
         return resJson;
     }
 };

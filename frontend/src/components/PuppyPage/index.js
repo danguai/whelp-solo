@@ -46,7 +46,7 @@ const PuppyPage = () => {
     // };
 
     const removePuppy = () => {
-        dispatch(deletePuppy(thisPuppy.id));
+        dispatch(deletePuppy(thisPuppy.id, litter.id));
         history.push(`/litter/${litter.id}`);
     };
 
@@ -101,15 +101,12 @@ const PuppyPage = () => {
                 </button>}
             </div>
             <div className='gradient'>
-                {thisPuppyImages[0].image ?
+                {/* {thisPuppyImages[0].image ?
                     <img className='litter__bg__image' src={thisPuppyImages[0].image}
                     /> :
                     <img className='litter__bg__image' src={require('../../images/puppy-temp.png')}
                     />
-                }
-                <img
-
-                />
+                } */}
             </div>
             <div id='all__litters'>
                 <div className='recent__litters'>
