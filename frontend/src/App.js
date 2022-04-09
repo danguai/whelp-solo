@@ -10,6 +10,8 @@ import Navigation from "./components/Navigation";
 import NavigationRed from "./components/Navigation/NavBar-Red";
 import NavigationLitter from "./components/Navigation/NavBar-Litter";
 
+import Footer from "./components/Footer";
+
 import Splashpage from "./components/Splashpage";
 
 import LitterForm from "./components/LitterForm";
@@ -52,6 +54,7 @@ function App() {
   return (
     <>
       {navBar}
+      <Footer isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
           <Route exact path='/'>

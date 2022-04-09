@@ -24,10 +24,6 @@ const EditPuppyForm = () => {
     const litter = useSelector(state => state.litter?.litter);
     const puppies = useSelector(state => state.puppies.puppiesList)
 
-    // console.log('SESSION USER', session);
-    console.log('LITTER ID', litter);
-    console.log('PUPPIES: ', puppies);
-
     let thisPuppy = (puppies.filter(puppy => {
         if (puppyId == puppy.id) {
             return puppy;
@@ -39,6 +35,8 @@ const EditPuppyForm = () => {
     const [day, setDay] = useState(thisPuppy.day);
     const [month, setMonth] = useState(thisPuppy.month);
     const [year, setYear] = useState(thisPuppy.year);
+
+    const [image, setImage] = useState('');
 
     const [nameError, setNameError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
@@ -54,8 +52,6 @@ const EditPuppyForm = () => {
         monthError ||
         yearError
     );
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();

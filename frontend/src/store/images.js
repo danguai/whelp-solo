@@ -13,13 +13,20 @@ const createImageAction = image => {
     return {
         type: CREATE_IMAGE,
         payload: image
-    }
+    };
+};
 
-}
 const readImagesAction = images => {
     return {
         type: READ_IMAGES,
         arrOfImages: images
+    };
+};
+
+const deleteImageAction = image => {
+    return {
+        type: DELETE_IMAGE,
+        payload: image
     };
 };
 
@@ -47,11 +54,9 @@ export const createImage = imageTest => async dispatch => {
     return Promise.reject();
 };
 
-// //  R E A D   A L L   I M A G E S   T H U N K
+//  R E A D   A L L   I M A G E S   T H U N K
 export const readImages = puppyId => async dispatch => {
     const response = await csrfFetch(`/api/puppies/${puppyId}/images`);
-
-    // console.log('RESPONSE ++++++++++++++++++++++++++++++++++++++++++++ ', response);
 
     if (response.ok) {
         const resJson = await response.json();
@@ -59,6 +64,20 @@ export const readImages = puppyId => async dispatch => {
         return resJson;
     }
 };
+
+//  D E L E T E   I M A G E   T H U N K
+export const deleteImage = (puppyId, imageId) => async dispatch => {
+    const response = await csrfFetch(`/api/puppies/${puppyId}/images/${imageId}`, {
+        method: 'DELETE'
+    });
+
+    if (response) {
+        const resJson = await response.json();
+        dispatch(deleteImageAction({ id: imageId }));
+        return resJson;
+    }
+};
+
 
 //  R E D U C E R S
 const initialState = { imagesList: [] };
@@ -73,6 +92,12 @@ const imagesReducer = (state = initialState, action) => {
         case READ_IMAGES:
             newState = Object.assign({}, state);
             newState.imagesList = action.arrOfImages;
+            return newState;
+        case DELETE_IMAGE:
+            newState = Object.assign({}, action);
+            newState.imagesList = newState
+                .imagesList
+                .filter(image => action.payload.id !== image.id);
             return newState;
         default:
             return state;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
 import { readPuppy, deletePuppy } from '../../store/puppies';
-import { readImages } from '../../store/images';
+import { readImages, deleteImage } from '../../store/images';
 
 import Puppies from '../Puppies';
 // import * as sessionActions from '../../store/session';
@@ -48,6 +48,11 @@ const PuppyPage = () => {
     const removePuppy = () => {
         dispatch(deletePuppy(thisPuppy.id, litter.id));
         history.push(`/litter/${litter.id}`);
+    };
+
+    const removeImage = () => {
+        // dispatch(deleteImage(thisPuppy.id, image.id));
+        history.push(`/puppies/${puppyId}`);
     };
 
     if (!thisPuppy) return null;
@@ -101,20 +106,27 @@ const PuppyPage = () => {
                 </button>}
             </div>
             <div className='gradient'>
-                {/* {thisPuppyImages[0].image ?
+                {thisPuppyImages[0].image ?
                     <img className='litter__bg__image' src={thisPuppyImages[0].image}
                     /> :
                     <img className='litter__bg__image' src={require('../../images/puppy-temp.png')}
                     />
-                } */}
+                }
             </div>
             <div id='all__litters'>
                 <ul className='recent__litters'>
                     {thisPuppyImages.map(puppy =>
                         <li key={puppy.id} className='each__puppy__container' >
+
                             <div className="find__your__place__photo">
                                 <div>
                                     <img className='place__photo' src={puppy.image} />
+                                </div>
+                                <div>
+                                    <button
+                                        onClick={removeImage}>
+                                        Delete Image
+                                    </button>
                                 </div>
                             </div>
                         </li>
@@ -122,7 +134,7 @@ const PuppyPage = () => {
                 </ul>
             </div>
 
-        </div>
+        </div >
     )
 };
 
