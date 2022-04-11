@@ -47,3 +47,7 @@
     color: rgb(0, 0, 0);
     margin-top: 5px;
 }
+
+.litter__title:hover {
+    color: rgb(180, 40, 46, 1);
+}

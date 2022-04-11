@@ -138,7 +138,7 @@ const PuppyPage = () => {
                                     <img className='place__photo' src={image.image} />
                                 </div>
                                 {litterOwner &&
-                                    <div>
+                                    <div className='buttons__images__edit__del'>
                                         <Link to={`/litter/${litterId}/puppies/${puppyId}/images/${image.id}/edit-image`}>
                                             <button className='button__images all__buttons'>
                                                 Replace Image

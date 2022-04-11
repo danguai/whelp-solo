@@ -47,3 +47,7 @@
     color: rgb(0, 0, 0);
     margin: 5px 0;
 }
+
+.puppy__title:hover {
+    color: rgb(180, 40, 46, 1);
+}

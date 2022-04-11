@@ -83,7 +83,7 @@ const Puppies = () => {
                     <li
                         key={puppy.id}
                         className='each__puppy__container'>
-                        <NavLink to={`/litter/${litterId}/puppies/${puppy.id}`}>
+                        <NavLink to={`/litter/${litterId}/puppies/${puppy.id}`} style={{ textDecoration: "none" }}>
                             <div className="find__your__place__photo">
                                 <div>
                                     <img className='place__photo' src={puppy.image} />
@@ -96,12 +96,8 @@ const Puppies = () => {
                         {litterOwner &&
                             <div>
 
-                                {/* <button
-                                // onClick={ }
-                                >
-                                    Edit Puppy
-                                </button> */}
                                 <button
+                                    className='button__images all__buttons'
                                     onClick={() => removePuppyOrLitter(puppy.id)}
                                 >
                                     Delete Puppy
