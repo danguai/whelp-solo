@@ -162,7 +162,7 @@ const puppiesReducer = (state = initialState, action) => {
             return newState;
         case UPDATE_PUPPY:
             newState = Object.assign({}, state);
-            const puppyIndex = newState.puppiesList.findIndex(pup => pup.id === action.payload.id)
+            const puppyIndex = newState.puppiesList.findIndex(pup => pup.id === action.payload.id);
             newState.puppiesList[puppyIndex] = action.payload;
             return newState;
         case DELETE_PUPPY:

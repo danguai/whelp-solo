@@ -9,13 +9,14 @@ const DELETE_IMAGE = 'images/DELETE_IMAGE';
 
 
 //  A C T I O N S
-const createImageAction = image => {
+const createImageAction = ({ image, puppyId }) => {
     return {
         type: CREATE_IMAGE,
-        payload: image
-    }
+        image,
+        puppyId
+    };
+};
 
-}
 const readImagesAction = images => {
     return {
         type: READ_IMAGES,
@@ -23,10 +24,24 @@ const readImagesAction = images => {
     };
 };
 
+const updateImageAction = image => {
+    return {
+        type: UPDATE_IMAGE,
+        payload: image
+    };
+};
+
+const deleteImageAction = image => {
+    return {
+        type: DELETE_IMAGE,
+        payload: image
+    };
+};
+
 //  T H U N K S
 //  C R E A T E   I M A G E   T H U N K
-export const createImage = imageTest => async dispatch => {
-    const { image, puppyId } = imageTest;
+export const createImage = ({ image, puppyId }) => async dispatch => {
+
     try {
         const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
             method: 'POST',
@@ -38,7 +53,7 @@ export const createImage = imageTest => async dispatch => {
             if (data.errors) {
                 return Promise.reject(data);
             }
-            dispatch(createImageAction(data.image));
+            dispatch(createImageAction({ image, puppyId }));
             return data.image;
         }
     } catch (e) {
@@ -47,11 +62,9 @@ export const createImage = imageTest => async dispatch => {
     return Promise.reject();
 };
 
-// //  R E A D   A L L   I M A G E S   T H U N K
+//  R E A D   A L L   I M A G E S   T H U N K
 export const readImages = puppyId => async dispatch => {
     const response = await csrfFetch(`/api/puppies/${puppyId}/images`);
-
-    // console.log('RESPONSE ++++++++++++++++++++++++++++++++++++++++++++ ', response);
 
     if (response.ok) {
         const resJson = await response.json();
@@ -60,19 +73,65 @@ export const readImages = puppyId => async dispatch => {
     }
 };
 
+//  U P D A T E   I M A G E
+export const updateImage = (oldImage, newImage) => async dispatch => {
+    const { puppyId, id } = oldImage;
+    const response = await csrfFetch(`/api/puppies/${puppyId}/images/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newImage)
+    });
+
+    if (response.ok) {
+        const image = await response.json();
+        dispatch(updateImageAction(image));
+        return image;
+    }
+};
+
+//  D E L E T E   I M A G E   T H U N K
+export const deleteImage = (puppyId, imageId) => async dispatch => {
+    const response = await csrfFetch(`/api/puppies/${puppyId}/images/${imageId}`, {
+        method: 'DELETE'
+    });
+
+    if (response) {
+        const resJson = await response.json();
+        dispatch(deleteImageAction({ id: imageId }));
+        return resJson;
+    }
+};
+
+
 //  R E D U C E R S
 const initialState = { imagesList: [] };
 
 const imagesReducer = (state = initialState, action) => {
     let newState;
-    switch (action.type) {
+
+    const { payload, image, puppyId, type, arrOfImages } = action;
+
+    switch (type) {
         case CREATE_IMAGE:
             newState = Object.assign({}, state);
-            newState.image = action.payload;
+            newState.imagesList.push({ image, puppyId });
             return newState;
         case READ_IMAGES:
             newState = Object.assign({}, state);
-            newState.imagesList = action.arrOfImages;
+            newState.imagesList = arrOfImages;
+            return newState;
+        case UPDATE_IMAGE:
+            newState = Object.assign({}, state);
+            const imageIndex = newState.imagesList.findIndex(img => img.id === payload.id);
+            newState.imagesList[imageIndex] = payload;
+            return newState;
+        case DELETE_IMAGE:
+            newState = Object.assign({}, state);
+            newState.imagesList = newState
+                .imagesList
+                .filter(image => payload.id !== image.id);
             return newState;
         default:
             return state;

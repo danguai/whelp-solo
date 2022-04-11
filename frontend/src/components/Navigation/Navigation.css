@@ -56,7 +56,12 @@
 
 .business__navbar {
     padding: 0 25px;
-    color: rgb(0, 0, 0)
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.business__navbar:hover {
+    color: rgb(180, 40, 46, 1);
 }
 
 .menu__top__left {
@@ -74,6 +79,10 @@
     border: none;
 }
 
+.button__login:hover {
+    color: rgb(180, 40, 46, 1);
+}
+
 .all__buttons:hover {
     cursor: pointer;
 }
@@ -87,6 +96,12 @@
     border-radius: 3px;
 }
 
+.button__demo:hover {
+    color: rgb(180, 40, 46, 1);
+    background-color: 1px rgb(180, 40, 46, 0.25) solid;
+    border: 1px rgb(180, 40, 46, 1) solid;
+}
+
 .button__signup {
     color: white;
     font-weight: bold;
@@ -94,6 +109,12 @@
     padding: 7px;
     border: white 1px solid;
     border-radius: 3px;
+}
+
+.button__signup:hover {
+    color: rgb(180, 40, 46, 1);
+    background-color: 1px rgb(180, 40, 46, 0.25) solid;
+    border: 1px rgb(180, 40, 46, 1) solid;
 }
 
 #search__form__navbar {

@@ -11,7 +11,8 @@ import './LitterPage.css';
 import './score.css';
 
 const LitterPage = () => {
-    const { id } = useParams();
+    const { litterId } = useParams();
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -19,19 +20,19 @@ const LitterPage = () => {
 
     const litter = useSelector(state => state.litter?.litter);
     const sessionUser = useSelector(state => state.session.user);
+    const puppies = useSelector(state => state.puppies?.puppiesList);
 
+    console.log('LITTER ID: ', litterId);
     useEffect(() => {
-        dispatch(readLitter(id));
+        dispatch(readLitter(litterId));
     }, [dispatch]);
-
-    // let sumScore = 0;
 
     const handleToggle = () => {
         setActive(!active);
     };
 
     const removeLitter = () => {
-        dispatch(deleteLitter(litter.id));
+        dispatch(deleteLitter(litterId));
         history.push('/');
     };
 
@@ -46,7 +47,7 @@ const LitterPage = () => {
             <div>
                 <Link to={`/`}
                     className='back__to__litter__button'>
-                    <button>
+                    <button className='button__litters all__buttons' >
                         All Litters
                     </button>
                 </Link>
@@ -54,65 +55,67 @@ const LitterPage = () => {
             <div className='litter__name'>
                 {litter.name}
             </div>
-            <div className='paws__score'>
-                <div>
-                    <img
-                        className={active ? 'one__paw__score__gray' : 'one__paw__score__yellow'}
-                        src={require('../../images/Paw-Score.png')}
-                        onClick={handleToggle}
-                    />
+            {/* {!litterOwner &&
+                <div className='paws__score'>
+                    <div>
+                        <img
+                            className={active ? 'one__paw__score__gray' : 'one__paw__score__yellow'}
+                            src={require('../../images/Paw-Score.png')}
+                            onClick={handleToggle}
+                        />
+                    </div>
+                    <div>
+                        <img
+                            className={active ? 'two__paw__score__gray' : 'two__paw__score__yellow__orange'}
+                            src={require('../../images/Paw-Score.png')}
+                            onClick={handleToggle}
+                        />
+                    </div>
+                    <div>
+                        <img
+                            className='three__paw__score__gray'
+                            src={require('../../images/Paw-Score.png')}
+                        />
+                    </div>
+                    <div>
+                        <img
+                            className='four__paw__score__gray'
+                            src={require('../../images/Paw-Score.png')}
+                        />
+                    </div>
+                    <div>
+                        <img
+                            className='five__paw__score__gray'
+                            src={require('../../images/Paw-Score.png')}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <img
-                        className={active ? 'two__paw__score__gray' : 'two__paw__score__yellow__orange'}
-                        src={require('../../images/Paw-Score.png')}
-                        onClick={handleToggle}
-                    />
-                </div>
-                <div>
-                    <img
-                        className='three__paw__score__gray'
-                        src={require('../../images/Paw-Score.png')}
-                    />
-                </div>
-                <div>
-                    <img
-                        className='four__paw__score__gray'
-                        src={require('../../images/Paw-Score.png')}
-                    />
-                </div>
-                <div>
-                    <img
-                        className='five__paw__score__gray'
-                        src={require('../../images/Paw-Score.png')}
-                    />
-                </div>
-            </div>
+            } */}
             <div>
                 {litterOwner && <Link to='/litter-edit'
                     className='edit__litter__button'>
-                    <button>
+                    <button className='button__edit__litter'>
                         Edit Litter
                     </button>
                 </Link>}
                 {litterOwner && <button
-                    className='delete__litter__button'
+                    className='delete__litter__button button__edit__litter'
                     onClick={removeLitter}
                     type='submit'
                 >
                     Delete Litter
                 </button>}
-                {canWriteReview && <Link to='/reviews'
+                {/* {canWriteReview && <Link to='/reviews'
                     className='edit__litter__button'>
                     <button>
                         Leave a Review
                     </button>
-                </Link>}
+                </Link>} */}
             </div>
             <div>
                 {litterOwner && <Link to={`/litter/${litter.id}/new-puppy`}
                     className='new__puppy__button'>
-                    <button>
+                    <button className='button__litters all__buttons' >
                         New Pup
                     </button>
                 </Link>}
@@ -127,7 +130,7 @@ const LitterPage = () => {
                 <div className='new__puppies__title'>
                     Pups
                 </div>
-                <div>
+                <div className='bottom__margin__puppies'>
                     <Puppies />
                 </div>
             </div>

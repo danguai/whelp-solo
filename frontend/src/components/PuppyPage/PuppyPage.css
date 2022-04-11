@@ -17,28 +17,28 @@
     margin: 300px 0 0 150px;
     font-size: 40px;
     font-weight: bold;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .puppy__description {
     position: absolute;
     margin: 350px 0 0 150px;
     font-size: 16px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .puppy__birthday {
     position: absolute;
     margin: 370px 0 0 150px;
     font-size: 13px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .puppy__age {
     position: absolute;
     margin: 385px 0 0 150px;
     font-size: 10px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font: bolder;
 }
 
@@ -47,9 +47,36 @@
     margin: 260px 0 0 150px;
 }
 
+.add__image__button {
+    position: absolute;
+    margin: 440px 0 0 150px;
+}
+
 .edit__puppy__button {
     position: absolute;
     margin: 410px 0 0 150px;
+}
+
+.button__edit__puppy {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.button__edit__puppy:hover {
+    color: rgb(180, 40, 46, 1);
+}
+
+.button__images {
+    color: rgb(180, 40, 46, 1);
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.button__images:hover {
+    color: rgb(0, 0, 0);
 }
 
 .delete__puppy__button {
@@ -60,6 +87,13 @@
 .new__puppy__button {
     position: absolute;
     margin: 440px 0 0 150px;
+}
+
+.this__puppy__photos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0 100px 0;
 }
 
 .new__puppies__container {
@@ -76,4 +110,5 @@
     margin: 20px 0;
     font-size: 25px;
     font-weight: bold;
+    /* color: white */
 }

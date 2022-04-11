@@ -1,0 +1,40 @@
+.footer__bar {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(180, 40, 46, 1);
+    position: fixed;
+    bottom: 0;
+}
+
+.built__with__container {
+    display: flex;
+    color: white;
+    margin: 0 80px;
+}
+
+.built__with__logos {
+    display: flex;
+    margin-left: 15px;
+    margin-right: 5px;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: auto;
+    color: white;
+    text-decoration: none;
+
+}
+
+.built__with__logos__text {
+    display: flex;
+    font-weight: lighter;
+    font-size: 12px;
+    align-items: center;
+    width: auto;
+    color: white;
+    text-decoration: none;
+
+}

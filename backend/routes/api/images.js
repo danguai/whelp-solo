@@ -31,5 +31,33 @@ router.get('/', asyncHandler(async (req, res) => {
     }
 }));
 
+//  U P D A T E   I M A G E
+router.put('/:imageId', requireAuth, asyncHandler(async (req, res) => {
+    const id = req.params.imageId;
+
+    // console.log('ID IN UPDATE: ', id);
+    delete req.body.id;
+
+    const [_updateCount, image] = await Image.update(req.body, {
+        where: { id },
+        returning: true,
+        plain: true
+    })
+
+    return res.json(image);
+}));
+
+//   D E L E T E  I M A G E
+router.delete('/:imageId', requireAuth, asyncHandler(async (req, res) => {
+    const image = await Image.findByPk(req.params.imageId);
+
+    if (!image) throw new Error(`Can't find image`);
+
+    await Image.destroy({ where: { id: image.id } });
+
+    return res.json({ id: image.id });
+}));
+
+
 
 module.exports = router;

@@ -1,4 +1,4 @@
-# S C A R E B N B
+# W H E L P
 Whelp it's a Yelp clone for puppies and their litters.
 
 Users of the app will be able to sign up or log in, create their own litter and add as many puppies as necessary, and you can add as many images for each puppy as you have

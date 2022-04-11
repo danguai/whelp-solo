@@ -25,6 +25,17 @@
     margin: 400px 0 0 150px;
 }
 
+.button__edit__litter {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.button__edit__litter:hover {
+    color: rgb(180, 40, 46, 1);
+}
+
 .delete__litter__button {
     position: absolute;
     margin: 400px 0 0 250px;
@@ -50,3 +61,23 @@
     font-size: 25px;
     font-weight: bold;
 }
+
+.button__litters {
+    color: white;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255, 0.25);
+    padding: 7px;
+    border: white 1px solid;
+    border-radius: 3px;
+}
+
+.button__litters:hover {
+    color: rgb(180, 40, 46, 1);
+    background-color: 1px rgb(180, 40, 46, 0.25) solid;
+    border: 1px rgb(180, 40, 46, 1) solid;
+}
+
+/*
+.bottom__margin__puppies {
+    margin: 100px 0;
+} */

@@ -167,7 +167,8 @@ const litterReducer = (state = initialState, action) => {
         case DELETE_LITTER:
             newState = Object.assign({}, state);
             newState.litter = null;
-            newState.littersList = newState.littersList
+            newState.littersList = newState
+                .littersList
                 .filter(litter => litter.id !== action.payload);
             return newState;
         default:

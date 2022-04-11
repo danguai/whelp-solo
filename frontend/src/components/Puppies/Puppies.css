@@ -15,6 +15,7 @@
     height: 220px;
     list-style: none;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -44,5 +45,5 @@
     font-weight: bold;
     text-decoration: none;
     color: rgb(0, 0, 0);
-    margin-top: 5px;
+    margin: 5px 0;
 }
