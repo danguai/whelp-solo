@@ -62,14 +62,14 @@ const Navigation = ({ isLoaded }) => {
     return (
         <div className="navigation__bar">
             <div className='menu__top__left'>
-                <a href='/reviews'
+                {/* <a href='/reviews'
                     className='review__navbar'>
                     Write a Review
-                </a>
-                <a href='/litter'
+                </a> */}
+                {sessionUser && <a href='/litter'
                     className='business__navbar'>
                     Create New Litter
-                </a>
+                </a>}
             </div>
             <div className='buttons__sessions'>
                 {sessionLinks}

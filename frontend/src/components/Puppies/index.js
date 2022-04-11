@@ -55,7 +55,7 @@ const Puppies = () => {
         return { ...image, ...puppy };
     })
 
-    console.log('PFL-------------', puppiesFromLitter);
+    // console.log('PFL-------------', puppiesFromLitter);
 
 
     // let uniq
@@ -96,11 +96,11 @@ const Puppies = () => {
                         {litterOwner &&
                             <div>
 
-                                <button
+                                {/* <button
                                 // onClick={ }
                                 >
                                     Edit Puppy
-                                </button>
+                                </button> */}
                                 <button
 
                                     onClick={() => removePuppyOrLitter(puppy.id)}

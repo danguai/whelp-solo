@@ -75,10 +75,10 @@ const NavigationLitter = ({ isLoaded }) => {
                 </form> */}
             </div>
             <div className='menu__top__left'>
-                <a href='/reviews'
+                {/* <a href='/reviews'
                     className='review__navbar nav__bar__buttons'>
                     Write a Review
-                </a>
+                </a> */}
                 <a href='/litter'
                     className='business__navbar nav__bar__buttons'>
                     Create New Litter

@@ -51,7 +51,7 @@ const EditImageForm = () => {
                 </div>
                 <div className='puppy__form__box'>
                     <div className='new__puppy__title'>
-                        Add New Image
+                        Replace Image
                     </div>
                     <form className='puppy__form' onSubmit={handleSubmit}>
 

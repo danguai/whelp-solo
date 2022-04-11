@@ -17,6 +17,13 @@ body {
     border-radius: 5px;
 }
 
+.red__button:hover {
+    color: rgba(180, 40, 46, 1);
+    background: white;
+    /* border: 1px rgba(180, 40, 46, 1) solid; */
+
+}
+
 .red__button__disabled {
     font-weight: bold;
     color: white;

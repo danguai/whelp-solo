@@ -54,7 +54,7 @@ const LitterPage = () => {
             <div className='litter__name'>
                 {litter.name}
             </div>
-            {!litterOwner &&
+            {/* {!litterOwner &&
                 <div className='paws__score'>
                     <div>
                         <img
@@ -89,7 +89,7 @@ const LitterPage = () => {
                         />
                     </div>
                 </div>
-            }
+            } */}
             <div>
                 {litterOwner && <Link to='/litter-edit'
                     className='edit__litter__button'>
@@ -104,12 +104,12 @@ const LitterPage = () => {
                 >
                     Delete Litter
                 </button>}
-                {canWriteReview && <Link to='/reviews'
+                {/* {canWriteReview && <Link to='/reviews'
                     className='edit__litter__button'>
                     <button>
                         Leave a Review
                     </button>
-                </Link>}
+                </Link>} */}
             </div>
             <div>
                 {litterOwner && <Link to={`/litter/${litter.id}/new-puppy`}

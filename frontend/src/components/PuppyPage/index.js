@@ -30,8 +30,6 @@ const PuppyPage = () => {
         }
     })[0]);
 
-    // console.log('THIS PUPPY', thisPuppy);
-    // console.log('ALL IMAGES', images);
 
     let thisPuppyImages = [];
 
@@ -41,29 +39,17 @@ const PuppyPage = () => {
         }
     });
 
-    // console.log('THIS PUPPY IMAGES', thisPuppyImages[0]);
-    // console.log('THIS PUPPY IMAGES ID', thisPuppyImages[0].id);
-    // console.log('THIS PUPPY IMAGES IMAGE', thisPuppyImages[0].image);
-
     useEffect(() => {
         dispatch(readImages());
         dispatch(readPuppies(litterId));
         dispatch(readLitter(litterId));
     }, [dispatch]);
 
-    // const handleToggle = () => {
-    //     setActive(!active);
-    // };
 
     const removePuppy = () => {
         dispatch(deletePuppy(thisPuppy.id, litter.id));
         history.push(`/litter/${litter.id}`);
     };
-
-    // const removeImage = () => {
-    //     // dispatch(deleteImage(thisPuppy.id, image.id));
-    //     history.push(`/puppies/${puppyId}`);
-    // };
 
     const removeImageOrPuppy = (imageId) => {
         if (thisPuppyImages.length === 1) {
