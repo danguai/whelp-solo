@@ -49,17 +49,39 @@
 
 .add__image__button {
     position: absolute;
-    margin: 410px 0 0 150px;
+    margin: 440px 0 0 150px;
 }
 
 .edit__puppy__button {
     position: absolute;
-    margin: 410px 0 0 250px;
+    margin: 410px 0 0 150px;
+}
+
+.button__edit__puppy {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.button__edit__puppy:hover {
+    color: rgb(180, 40, 46, 1);
+}
+
+.button__images {
+    color: rgb(180, 40, 46, 1);
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.button__images:hover {
+    color: rgb(0, 0, 0);
 }
 
 .delete__puppy__button {
     position: absolute;
-    margin: 410px 0 0 350px;
+    margin: 410px 0 0 250px;
 }
 
 .new__puppy__button {

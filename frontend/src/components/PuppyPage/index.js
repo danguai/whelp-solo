@@ -59,7 +59,7 @@ const PuppyPage = () => {
             dispatch(deleteImage(puppyId, imageId));
             history.push(`/litter/${litterId}/puppies/${puppyId}`);
         }
-    }
+    };
 
     if (!thisPuppy) return null;
 
@@ -75,7 +75,7 @@ const PuppyPage = () => {
             <div>
                 <Link to={`/litter/${litter.id}`}
                     className='back__to__litter__button'>
-                    <button>
+                    <button className='button__litters all__buttons'>
                         Back to Litter
                     </button>
                 </Link>
@@ -97,25 +97,28 @@ const PuppyPage = () => {
 
             </div>
             <div>
-                {litterOwner && <Link to={`/litter/${litterId}/puppies/${thisPuppy.id}/add-image`}
-                    className='add__image__button'>
-                    <button>
-                        Add Image
-                    </button>
-                </Link>}
+
                 {litterOwner && <Link to={`/litter/${litterId}/puppies/${thisPuppy.id}/puppy-edit`}
                     className='edit__puppy__button'>
-                    <button>
+                    <button className='button__edit__puppy'>
                         Edit Puppy
                     </button>
                 </Link>}
                 {litterOwner && <button
-                    className='delete__puppy__button'
+                    className='delete__puppy__button button__edit__puppy'
                     onClick={removePuppy}
                     type='submit'
                 >
                     Delete Puppy
                 </button>}
+            </div>
+            <div>
+                {litterOwner && <Link to={`/litter/${litterId}/puppies/${thisPuppy.id}/add-image`}
+                    className='add__image__button'>
+                    <button className='button__litters all__buttons'>
+                        Add Image
+                    </button>
+                </Link>}
             </div>
             <div className='gradient'>
                 {thisPuppyImages[0].image ?
@@ -137,11 +140,12 @@ const PuppyPage = () => {
                                 {litterOwner &&
                                     <div>
                                         <Link to={`/litter/${litterId}/puppies/${puppyId}/images/${image.id}/edit-image`}>
-                                            <button>
+                                            <button className='button__images all__buttons'>
                                                 Replace Image
                                             </button>
                                         </Link>
                                         <button
+                                            className='button__images all__buttons'
                                             onClick={() => removeImageOrPuppy(image.id)}>
                                             Delete Image
                                         </button>

@@ -22,6 +22,7 @@ const LitterPage = () => {
     const sessionUser = useSelector(state => state.session.user);
     const puppies = useSelector(state => state.puppies?.puppiesList);
 
+    console.log('LITTER ID: ', litterId);
     useEffect(() => {
         dispatch(readLitter(litterId));
     }, [dispatch]);
@@ -46,7 +47,7 @@ const LitterPage = () => {
             <div>
                 <Link to={`/`}
                     className='back__to__litter__button'>
-                    <button>
+                    <button className='button__litters all__buttons' >
                         All Litters
                     </button>
                 </Link>
@@ -93,12 +94,12 @@ const LitterPage = () => {
             <div>
                 {litterOwner && <Link to='/litter-edit'
                     className='edit__litter__button'>
-                    <button>
+                    <button className='button__edit__litter'>
                         Edit Litter
                     </button>
                 </Link>}
                 {litterOwner && <button
-                    className='delete__litter__button'
+                    className='delete__litter__button button__edit__litter'
                     onClick={removeLitter}
                     type='submit'
                 >
@@ -114,7 +115,7 @@ const LitterPage = () => {
             <div>
                 {litterOwner && <Link to={`/litter/${litter.id}/new-puppy`}
                     className='new__puppy__button'>
-                    <button>
+                    <button className='button__litters all__buttons' >
                         New Pup
                     </button>
                 </Link>}

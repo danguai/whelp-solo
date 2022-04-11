@@ -101,7 +101,7 @@ export const deleteImage = (puppyId, imageId) => async dispatch => {
         const resJson = await response.json();
         dispatch(deleteImageAction({ id: imageId }));
         return resJson;
-    };
+    }
 };
 
 
