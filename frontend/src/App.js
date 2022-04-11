@@ -21,6 +21,8 @@ import LitterPage from "./components/LitterPage";
 
 import PuppyForm from "./components/PuppyForm";
 import EditPuppyForm from "./components/PuppyForm/EditPuppyForm";
+import AddImageForm from "./components/PuppyForm/AddImages";
+import EditImageForm from "./components/PuppyForm/EditImage";
 import PuppyPage from "./components/PuppyPage";
 // import Puppies from "./components/Puppies";
 
@@ -75,17 +77,23 @@ function App() {
           {/* <Route exact path='/litters'>
             <Litters />
           </Route> */}
-          <Route exact path='/litter/:id'>
+          <Route exact path='/litter/:litterId'>
             <LitterPage />
           </Route>
-          <Route exact path='/litter/:id/new-puppy'>
+          <Route exact path='/litter/:litterId/new-puppy'>
             <PuppyForm />
           </Route>
-          <Route exact path='/puppies/:puppyId'>
+          <Route exact path='/litter/:litterId/puppies/:puppyId'>
             <PuppyPage />
           </Route>
-          <Route exact path='/puppies/:puppyId/puppy-edit'>
+          <Route exact path='/litter/:litterId/puppies/:puppyId/puppy-edit'>
             <EditPuppyForm />
+          </Route>
+          <Route exact path='/litter/:litterId/puppies/:puppyId/add-image'>
+            <AddImageForm />
+          </Route>
+          <Route exact path='/litter/:litterId/puppies/:puppyId/images/:imageId/edit-image'>
+            <EditImageForm />
           </Route>
         </Switch>
       )}

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
-import { readPuppy, deletePuppy } from '../../store/puppies';
+import { readLitter } from '../../store/litter';
+import { readPuppies, updatePuppy, deletePuppy } from '../../store/puppies';
 import { readImages, deleteImage } from '../../store/images';
 
 import Puppies from '../Puppies';
@@ -11,7 +12,7 @@ import Puppies from '../Puppies';
 import './PuppyPage.css';
 
 const PuppyPage = () => {
-    const { litterId, puppyId } = useParams();
+    const { puppyId, litterId } = useParams();
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -20,7 +21,7 @@ const PuppyPage = () => {
 
     const litter = useSelector(state => state.litter?.litter);
     const sessionUser = useSelector(state => state.session.user);
-    const puppies = useSelector(state => state.puppies.puppiesList);
+    const puppies = useSelector(state => state.puppies?.puppiesList);
     const images = useSelector(state => state.images?.imagesList);
 
     let thisPuppy = (puppies.filter(puppy => {
@@ -29,16 +30,25 @@ const PuppyPage = () => {
         }
     })[0]);
 
-    let thisPuppyImages = (images.filter(image => {
-        if (puppyId == image.puppyId) {
-            return image;
-        }
-    }));
+    // console.log('THIS PUPPY', thisPuppy);
+    // console.log('ALL IMAGES', images);
 
-    // console.log('WHAT HAPPEN', thisPuppyImages);
+    let thisPuppyImages = [];
+
+    images.forEach(image => {
+        if (puppyId == image.puppyId) {
+            thisPuppyImages.push(image);
+        }
+    });
+
+    // console.log('THIS PUPPY IMAGES', thisPuppyImages[0]);
+    // console.log('THIS PUPPY IMAGES ID', thisPuppyImages[0].id);
+    // console.log('THIS PUPPY IMAGES IMAGE', thisPuppyImages[0].image);
 
     useEffect(() => {
         dispatch(readImages());
+        dispatch(readPuppies(litterId));
+        dispatch(readLitter(litterId));
     }, [dispatch]);
 
     // const handleToggle = () => {
@@ -50,10 +60,20 @@ const PuppyPage = () => {
         history.push(`/litter/${litter.id}`);
     };
 
-    const removeImage = () => {
-        // dispatch(deleteImage(thisPuppy.id, image.id));
-        history.push(`/puppies/${puppyId}`);
-    };
+    // const removeImage = () => {
+    //     // dispatch(deleteImage(thisPuppy.id, image.id));
+    //     history.push(`/puppies/${puppyId}`);
+    // };
+
+    const removeImageOrPuppy = (imageId) => {
+        if (thisPuppyImages.length === 1) {
+            dispatch(deletePuppy(thisPuppy.id, litter.id));
+            history.push(`/litter/${litter.id}`);
+        } else {
+            dispatch(deleteImage(puppyId, imageId));
+            history.push(`/litter/${litterId}/puppies/${puppyId}`);
+        }
+    }
 
     if (!thisPuppy) return null;
 
@@ -91,7 +111,13 @@ const PuppyPage = () => {
 
             </div>
             <div>
-                {litterOwner && <Link to={`/puppies/${thisPuppy.id}/puppy-edit`}
+                {litterOwner && <Link to={`/litter/${litterId}/puppies/${thisPuppy.id}/add-image`}
+                    className='add__image__button'>
+                    <button>
+                        Add Image
+                    </button>
+                </Link>}
+                {litterOwner && <Link to={`/litter/${litterId}/puppies/${thisPuppy.id}/puppy-edit`}
                     className='edit__puppy__button'>
                     <button>
                         Edit Puppy
@@ -113,21 +139,28 @@ const PuppyPage = () => {
                     />
                 }
             </div>
-            <div id='all__litters'>
-                <ul className='recent__litters'>
-                    {thisPuppyImages.map(puppy =>
-                        <li key={puppy.id} className='each__puppy__container' >
+            <div id='all__litter'>
+                <ul className='this__puppy__photos'>
+                    {thisPuppyImages.map(image =>
+                        <li key={image.id} className='each__puppy__container' >
 
                             <div className="find__your__place__photo">
                                 <div>
-                                    <img className='place__photo' src={puppy.image} />
+                                    <img className='place__photo' src={image.image} />
                                 </div>
-                                <div>
-                                    <button
-                                        onClick={removeImage}>
-                                        Delete Image
-                                    </button>
-                                </div>
+                                {litterOwner &&
+                                    <div>
+                                        <Link to={`/litter/${litterId}/puppies/${puppyId}/images/${image.id}/edit-image`}>
+                                            <button>
+                                                Replace Image
+                                            </button>
+                                        </Link>
+                                        <button
+                                            onClick={() => removeImageOrPuppy(image.id)}>
+                                            Delete Image
+                                        </button>
+                                    </div>
+                                }
                             </div>
                         </li>
                     )}

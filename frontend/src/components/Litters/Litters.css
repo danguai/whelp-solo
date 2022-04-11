@@ -8,6 +8,7 @@
     gap: 40px;
     grid-template-columns: 220px 220px 220px 220px;
     grid-auto-flow: row dense;
+    margin-bottom: 100px;
 }
 
 .each__litter__container {

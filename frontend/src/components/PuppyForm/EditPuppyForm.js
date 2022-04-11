@@ -11,18 +11,22 @@ import {
 } from '../../utils/validation';
 
 import { updatePuppy } from '../../store/puppies';
+import { updateImage } from '../../store/images';
+
 // import * as sessionActions from '../../store/session';
 
 import './PuppyForm.css';
 
 const EditPuppyForm = () => {
-    const { litterId, puppyId } = useParams();
+    const { puppyId, litterId } = useParams();
+
     const dispatch = useDispatch();
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
     const litter = useSelector(state => state.litter?.litter);
     const puppies = useSelector(state => state.puppies.puppiesList)
+    const images = useSelector(state => state.images.imagesList)
 
     let thisPuppy = (puppies.filter(puppy => {
         if (puppyId == puppy.id) {
@@ -30,13 +34,17 @@ const EditPuppyForm = () => {
         }
     })[0]);
 
+    let firstImage = (images.find(image => {
+        return puppyId == image.puppyId;
+    }));
+
     const [name, setName] = useState(thisPuppy.name);
     const [description, setDescription] = useState(thisPuppy.description);
     const [day, setDay] = useState(thisPuppy.day);
     const [month, setMonth] = useState(thisPuppy.month);
     const [year, setYear] = useState(thisPuppy.year);
 
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(firstImage.image);
 
     const [nameError, setNameError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
@@ -66,9 +74,31 @@ const EditPuppyForm = () => {
             // litterId
         };
 
-        const updatedPuppy = await dispatch(updatePuppy(editedPuppy));
-        history.push(`/puppies/${updatedPuppy.id}`);
 
+        try {
+            const updatedPuppy = await dispatch(updatePuppy(editedPuppy));
+            history.push(`/litter/${litterId}/puppies/${updatedPuppy.id}`);
+            // const createdPuppy = await dispatch(createPuppy(newPuppy));
+
+            if (updatedPuppy) {
+                console.log('UPDATES PUPPY: ', updatedPuppy);
+
+                let updatedImage = {
+                    ...firstImage,
+                    image
+                };
+
+                console.log('UPDATE IMAGE: ', updatedImage);
+
+                updatedImage = await dispatch(updateImage(firstImage, updatedImage));
+                console.log('UPDATED IMAGE: ', updatedImage);
+
+                history.push(`/litter/${litterId}/puppies/${updatedImage.puppyId}`);
+            }
+
+        } catch (e) {
+            console.log('OHHHHH NOOOOOOOOOO!O!!!!!!', e);
+        }
     };
 
     // if (!litterId) return null;
@@ -164,7 +194,21 @@ const EditPuppyForm = () => {
                             />
                         </div>
                         {yearError && <div className="errors_style">{yearError}</div>}
-
+                        <div className='puppy__form__area'>
+                            <input
+                                className='input__puppy'
+                                placeholder='First Image'
+                                type="text"
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                            // onBlur={() => {
+                            //     const error = validateYear(year)
+                            //     if (error) setYearError(error)
+                            // }}
+                            // onFocus={() => { setYearError('') }}
+                            // required
+                            />
+                        </div>
                         <button
                             className={checkingErrors ? 'red__button__disabled puppy__button all__buttons' : 'red__button puppy__button all__buttons'}
                             disabled={checkingErrors}

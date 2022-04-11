@@ -17,11 +17,12 @@ import { createImage } from '../../store/images';
 import './PuppyForm.css';
 
 const PuppyForm = () => {
+    const { litterId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
-    const litterId = useSelector(state => state.litter?.litter.id)
+    // const litterId = useSelector(state => state.litter?.litter.id)
 
     // console.log('SESSION USER', session);
     // console.log('LITTER ID', litterId);
@@ -49,6 +50,10 @@ const PuppyForm = () => {
         yearError
     );
 
+    if (!litterId) return null;
+
+    let createdImage;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -65,32 +70,32 @@ const PuppyForm = () => {
             const createdPuppy = await dispatch(createPuppy(newPuppy));
 
             if (createdPuppy) {
-
-                console.log('createdPuppy', createdPuppy);
+                console.log('CREATED PUPPY: ', createdPuppy);
 
                 const newImage = {
                     image,
                     puppyId: createdPuppy.id
-                }
+                };
 
-                console.log('NEWIMAGE', newImage);
+                console.log('NEW IMAGE: ', newImage);
 
-                await dispatch(createImage(newImage));
+                createdImage = await dispatch(createImage(newImage));
+                console.log('CREATED IMAGE: ', createdImage);
+
+                history.push(`/litter/${litterId}/puppies/${createdPuppy.id}`);
             }
 
-            history.push(`/puppies/${createdPuppy.id}`);
         } catch (e) {
             console.log('IS IT HERE?', e);
         }
     };
 
-    if (!litterId) return null;
 
     return (
         <div>
             <div className='puppy__form__container'>
                 <div>
-                    <img className='puppy__image' src={require('../../images/new_pup.png')} />
+                    <img className='puppy__image' src={createdImage} />
                 </div>
                 <div className='puppy__form__box'>
                     <div className='new__puppy__title'>
