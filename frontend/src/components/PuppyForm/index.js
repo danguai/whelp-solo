@@ -95,7 +95,7 @@ const PuppyForm = () => {
         <div>
             <div className='puppy__form__container'>
                 <div>
-                    <img className='puppy__image' src={createdImage} />
+                    <img className='puppy__image' src={require('../../images/new_pup.png')} />
                 </div>
                 <div className='puppy__form__box'>
                     <div className='new__puppy__title'>

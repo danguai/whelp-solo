@@ -59,13 +59,13 @@ const Puppies = () => {
 
 
     // let uniq
-    const removePuppyOrLitter = (puppyId) => {
+    const removePuppyOrLitter = async (puppyId) => {
         if (puppiesFromLitter.length === 1) {
-            dispatch(deleteLitter(litterId));
+            await dispatch(deleteLitter(litterId));
             history.push(`/`);
         } else {
             // puppiesFromLitter.forEach(puppy => {
-            dispatch(deletePuppy(puppyId));
+            await dispatch(deletePuppy(puppyId));
             history.push(`/litter/${litterId}`);
             // });
         }
@@ -102,7 +102,6 @@ const Puppies = () => {
                                     Edit Puppy
                                 </button> */}
                                 <button
-
                                     onClick={() => removePuppyOrLitter(puppy.id)}
                                 >
                                     Delete Puppy

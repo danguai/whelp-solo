@@ -46,17 +46,17 @@ const PuppyPage = () => {
     }, [dispatch]);
 
 
-    const removePuppy = () => {
-        dispatch(deletePuppy(thisPuppy.id, litter.id));
+    const removePuppy = async () => {
+        await dispatch(deletePuppy(thisPuppy.id, litter.id));
         history.push(`/litter/${litter.id}`);
     };
 
-    const removeImageOrPuppy = (imageId) => {
+    const removeImageOrPuppy = async (imageId) => {
         if (thisPuppyImages.length === 1) {
-            dispatch(deletePuppy(thisPuppy.id, litter.id));
+            await dispatch(deletePuppy(thisPuppy.id, litter.id));
             history.push(`/litter/${litter.id}`);
         } else {
-            dispatch(deleteImage(puppyId, imageId));
+            await dispatch(deleteImage(puppyId, imageId));
             history.push(`/litter/${litterId}/puppies/${puppyId}`);
         }
     };

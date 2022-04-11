@@ -1,16 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import Litters from '../Litters';
 
 import './Splashpage.css';
 
-
 const Splashpage = () => {
-
-    const litters = useSelector(state => state.litter?.littersList);
-
-    console.log('LITTERS', litters);
 
     return (
         <div>

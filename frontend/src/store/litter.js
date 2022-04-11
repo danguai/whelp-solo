@@ -107,6 +107,7 @@ export const readLitters = () => async dispatch => {
     if (response.ok) {
         const litters = await response.json();
         dispatch(readLittersAction(litters));
+        return litters;
     }
 };
 
@@ -136,14 +137,14 @@ export const deleteLitter = litterId => async dispatch => {
 
     if (response.ok) {
         const resJson = await response.json();
-        dispatch(deleteLitterAction(litterId));
+        dispatch(deleteLitterAction(resJson));
         return resJson;
     }
 
 };
 
 //  R E D U C E R
-let initialState = { litter: null };
+let initialState = { litter: null, littersList: [] };
 
 const litterReducer = (state = initialState, action) => {
     let newState;
@@ -169,7 +170,7 @@ const litterReducer = (state = initialState, action) => {
             newState.litter = null;
             newState.littersList = newState
                 .littersList
-                .filter(litter => litter.id !== action.payload);
+                .filter(litter => litter.id !== action.payload.id);
             return newState;
         default:
             return state;

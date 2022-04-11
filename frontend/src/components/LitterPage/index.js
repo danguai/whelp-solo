@@ -22,7 +22,6 @@ const LitterPage = () => {
     const sessionUser = useSelector(state => state.session.user);
     const puppies = useSelector(state => state.puppies?.puppiesList);
 
-    console.log('LITTER ID: ', litterId);
     useEffect(() => {
         dispatch(readLitter(litterId));
     }, [dispatch]);
@@ -31,16 +30,14 @@ const LitterPage = () => {
         setActive(!active);
     };
 
-    const removeLitter = () => {
-        dispatch(deleteLitter(litterId));
+    const removeLitter = async (litterId) => {
+        await dispatch(deleteLitter(litterId));
         history.push('/');
     };
 
     if (!litter) return null;
 
     const litterOwner = litter.userId === sessionUser?.id;
-
-    const canWriteReview = sessionUser && !litterOwner;
 
     return (
         <div>
@@ -100,7 +97,7 @@ const LitterPage = () => {
                 </Link>}
                 {litterOwner && <button
                     className='delete__litter__button button__edit__litter'
-                    onClick={removeLitter}
+                    onClick={() => removeLitter(litterId)}
                     type='submit'
                 >
                     Delete Litter
