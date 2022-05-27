@@ -29,51 +29,29 @@ const Puppies = () => {
 
     if (!puppies) return null;
 
-    // let puppiesList = [];
-
-    // puppies.forEach(puppy => {
-    //     if (puppy.litterId === litter.id) {
-    //         // console.log('EACH PUPPY: ', puppy);
-    //         images.forEach(image => {
-    //             if (puppy.id === image.puppyId) {
-    //                 // console.log('EACH IMAGE: ', image)
-    //                 const newPuppyObj = { ...puppy, ...image }
-    //                 puppiesList.push(newPuppyObj);
-    //             }
-    //         });
-    //     }
-    // });
-
     let puppiesFromLitter = puppies.filter(puppy => {
         if (litter.id === puppy.litterId) {
             return true;
         }
     }).map(puppy => {
         const image = images.find(image => {
-            return puppy.id === image.puppyId
-        })
+            return puppy.id === image.puppyId;
+        });
         return { ...image, ...puppy };
-    })
-
-    // console.log('PFL-------------', puppiesFromLitter);
+    });
 
 
-    // let uniq
     const removePuppyOrLitter = async (puppyId) => {
         if (puppiesFromLitter.length === 1) {
             await dispatch(deleteLitter(litterId));
             history.push(`/`);
         } else {
-            // puppiesFromLitter.forEach(puppy => {
             await dispatch(deletePuppy(puppyId));
             history.push(`/litter/${litterId}`);
-            // });
         }
     };
 
     const litterOwner = litter.userId === sessionUser?.id;
-
-
 
     return (
 

@@ -40,12 +40,12 @@ const deleteImageAction = image => {
 
 //  T H U N K S
 //  C R E A T E   I M A G E   T H U N K
-export const createImage = ({ image, puppyId }) => async dispatch => {
+export const createImage = ({ image, puppyId, url }) => async dispatch => {
 
     try {
         const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
             method: 'POST',
-            body: JSON.stringify({ image, puppyId })
+            body: JSON.stringify({ image, puppyId, url })
         });
 
         if (response.ok) {
@@ -53,7 +53,7 @@ export const createImage = ({ image, puppyId }) => async dispatch => {
             if (data.errors) {
                 return Promise.reject(data);
             }
-            dispatch(createImageAction({ image, puppyId }));
+            dispatch(createImageAction({ image, puppyId, url }));
             return data.image;
         }
     } catch (e) {
@@ -74,8 +74,8 @@ export const readImages = puppyId => async dispatch => {
 };
 
 //  U P D A T E   I M A G E
-export const updateImage = (oldImage, newImage) => async dispatch => {
-    const { puppyId, id } = oldImage;
+export const updateImage = (oldImage, newImage, url) => async dispatch => {
+    const { puppyId, id, url } = oldImage;
     const response = await csrfFetch(`/api/puppies/${puppyId}/images/${id}`, {
         method: 'PUT',
         headers: {
@@ -116,7 +116,7 @@ const imagesReducer = (state = initialState, action) => {
     switch (type) {
         case CREATE_IMAGE:
             newState = Object.assign({}, state);
-            newState.imagesList.push({ image, puppyId });
+            newState.imagesList.push({ image, puppyId, url });
             return newState;
         case READ_IMAGES:
             newState = Object.assign({}, state);

@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/danguai/whelp-solo/issues"
   },
-  "homepage": "https://github.com/danguai/whelp-solo#readme"
+  "homepage": "https://github.com/danguai/whelp-solo#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1144.0",
+    "uuid": "^8.3.2"
+  }
 }
