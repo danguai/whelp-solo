@@ -9,11 +9,12 @@ const DELETE_IMAGE = 'images/DELETE_IMAGE';
 
 
 //  A C T I O N S
-const createImageAction = ({ image, puppyId }) => {
+const createImageAction = ({ image, puppyId, url }) => {
     return {
         type: CREATE_IMAGE,
         image,
-        puppyId
+        puppyId,
+        url
     };
 };
 
@@ -24,10 +25,11 @@ const readImagesAction = images => {
     };
 };
 
-const updateImageAction = image => {
+const updateImageAction = (image, url) => {
     return {
         type: UPDATE_IMAGE,
-        payload: image
+        payload: image,
+        url
     };
 };
 
@@ -111,7 +113,7 @@ const initialState = { imagesList: [] };
 const imagesReducer = (state = initialState, action) => {
     let newState;
 
-    const { payload, image, puppyId, type, arrOfImages } = action;
+    const { payload, image, puppyId, url, type, arrOfImages } = action;
 
     switch (type) {
         case CREATE_IMAGE:
