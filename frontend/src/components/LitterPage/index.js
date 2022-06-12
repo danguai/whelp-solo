@@ -52,7 +52,7 @@ const LitterPage = () => {
             <div className='litter__name'>
                 {litter.name}
             </div>
-            {/* {!litterOwner &&
+            {!litterOwner &&
                 <div className='paws__score'>
                     <div>
                         <img
@@ -70,24 +70,27 @@ const LitterPage = () => {
                     </div>
                     <div>
                         <img
-                            className='three__paw__score__gray'
+                            className={active ? 'three__paw__score__gray' : 'three__paw__score__orange'}
                             src={require('../../images/Paw-Score.png')}
+                            onClick={handleToggle}
                         />
                     </div>
                     <div>
                         <img
-                            className='four__paw__score__gray'
+                            className={active ? 'four__paw__score__gray' : 'four__paw__score__orange__red'}
                             src={require('../../images/Paw-Score.png')}
+                            onClick={handleToggle}
                         />
                     </div>
                     <div>
                         <img
-                            className='five__paw__score__gray'
+                            className={active ? 'five__paw__score__gray' : 'five__paw__score__red'}
                             src={require('../../images/Paw-Score.png')}
+                            onClick={handleToggle}
                         />
                     </div>
                 </div>
-            } */}
+            }
             <div>
                 {litterOwner && <Link to='/litter-edit'
                     className='edit__litter__button'>
@@ -102,12 +105,12 @@ const LitterPage = () => {
                 >
                     Delete Litter
                 </button>}
-                {/* {canWriteReview && <Link to='/reviews'
+                <Link to='/reviews'
                     className='edit__litter__button'>
                     <button>
                         Leave a Review
                     </button>
-                </Link>} */}
+                </Link>
             </div>
             <div>
                 {litterOwner && <Link to={`/litter/${litter.id}/new-puppy`}

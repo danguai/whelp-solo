@@ -46,55 +46,33 @@ const deleteLitterAction = litterId => {
 //  T H U N K S
 //  C R E A T E   L I T T E R   T H U N K
 export const createLitter = litter => async dispatch => {
-    const {
-        name,
-        imageHeader,
-        description,
-        address,
-        city,
-        state,
-        zipcode,
-        userId
-    } = litter;
+    const response = await csrfFetch('/api/litter', {
+        method: 'POST',
+        body: JSON.stringify(litter)
+    });
 
-    try {
-        const response = await csrfFetch('/api/litter', {
-            method: 'POST',
-            body: JSON.stringify({
-                name,
-                imageHeader,
-                description,
-                address,
-                city,
-                state,
-                zipcode,
-                userId
-            })
-        });
+    const data = await response.json();
 
-        if (response.ok) {
-            const data = await response.json();
-            if (data.errors) {
-                return Promise.reject(data);
-            }
-            dispatch(createLitterAction(data.litter));
-            return data.litter;
-        }
-    } catch (e) {
-        console.log('CREATE LITTER ERROR', e);
+    if (response.ok) {
+        dispatch(createLitterAction(data.litter));
+        return data.litter;
+    } else {
+        console.log(data.error);
     }
-    return Promise.reject();
+
+
 };
 
 //  R E A D   O N E   L I T T E R   T H U N K
 export const readLitter = id => async dispatch => {
     const response = await csrfFetch(`/api/litter/${id}`);
 
-    // console.log('RESPONSE ONE LITTER', response);
+    const data = await response.json();
 
     if (response.ok) {
-        const litter = await response.json();
-        dispatch(readLitterAction(litter));
+        dispatch(readLitterAction(data));
+    } else {
+        console.log(data.errors);
     }
 };
 
@@ -102,12 +80,12 @@ export const readLitter = id => async dispatch => {
 export const readLitters = () => async dispatch => {
     const response = await csrfFetch(`/api/litter`);
 
-    // console.log('ALL LITTER IS INEVITABLE', response);
-
+    const data = await response.json();
     if (response.ok) {
-        const litters = await response.json();
-        dispatch(readLittersAction(litters));
-        return litters;
+        dispatch(readLittersAction(data));
+        return data;
+    } else {
+        console.log(data.errors);
     }
 };
 
@@ -115,30 +93,32 @@ export const readLitters = () => async dispatch => {
 export const updateLitter = litter => async dispatch => {
     const response = await csrfFetch(`/api/litter/${litter.id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(litter)
     });
 
+    const data = await response.json();
+
     if (response.ok) {
-        const litter = await response.json();
-        dispatch(updateLitterAction(litter));
-        return litter;
+        dispatch(updateLitterAction(data));
+        return data;
+    } else {
+        console.log(data.errors);
     }
 };
 
 //  D E L E T E   L I T T E R   T H U N K
 export const deleteLitter = litterId => async dispatch => {
-
     const response = await csrfFetch(`/api/litter/${litterId}`, {
         method: 'DELETE'
     });
 
+    const data = await response.json();
     if (response.ok) {
-        const resJson = await response.json();
-        dispatch(deleteLitterAction(resJson));
-        return resJson;
+        dispatch(deleteLitterAction(data));
+        return data;
+    } else {
+        console.log(data.errors);
     }
 
 };

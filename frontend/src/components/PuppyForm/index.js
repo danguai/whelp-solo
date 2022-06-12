@@ -10,8 +10,8 @@ import {
     validateDay
 } from '../../utils/validation';
 
-import { createPuppy } from '../../store/puppies';
-import { createImage } from '../../store/images';
+import { createPuppy, readPuppy } from '../../store/puppies';
+import { createImage, readImages, updateImage, deleteImage } from '../../store/images';
 // import * as sessionActions from '../../store/session';
 
 import './PuppyForm.css';
@@ -22,6 +22,8 @@ const PuppyForm = () => {
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
+    const images = useSelector(state => state.images?.imagesList);
+
     // const litterId = useSelector(state => state.litter?.litter.id)
 
     // console.log('SESSION USER', session);
@@ -34,6 +36,8 @@ const PuppyForm = () => {
     const [year, setYear] = useState('');
 
     const [image, setImage] = useState('');
+
+    const [visible, setVisible] = useState(false);
 
     const [nameError, setNameError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
@@ -50,9 +54,8 @@ const PuppyForm = () => {
         yearError
     );
 
-    if (!litterId) return null;
-
     let createdImage;
+    let createdPuppy;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,33 +70,85 @@ const PuppyForm = () => {
         };
 
         try {
-            const createdPuppy = await dispatch(createPuppy(newPuppy));
+            createdPuppy = await dispatch(createPuppy(newPuppy));
 
             if (createdPuppy) {
-                console.log('CREATED PUPPY: ', createdPuppy);
-
                 const newImage = {
                     image,
                     puppyId: createdPuppy.id
                 };
 
-                console.log('NEW IMAGE: ', newImage);
-
                 createdImage = await dispatch(createImage(newImage));
-                console.log('CREATED IMAGE: ', createdImage);
-
                 history.push(`/litter/${litterId}/puppies/${createdPuppy.id}`);
             }
-
         } catch (e) {
             console.log('IS IT HERE?', e);
         }
     };
 
+    const openImageManager = e => setVisible(true);
+    const closeImageManager = e => setVisible(false);
+
+    const uploadFile = async (file, signedRequest, url) => {
+        const response = await fetch(signedRequest, {
+            method: 'PUT',
+            body: file
+        });
+
+        if (response.ok) {
+            return url;
+        } else {
+            return null;
+        }
+    };
+
+    const handleFiles = async e => {
+        const files = e.target.files;
+        const statuses = new Array(files.length);
+        if (files.length === 0) return;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i]
+            const response1 = await fetch(`/api/aws/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+            const data = await response1.json();
+
+            if (response1.ok) {
+
+                const imageUrl = await uploadFile(file, data.signedRequest, data.url)
+
+                if (imageUrl) {
+                    const response = await dispatch(createImage(createdPuppy.id, imageUrl));
+                    if (response.ok) {
+                        statuses[i] = 'SUCCESS'
+                        dispatch(readPuppy(litterId, createdPuppy.id));
+                    } else {
+                        statuses[i] = response.errors
+                    }
+
+                } else {
+                    statuses[i] = 'Successfully got signed url, but was unable to upload.'
+                }
+
+            } else {
+                statuses[i] = 'Could not get signed url.'
+            }
+        }
+    };
+
+    // const deleteHandler = async (puppyId, imageId) => {
+    //     const error = await dispatch(deleteImage(puppyId, imageId));
+    //     if (error) {
+    //         alert(error);
+    //     } else {
+    //         dispatch(readPuppy(litterId, createdPuppy.id));
+    //     }
+    // };
+
+    if (!litterId) return null;
 
     return (
         <div>
             <div className='puppy__form__container'>
+
                 <div>
                     <img className='puppy__image' src={require('../../images/new_pup.png')} />
                 </div>
@@ -182,24 +237,36 @@ const PuppyForm = () => {
                             />
                         </div>
                         {yearError && <div className="errors_style">{yearError}</div>}
-                        <div className='puppy__form__area'>
+                        {/* <div className='puppy__form__area'>
                             <input
                                 className='input__puppy'
                                 placeholder='First Image'
                                 type="text"
                                 value={image}
-                                onChange={(e) => setImage(e.target.value)}
-                            // onBlur={() => {
-                            //     const error = validateYear(year)
-                            //     if (error) setYearError(error)
-                            // }}
-                            // onFocus={() => { setYearError('') }}
-                            // required
-                            />
+                                onChange={(e) => setImage(e.target.value)} />
+                        </div> */}
+
+
+                        <div className="images-modal">
+                            <div className="images-modal-background" onClick={closeImageManager} />
+                            <div className="images-modal-content">
+                                <div className="images-modal-list">
+                                    {/* {images && Object.values(images).map((img, i) => (
+                                        <div key={i} className="image-manager-image">
+                                            <i className="fa-solid fa-xmark-large" onClick={deleteHandler(img.id, img.puppyId)} />
+                                            <div className='img-thumbnail' style={{ backgroundImage: `url(${img.url})` }} />
+                                            {img.url.slice(47)}
+                                        </div>
+                                    ))} */}
+                                </div>
+                                <input type="file" id="img-input" name="img-input" multiple accept=".png,.jpg,.jpeg" onChange={handleFiles} />
+                                <label htmlFor="img-input" className="img-input-label">Select Images</label>
+                            </div>
                         </div>
                         {/* {yearError && <div className="errors_style">{yearError}</div>} */}
 
                         <button
+                            onClick={openImageManager}
                             className={checkingErrors ? 'red__button__disabled puppy__button all__buttons' : 'red__button puppy__button all__buttons'}
                             disabled={checkingErrors}
                             type="submit"

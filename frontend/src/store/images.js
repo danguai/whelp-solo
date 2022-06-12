@@ -43,25 +43,18 @@ const deleteImageAction = image => {
 //  T H U N K S
 //  C R E A T E   I M A G E   T H U N K
 export const createImage = ({ image, puppyId, url }) => async dispatch => {
+    const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
+        method: 'POST',
+        body: JSON.stringify({ image, puppyId, url })
+    });
 
-    try {
-        const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
-            method: 'POST',
-            body: JSON.stringify({ image, puppyId, url })
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            if (data.errors) {
-                return Promise.reject(data);
-            }
-            dispatch(createImageAction({ image, puppyId, url }));
-            return data.image;
-        }
-    } catch (e) {
-        console.log('CREATE IMAGE ERROR', e);
+    const data = await response.json();
+    if (response.ok) {
+        dispatch(createImageAction({ image, puppyId, url }));
+        return data.image;
+    } else {
+        console.log(data.errors);
     }
-    return Promise.reject();
 };
 
 //  R E A D   A L L   I M A G E S   T H U N K
@@ -80,16 +73,17 @@ export const updateImage = (oldImage, newImage, url) => async dispatch => {
     const { puppyId, id, url } = oldImage;
     const response = await csrfFetch(`/api/puppies/${puppyId}/images/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newImage)
     });
 
+    const data = await response.json();
+
     if (response.ok) {
-        const image = await response.json();
-        dispatch(updateImageAction(image));
-        return image;
+        dispatch(updateImageAction(data));
+        return data;
+    } else {
+        console.log(data.errors);
     }
 };
 
@@ -99,10 +93,13 @@ export const deleteImage = (puppyId, imageId) => async dispatch => {
         method: 'DELETE'
     });
 
+    const data = await response.json();
+
     if (response) {
-        const resJson = await response.json();
-        dispatch(deleteImageAction({ id: imageId }));
-        return resJson;
+        dispatch(deleteImageAction(data));
+        return data;
+    } else {
+        console.log(data.errors);
     }
 };
 
