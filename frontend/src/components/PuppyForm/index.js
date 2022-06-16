@@ -237,14 +237,14 @@ const PuppyForm = () => {
                             />
                         </div>
                         {yearError && <div className="errors_style">{yearError}</div>}
-                        {/* <div className='puppy__form__area'>
+                        <div className='puppy__form__area'>
                             <input
                                 className='input__puppy'
-                                placeholder='First Image'
+                                placeholder='First Image TEMPORARY'
                                 type="text"
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)} />
-                        </div> */}
+                        </div>
 
 
                         <div className="images-modal">
