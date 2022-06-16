@@ -55,8 +55,21 @@ const Puppies = () => {
 
     return (
 
-        <div id='all__litters'>
-            <ul className='recent__litters'>
+        <div id='all__puppies'>
+            <ul className='recent__puppies'>
+                {litterOwner &&
+                    <div className='each__puppy__container'>
+                        <NavLink to={`/litter/${litter.id}/new-puppy`} style={{ textDecoration: "none" }}>
+                            <div className="find__your__place__photo">
+                                <div className='place__photo__puppies add__puppy__button' >
+                                    +
+                                </div>
+                                <div className="puppy__title">
+                                    New Pup
+                                </div>
+                            </div>
+                        </NavLink>
+                    </div>}
                 {puppiesFromLitter.map(puppy =>
                     <li
                         key={puppy.id}
@@ -64,14 +77,14 @@ const Puppies = () => {
                         <NavLink to={`/litter/${litterId}/puppies/${puppy.id}`} style={{ textDecoration: "none" }}>
                             <div className="find__your__place__photo">
                                 <div>
-                                    <img className='place__photo' src={puppy.image} />
+                                    <img className='place__photo__puppies' src={puppy.image} />
                                 </div>
                                 <div className="puppy__title">
                                     {puppy.name}
                                 </div>
                             </div>
                         </NavLink>
-                        {litterOwner &&
+                        {/* {litterOwner &&
                             <div>
 
                                 <button
@@ -80,7 +93,8 @@ const Puppies = () => {
                                 >
                                     Delete Puppy
                                 </button>
-                            </div>}
+                            </div>
+                        } */}
                     </li>
                 )}
             </ul>

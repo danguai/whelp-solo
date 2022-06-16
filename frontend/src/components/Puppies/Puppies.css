@@ -1,13 +1,14 @@
-/* #all__litters {
+#all__puppies {
     display: flex;
     justify-content: center;
-} */
+}
 
 .recent__puppies {
     display: grid;
     gap: 40px;
     grid-template-columns: 220px 220px 220px 220px;
     grid-auto-flow: row dense;
+    margin-bottom: 100px;
 }
 
 .each__puppy__container {
@@ -20,19 +21,25 @@
     align-items: center;
 }
 
-.place__photo {
+.place__photo__puppies {
     width: 200px;
     height: 200px;
     border-radius: 10px;
     object-fit: cover;
-    /* border: 1px rgb(255, 255, 255, 0.25) solid; */
-    /* transition: box-shadow 0.25s ease-in-out; */
 }
 
-/* .place__photo:hover {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    transition: box-shadow 0.25s ease-in-out;
-} */
+.add__puppy__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: rgb(120, 120, 120);
+    border: 1px solid rgb(200, 200, 200);
+}
+
+.add__puppy__button:hover {
+    background-color: rgb(225, 225, 225);
+}
 
 .find__your__place__photo {
     display: flex;

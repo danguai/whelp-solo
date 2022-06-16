@@ -45,7 +45,7 @@ const LitterPage = () => {
                 <Link to={`/`}
                     className='back__to__litter__button'>
                     <button className='button__litters all__buttons' >
-                        All Litters
+                        Back to All Litters
                     </button>
                 </Link>
             </div>
@@ -105,21 +105,23 @@ const LitterPage = () => {
                 >
                     Delete Litter
                 </button>}
-                <Link to='/reviews'
-                    className='edit__litter__button'>
-                    <button>
-                        Leave a Review
-                    </button>
-                </Link>
             </div>
-            <div>
+            {/* <div>
                 {litterOwner && <Link to={`/litter/${litter.id}/new-puppy`}
                     className='new__puppy__button'>
                     <button className='button__litters all__buttons' >
                         New Pup
                     </button>
                 </Link>}
-            </div>
+            </div> */}
+            {/* <div>
+                <Link to='/reviews'
+                    className='edit__litter__button'>
+                    <button>
+                        Reviews
+                    </button>
+                </Link>
+            </div> */}
             <div className='gradient'>
                 <img
                     className='litter__bg__image'
