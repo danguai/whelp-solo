@@ -1,7 +1,7 @@
-/* #all__litters {
+#all__litters {
     display: flex;
     justify-content: center;
-} */
+}
 
 .recent__litters {
     display: grid;
@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.place__photo {
+.place__photo__litters {
     width: 200px;
     height: 200px;
     border-radius: 10px;

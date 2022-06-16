@@ -9,11 +9,12 @@ const DELETE_IMAGE = 'images/DELETE_IMAGE';
 
 
 //  A C T I O N S
-const createImageAction = ({ image, puppyId }) => {
+const createImageAction = ({ image, puppyId, url }) => {
     return {
         type: CREATE_IMAGE,
         image,
-        puppyId
+        puppyId,
+        url
     };
 };
 
@@ -24,10 +25,11 @@ const readImagesAction = images => {
     };
 };
 
-const updateImageAction = image => {
+const updateImageAction = (image, url) => {
     return {
         type: UPDATE_IMAGE,
-        payload: image
+        payload: image,
+        url
     };
 };
 
@@ -40,26 +42,19 @@ const deleteImageAction = image => {
 
 //  T H U N K S
 //  C R E A T E   I M A G E   T H U N K
-export const createImage = ({ image, puppyId }) => async dispatch => {
+export const createImage = ({ image, puppyId, url }) => async dispatch => {
+    const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
+        method: 'POST',
+        body: JSON.stringify({ image, puppyId, url })
+    });
 
-    try {
-        const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
-            method: 'POST',
-            body: JSON.stringify({ image, puppyId })
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            if (data.errors) {
-                return Promise.reject(data);
-            }
-            dispatch(createImageAction({ image, puppyId }));
-            return data.image;
-        }
-    } catch (e) {
-        console.log('CREATE IMAGE ERROR', e);
+    const data = await response.json();
+    if (response.ok) {
+        dispatch(createImageAction({ image, puppyId, url }));
+        return data.image;
+    } else {
+        console.log(data.errors);
     }
-    return Promise.reject();
 };
 
 //  R E A D   A L L   I M A G E S   T H U N K
@@ -74,20 +69,21 @@ export const readImages = puppyId => async dispatch => {
 };
 
 //  U P D A T E   I M A G E
-export const updateImage = (oldImage, newImage) => async dispatch => {
-    const { puppyId, id } = oldImage;
+export const updateImage = (oldImage, newImage, url) => async dispatch => {
+    const { puppyId, id, url } = oldImage;
     const response = await csrfFetch(`/api/puppies/${puppyId}/images/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newImage)
     });
 
+    const data = await response.json();
+
     if (response.ok) {
-        const image = await response.json();
-        dispatch(updateImageAction(image));
-        return image;
+        dispatch(updateImageAction(data));
+        return data;
+    } else {
+        console.log(data.errors);
     }
 };
 
@@ -97,10 +93,13 @@ export const deleteImage = (puppyId, imageId) => async dispatch => {
         method: 'DELETE'
     });
 
+    const data = await response.json();
+
     if (response) {
-        const resJson = await response.json();
-        dispatch(deleteImageAction({ id: imageId }));
-        return resJson;
+        dispatch(deleteImageAction(data));
+        return data;
+    } else {
+        console.log(data.errors);
     }
 };
 
@@ -111,12 +110,12 @@ const initialState = { imagesList: [] };
 const imagesReducer = (state = initialState, action) => {
     let newState;
 
-    const { payload, image, puppyId, type, arrOfImages } = action;
+    const { payload, image, puppyId, url, type, arrOfImages } = action;
 
     switch (type) {
         case CREATE_IMAGE:
             newState = Object.assign({}, state);
-            newState.imagesList.push({ image, puppyId });
+            newState.imagesList.push({ image, puppyId, url });
             return newState;
         case READ_IMAGES:
             newState = Object.assign({}, state);

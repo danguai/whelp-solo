@@ -14,8 +14,8 @@ const AddImageForm = () => {
 
     const sessionUser = useSelector(state => state.session.user);
     const litter = useSelector(state => state.litter?.litter);
-    const puppies = useSelector(state => state.puppies.puppiesList)
-    const images = useSelector(state => state.images.imagesList)
+    const puppies = useSelector(state => state.puppies.puppiesList);
+    const images = useSelector(state => state.images.imagesList);
 
     let thisPuppy = (puppies.filter(puppy => {
         if (puppyId == puppy.id) {

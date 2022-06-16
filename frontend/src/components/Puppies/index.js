@@ -29,56 +29,47 @@ const Puppies = () => {
 
     if (!puppies) return null;
 
-    // let puppiesList = [];
-
-    // puppies.forEach(puppy => {
-    //     if (puppy.litterId === litter.id) {
-    //         // console.log('EACH PUPPY: ', puppy);
-    //         images.forEach(image => {
-    //             if (puppy.id === image.puppyId) {
-    //                 // console.log('EACH IMAGE: ', image)
-    //                 const newPuppyObj = { ...puppy, ...image }
-    //                 puppiesList.push(newPuppyObj);
-    //             }
-    //         });
-    //     }
-    // });
-
     let puppiesFromLitter = puppies.filter(puppy => {
         if (litter.id === puppy.litterId) {
             return true;
         }
     }).map(puppy => {
         const image = images.find(image => {
-            return puppy.id === image.puppyId
-        })
+            return puppy.id === image.puppyId;
+        });
         return { ...image, ...puppy };
-    })
-
-    // console.log('PFL-------------', puppiesFromLitter);
+    });
 
 
-    // let uniq
     const removePuppyOrLitter = async (puppyId) => {
         if (puppiesFromLitter.length === 1) {
             await dispatch(deleteLitter(litterId));
             history.push(`/`);
         } else {
-            // puppiesFromLitter.forEach(puppy => {
             await dispatch(deletePuppy(puppyId));
             history.push(`/litter/${litterId}`);
-            // });
         }
     };
 
     const litterOwner = litter.userId === sessionUser?.id;
 
-
-
     return (
 
-        <div id='all__litters'>
-            <ul className='recent__litters'>
+        <div id='all__puppies'>
+            <ul className='recent__puppies'>
+                {litterOwner &&
+                    <div className='each__puppy__container'>
+                        <NavLink to={`/litter/${litter.id}/new-puppy`} style={{ textDecoration: "none" }}>
+                            <div className="find__your__place__photo">
+                                <div className='place__photo__puppies add__puppy__button' >
+                                    +
+                                </div>
+                                <div className="puppy__title">
+                                    New Pup
+                                </div>
+                            </div>
+                        </NavLink>
+                    </div>}
                 {puppiesFromLitter.map(puppy =>
                     <li
                         key={puppy.id}
@@ -86,14 +77,14 @@ const Puppies = () => {
                         <NavLink to={`/litter/${litterId}/puppies/${puppy.id}`} style={{ textDecoration: "none" }}>
                             <div className="find__your__place__photo">
                                 <div>
-                                    <img className='place__photo' src={puppy.image} />
+                                    <img className='place__photo__puppies' src={puppy.image} />
                                 </div>
                                 <div className="puppy__title">
                                     {puppy.name}
                                 </div>
                             </div>
                         </NavLink>
-                        {litterOwner &&
+                        {/* {litterOwner &&
                             <div>
 
                                 <button
@@ -102,7 +93,8 @@ const Puppies = () => {
                                 >
                                     Delete Puppy
                                 </button>
-                            </div>}
+                            </div>
+                        } */}
                     </li>
                 )}
             </ul>

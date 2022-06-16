@@ -28,7 +28,7 @@ const Litters = () => {
                         <NavLink to={`/litter/${litter.id}`} style={{ textDecoration: "none" }}>
                             <div className="find__your__place__photo">
                                 <div>
-                                    <img className='place__photo' src={litter.imageHeader} />
+                                    <img className='place__photo__litters' src={litter.imageHeader} />
                                 </div>
                                 <div className="litter__title">
                                     {litter.name}
