@@ -108,12 +108,13 @@ const PuppyForm = () => {
         if (files.length === 0) return;
         for (let i = 0; i < files.length; i++) {
             const file = files[i]
-            const response1 = await fetch(`/api/aws/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+            const response1 = await fetch(`/api/puppies/1/images/aws3?file-name=${file.name}&file-type=${file.type}`);
             const data = await response1.json();
-
+            console.log(response1);
             if (response1.ok) {
 
                 const imageUrl = await uploadFile(file, data.signedRequest, data.url)
+                console.log(imageUrl);
 
                 if (imageUrl) {
                     const response = await dispatch(createImage(createdPuppy.id, imageUrl));
