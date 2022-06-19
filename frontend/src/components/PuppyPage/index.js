@@ -135,7 +135,7 @@ const PuppyPage = () => {
 
                             <div className="find__your__place__photo">
                                 <div>
-                                    <img className='place__photo' src={image.image} />
+                                    <img className='place__photo__puppies' src={image.image} />
                                 </div>
                                 {litterOwner &&
                                     <div className='buttons__images__edit__del'>
