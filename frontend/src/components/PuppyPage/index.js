@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
+import { NavLink, Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
 import { readLitter } from '../../store/litter';
 import { readPuppies, updatePuppy, deletePuppy } from '../../store/puppies';
@@ -61,6 +61,26 @@ const PuppyPage = () => {
         }
     };
 
+    const addNewImage = () => {
+        return (
+            <div>
+
+                <div className='each__puppy__container'>
+                    <NavLink to={`/litter/${litter.id}/puppies/${thisPuppy.id}/add-image`} style={{ textDecoration: "none" }}>
+                        <div className="find__your__place__photo">
+                            <div className='photo__puppies add__puppy__button' >
+                                +
+                            </div>
+                            <div className="add__puppy__title">
+                                Add Image
+                            </div>
+                        </div>
+                    </NavLink>
+                </div>
+            </div>
+        )
+    }
+
     if (!thisPuppy) return null;
 
     const newDate = new Date().toJSON().slice(0, 10).split('-');
@@ -99,27 +119,20 @@ const PuppyPage = () => {
             <div>
 
                 {litterOwner && <Link to={`/litter/${litterId}/puppies/${thisPuppy.id}/puppy-edit`}
-                    className='edit__puppy__button'>
-                    <button className='button__edit__puppy'>
+                    className='edit__puppy__button '>
+                    <button className='button__edit__litter button__litters'>
                         Edit Puppy
                     </button>
                 </Link>}
                 {litterOwner && <button
-                    className='delete__puppy__button button__edit__puppy'
+                    className='delete__puppy__button button__edit__litter button__litters'
                     onClick={removePuppy}
                     type='submit'
                 >
                     Delete Puppy
                 </button>}
             </div>
-            <div>
-                {litterOwner && <Link to={`/litter/${litterId}/puppies/${thisPuppy.id}/add-image`}
-                    className='add__image__button'>
-                    <button className='button__litters all__buttons'>
-                        Add Image
-                    </button>
-                </Link>}
-            </div>
+
             <div className='gradient'>
                 {thisPuppyImages[0].image ?
                     <img className='litter__bg__image' src={thisPuppyImages[0].image}
@@ -130,12 +143,13 @@ const PuppyPage = () => {
             </div>
             <div id='all__litter'>
                 <ul className='this__puppy__photos'>
+                    {litterOwner && addNewImage()}
                     {thisPuppyImages.map(image =>
                         <li key={image.id} className='each__puppy__container' >
 
                             <div className="find__your__place__photo">
                                 <div>
-                                    <img className='place__photo__puppies' src={image.image} />
+                                    <img className='photo__puppies' src={image.image} />
                                 </div>
                                 {litterOwner &&
                                     <div className='buttons__images__edit__del'>

@@ -8,7 +8,7 @@ const { Image } = require('../../db/models');
 const router = express.Router();
 
 const S3_BUCKET = process.env.S3_BUCKET;
-aws.config.region = 'us-west-2';
+aws.config.region = 'us-east-1';
 
 //  C R E A T E   I M A G E
 router.post('/', requireAuth, asyncHandler(async (req, res) => {
@@ -24,22 +24,18 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 }));
 
 //   R E A D   B U C K E T
-router.get('/aws3', requireAuth, asyncHandler(async (req, res, next) => {
+router.get('/aws', requireAuth, asyncHandler(async (req, res, next) => {
     const s3 = new aws.S3();
     const fileName = req.query['file-name'];
     const fileType = req.query['file-type'];
     const s3Params = {
         Bucket: S3_BUCKET,
         Key: fileName,
-        Expires: 60,
-        ContentType: fileType,
-        ACL: 'public-read'
+        ContentType: fileType
     };
 
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
-        if (err) {
-            return next(err);
-        }
+        if (err) return next(err);
 
         const returnData = {
             signedRequest: data,

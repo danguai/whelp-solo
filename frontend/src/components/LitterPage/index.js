@@ -94,12 +94,12 @@ const LitterPage = () => {
             <div>
                 {litterOwner && <Link to='/litter-edit'
                     className='edit__litter__button'>
-                    <button className='button__edit__litter'>
+                    <button className='button__edit__litter button__litters'>
                         Edit Litter
                     </button>
                 </Link>}
                 {litterOwner && <button
-                    className='delete__litter__button button__edit__litter'
+                    className='delete__litter__button button__edit__litter button__litters'
                     onClick={() => removeLitter(litterId)}
                     type='submit'
                 >

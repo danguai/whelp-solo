@@ -89,8 +89,8 @@ export const createPuppy = puppy => async dispatch => {
 };
 
 //  R E A D   O N E   P U P P Y   T H U N K
-export const readPuppy = (litterId, puppyId) => async dispatch => {
-    const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppyId}`);
+export const readPuppy = puppyId => async dispatch => {
+    const response = await csrfFetch(`/api/puppies/${puppyId}`);
 
     if (response.ok) {
         const puppy = await response.json();
@@ -100,8 +100,8 @@ export const readPuppy = (litterId, puppyId) => async dispatch => {
 };
 
 //  R E A D   A L L   P U P P I E S   T H U N K
-export const readPuppies = litterId => async dispatch => {
-    const response = await csrfFetch(`/api/litter/${litterId}/puppies`);
+export const readPuppies = () => async dispatch => {
+    const response = await csrfFetch(`/api/puppies`);
 
     if (response.ok) {
         const puppies = await response.json();
@@ -111,9 +111,7 @@ export const readPuppies = litterId => async dispatch => {
 
 //   U P D A T E   P U P P Y   T H U N K
 export const updatePuppy = puppy => async dispatch => {
-    const { litterId } = puppy;
-
-    const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppy.id}`, {
+    const response = await csrfFetch(`/api/puppies/${puppy.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -129,9 +127,9 @@ export const updatePuppy = puppy => async dispatch => {
 };
 
 //  D E L E T E   P U P P Y   T H U N K
-export const deletePuppy = (puppyId, litterId) => async dispatch => {
+export const deletePuppy = puppyId => async dispatch => {
 
-    const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppyId}`, {
+    const response = await csrfFetch(`/api/puppies/${puppyId}`, {
         method: 'DELETE'
     });
 

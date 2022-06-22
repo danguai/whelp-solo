@@ -54,19 +54,6 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(puppies);
 }));
 
-//  R E A D   I M A G E S
-// router.get('/images', asyncHandler(async (req, res) => {
-//     try {
-
-//         const images = await Image.findAll();
-
-//         // console.log('images BE', images);
-//         return res.json(images);
-//     } catch (e) {
-//         console.log('READ IMAGES BACK END', e)
-//     }
-// }));
-
 //  U P D A T E   P U P P Y
 router.put('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
     const id = req.params.puppyId;
