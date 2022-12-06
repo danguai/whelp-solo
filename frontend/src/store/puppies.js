@@ -47,54 +47,27 @@ const deletePuppyAction = puppy => {
 //  T H U N K S
 //  C R E A T E   P U P P Y   T H U N K
 export const createPuppy = puppy => async dispatch => {
-    const {
-        name,
-        description,
-        year,
-        month,
-        day,
-        userId,
-        litterId
-    } = puppy;
+    const response = await csrfFetch(`/api/litter/${puppy.litterId}/puppies`, {
+        method: 'POST',
+        body: JSON.stringify(puppy)
+    });
 
-    try {
-        const response = await csrfFetch(`/api/litter/${litterId}/puppies`, {
-            method: 'POST',
-            body: JSON.stringify(
-                {
-                    name,
-                    description,
-                    year,
-                    month,
-                    day,
-                    userId,
-                    litterId
-                })
-        });
+    if (response.ok) {
+        const data = await response.json();
 
-        if (response.ok) {
-            const data = await response.json();
-
-            if (data.errors) {
-                return Promise.reject(data);
-            }
-            dispatch(createPuppyAction(data.puppy));
-            return data.puppy;
-        }
-
-    } catch (e) {
-        console.log('CREATE PUPPY ERROR: ', e);
+        dispatch(createPuppyAction(data.puppy));
+        return data.puppy;
     }
-    return Promise.reject();
+
 };
 
 //  R E A D   O N E   P U P P Y   T H U N K
-export const readPuppy = (litterId, puppyId) => async dispatch => {
+export const readPuppy = (puppyId, litterId) => async dispatch => {
     const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppyId}`);
 
     if (response.ok) {
-        const puppy = await response.json();
-        dispatch(readPuppyAction(puppy));
+        const data = await response.json();
+        dispatch(readPuppyAction(data));
     }
 
 };
@@ -111,9 +84,7 @@ export const readPuppies = litterId => async dispatch => {
 
 //   U P D A T E   P U P P Y   T H U N K
 export const updatePuppy = puppy => async dispatch => {
-    const { litterId } = puppy;
-
-    const response = await csrfFetch(`/api/litter/${litterId}/puppies/${puppy.id}`, {
+    const response = await csrfFetch(`/api/litter/${puppy.litterId}/puppies/${puppy.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

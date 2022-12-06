@@ -43,7 +43,7 @@ const deleteImageAction = image => {
 //  T H U N K S
 //  C R E A T E   I M A G E   T H U N K
 export const createImage = ({ image, puppyId, url }) => async dispatch => {
-    const response = await csrfFetch(`/api/puppies/${puppyId}/images`, {
+    const response = await csrfFetch(`/api/images`, {
         method: 'POST',
         body: JSON.stringify({ image, puppyId, url })
     });
@@ -58,8 +58,8 @@ export const createImage = ({ image, puppyId, url }) => async dispatch => {
 };
 
 //  R E A D   A L L   I M A G E S   T H U N K
-export const readImages = puppyId => async dispatch => {
-    const response = await csrfFetch(`/api/puppies/${puppyId}/images`);
+export const readImages = () => async dispatch => {
+    const response = await csrfFetch(`/api/images`);
 
     if (response.ok) {
         const resJson = await response.json();
@@ -71,7 +71,7 @@ export const readImages = puppyId => async dispatch => {
 //  U P D A T E   I M A G E
 export const updateImage = (oldImage, newImage, url) => async dispatch => {
     const { puppyId, id, url } = oldImage;
-    const response = await csrfFetch(`/api/puppies/${puppyId}/images/${id}`, {
+    const response = await csrfFetch(`/api/images/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newImage)
@@ -88,8 +88,8 @@ export const updateImage = (oldImage, newImage, url) => async dispatch => {
 };
 
 //  D E L E T E   I M A G E   T H U N K
-export const deleteImage = (puppyId, imageId) => async dispatch => {
-    const response = await csrfFetch(`/api/puppies/${puppyId}/images/${imageId}`, {
+export const deleteImage = imageId => async dispatch => {
+    const response = await csrfFetch(`/api/images/${imageId}`, {
         method: 'DELETE'
     });
 

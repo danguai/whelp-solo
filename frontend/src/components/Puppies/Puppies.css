@@ -21,7 +21,8 @@
     align-items: center;
 }
 
-.place__photo__puppies {
+.photo__puppies {
+    margin-top: 20px;
     width: 200px;
     height: 200px;
     border-radius: 10px;
@@ -32,6 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* margin-top: 10px; */
     font-size: 50px;
     color: rgb(120, 120, 120);
     border: 1px solid rgb(200, 200, 200);
@@ -49,7 +51,18 @@
 .puppy__title {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-weight: bold;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    margin: 5px 0;
+}
+
+.add__puppy__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* font-weight: bold; */
     text-decoration: none;
     color: rgb(0, 0, 0);
     margin: 5px 0;

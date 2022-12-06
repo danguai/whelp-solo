@@ -11,7 +11,8 @@ const router = express.Router();
 
 //  C R E A T E   L I T T E R
 router.post('/', requireAuth, asyncHandler(async (req, res) => {
-    const { name,
+    const {
+        name,
         imageHeader,
         description,
         address,

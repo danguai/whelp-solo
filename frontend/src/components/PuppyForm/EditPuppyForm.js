@@ -13,38 +13,31 @@ import {
 import { updatePuppy } from '../../store/puppies';
 import { updateImage } from '../../store/images';
 
-// import * as sessionActions from '../../store/session';
-
 import './PuppyForm.css';
 
 const EditPuppyForm = () => {
     const { puppyId, litterId } = useParams();
-
     const dispatch = useDispatch();
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
     const litter = useSelector(state => state.litter?.litter);
-    const puppies = useSelector(state => state.puppies.puppiesList)
-    const images = useSelector(state => state.images.imagesList)
 
-    let thisPuppy = (puppies.filter(puppy => {
-        if (puppyId == puppy.id) {
-            return puppy;
-        }
-    })[0]);
+    const puppies = useSelector(state => state.puppies?.puppiesList);
+    const images = useSelector(state => state.images?.imagesList);
 
-    let firstImage = (images.find(image => {
-        return puppyId == image.puppyId;
-    }));
+    let thisPuppy = puppies.filter(puppy => puppyId == puppy?.id)[0];
+    let firstImage = images.find(image => puppyId == image?.puppyId);
 
-    const [name, setName] = useState(thisPuppy.name);
-    const [description, setDescription] = useState(thisPuppy.description);
-    const [day, setDay] = useState(thisPuppy.day);
-    const [month, setMonth] = useState(thisPuppy.month);
-    const [year, setYear] = useState(thisPuppy.year);
+    const [name, setName] = useState(thisPuppy?.name);
+    const [description, setDescription] = useState(thisPuppy?.description);
+    const [day, setDay] = useState(thisPuppy?.day);
+    const [month, setMonth] = useState(thisPuppy?.month);
+    const [year, setYear] = useState(thisPuppy?.year);
 
-    const [image, setImage] = useState(firstImage.image);
+    const [image, setImage] = useState(firstImage?.image);
+
+    const [visible, setVisible] = useState(false);
 
     const [nameError, setNameError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
@@ -78,26 +71,41 @@ const EditPuppyForm = () => {
         try {
             const updatedPuppy = await dispatch(updatePuppy(editedPuppy));
             history.push(`/litter/${litterId}/puppies/${updatedPuppy.id}`);
-            // const createdPuppy = await dispatch(createPuppy(newPuppy));
 
             if (updatedPuppy) {
-                console.log('UPDATES PUPPY: ', updatedPuppy);
-
                 let updatedImage = {
                     ...firstImage,
                     image
                 };
 
-                console.log('UPDATE IMAGE: ', updatedImage);
-
                 updatedImage = await dispatch(updateImage(firstImage, updatedImage));
-                console.log('UPDATED IMAGE: ', updatedImage);
-
                 history.push(`/litter/${litterId}/puppies/${updatedImage.puppyId}`);
             }
-
         } catch (e) {
             console.log('OHHHHH NOOOOOOOOOO!O!!!!!!', e);
+        }
+    };
+
+    const openImageManager = () => setVisible(true);
+    const closeImageManager = () => setVisible(false);
+
+    const handleFiles = async e => {
+        const files = e.target.files;
+        if (files.length === 0) return;
+
+        const file = files[0];
+        const signedResponse = await fetch(`/api/image/aws?file-name=${file.name}&file-type=${file.type}`);
+
+        if (signedResponse.ok) {
+            const signedResponseJson = await signedResponse.json();
+            const uploadResponse = await fetch(signedResponseJson.signedRequest, {
+                method: 'PUT',
+                body: file
+            });
+
+            if (uploadResponse.ok) {
+                setImage(signedResponseJson.url);
+            }
         }
     };
 
@@ -196,20 +204,29 @@ const EditPuppyForm = () => {
                         {yearError && <div className="errors_style">{yearError}</div>}
                         <div className='puppy__form__area'>
                             <input
-                                className='input__puppy'
-                                placeholder='First Image'
                                 type="text"
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)}
-                            // onBlur={() => {
-                            //     const error = validateYear(year)
-                            //     if (error) setYearError(error)
-                            // }}
-                            // onFocus={() => { setYearError('') }}
-                            // required
                             />
                         </div>
+                        <div className="images-modal">
+                            <div className="images-modal-background" onClick={closeImageManager} />
+                            <div className="images-modal-content">
+                                <div className="images-modal-list">
+                                    {/* {images && Object.values(images).map((img, i) => (
+                                        <div key={i} className="image-manager-image">
+                                            <i className="fa-solid fa-xmark-large" onClick={deleteHandler(img.id, img.puppyId)} />
+                                            <div className='img-thumbnail' style={{ backgroundImage: `url(${img.url})` }} />
+                                            {img.url.slice(47)}
+                                        </div>
+                                    ))} */}
+                                </div>
+                                <input type="file" id="img-input" name="img-input" multiple accept=".png,.jpg,.jpeg" onChange={handleFiles} />
+                                <label htmlFor="img-input"></label>
+                            </div>
+                        </div>
                         <button
+                            onClick={openImageManager}
                             className={checkingErrors ? 'red__button__disabled puppy__button all__buttons' : 'red__button puppy__button all__buttons'}
                             disabled={checkingErrors}
                             type="submit"

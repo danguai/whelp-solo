@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 const { requireAuth } = require('../../utils/auth');
 
+const { Litter } = require('../../db/models');
 const { Puppy } = require('../../db/models');
 const { Image } = require('../../db/models');
 
@@ -20,6 +21,7 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 
     const userId = req.user.id;
     const litterId = req.params.litterId;
+    // console.log('______________________________', litterId);
 
     const puppy = await Puppy.create(
         {
@@ -53,19 +55,6 @@ router.get('/', asyncHandler(async (req, res) => {
     const puppies = await Puppy.findAll();
     return res.json(puppies);
 }));
-
-//  R E A D   I M A G E S
-// router.get('/images', asyncHandler(async (req, res) => {
-//     try {
-
-//         const images = await Image.findAll();
-
-//         // console.log('images BE', images);
-//         return res.json(images);
-//     } catch (e) {
-//         console.log('READ IMAGES BACK END', e)
-//     }
-// }));
 
 //  U P D A T E   P U P P Y
 router.put('/:puppyId', requireAuth, asyncHandler(async (req, res) => {
