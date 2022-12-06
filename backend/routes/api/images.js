@@ -47,27 +47,21 @@ router.get('/aws', requireAuth, asyncHandler(async (req, res, next) => {
 
 //   R E A D   I M A G E S
 router.get('/', asyncHandler(async (req, res) => {
-    try {
-        const images = await Image.findAll();
-
-        return res.json(images);
-    } catch (e) {
-        console.log('READ IMAGES BACK END', e)
-    }
+    const images = await Image.findAll();
+    return res.json(images);
 }));
 
 //  U P D A T E   I M A G E
 router.put('/:imageId', requireAuth, asyncHandler(async (req, res) => {
     const id = req.params.imageId;
 
-    // console.log('ID IN UPDATE: ', id);
     delete req.body.id;
 
     const [_updateCount, image] = await Image.update(req.body, {
         where: { id },
         returning: true,
         plain: true
-    })
+    });
 
     return res.json(image);
 }));

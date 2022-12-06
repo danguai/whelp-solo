@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 const { requireAuth } = require('../../utils/auth');
 
+const { Litter } = require('../../db/models');
 const { Puppy } = require('../../db/models');
 const { Image } = require('../../db/models');
 
@@ -20,6 +21,7 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 
     const userId = req.user.id;
     const litterId = req.params.litterId;
+    // console.log('______________________________', litterId);
 
     const puppy = await Puppy.create(
         {

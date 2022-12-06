@@ -12,7 +12,7 @@ router.use('/users', usersRouter);
 
 router.use('/litter', litterRouter);
 
-router.use('/puppies', puppiesRouter);
+router.use('/litter/:litterId/puppies', puppiesRouter);
 
 router.use('/images', imagesRouter);
 

@@ -10,12 +10,10 @@ import {
     validateDay
 } from '../../utils/validation';
 
-import { createPuppy, readPuppy } from '../../store/puppies';
-import { createImage, readImages, updateImage, deleteImage } from '../../store/images';
-// import * as sessionActions from '../../store/session';
+import { createPuppy } from '../../store/puppies';
+import { createImage } from '../../store/images';
 
 import './PuppyForm.css';
-import { csrfFetch } from '../../store/csrf';
 
 const PuppyForm = () => {
     const { litterId } = useParams();
@@ -25,11 +23,6 @@ const PuppyForm = () => {
     const sessionUser = useSelector(state => state.session.user);
     const images = useSelector(state => state.images?.imagesList);
 
-    // const litterId = useSelector(state => state.litter?.litter.id)
-
-    // console.log('SESSION USER', session);
-    // console.log('LITTER ID', litterId);
-
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [day, setDay] = useState('');
@@ -37,7 +30,6 @@ const PuppyForm = () => {
     const [year, setYear] = useState('');
 
     const [image, setImage] = useState('');
-
     const [visible, setVisible] = useState(false);
 
     const [nameError, setNameError] = useState('');
@@ -87,10 +79,8 @@ const PuppyForm = () => {
         }
     };
 
-    const openImageManager = e => setVisible(true);
-    const closeImageManager = e => setVisible(false);
-
-
+    const openImageManager = () => setVisible(true);
+    const closeImageManager = () => setVisible(false);
 
     const handleFiles = async e => {
         const files = e.target.files;
@@ -208,15 +198,10 @@ const PuppyForm = () => {
                         {yearError && <div className="errors_style">{yearError}</div>}
                         <div className='puppy__form__area'>
                             <input
-
-                                className='input__puppy'
-                                placeholder='First Image TEMPORARY'
-                                type="text"
+                                type="hidden"
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)} />
                         </div>
-
-
                         <div className="images-modal">
                             <div className="images-modal-background" onClick={closeImageManager} />
                             <div className="images-modal-content">
@@ -230,7 +215,7 @@ const PuppyForm = () => {
                                     ))} */}
                                 </div>
                                 <input type="file" id="img-input" name="img-input" multiple accept=".png,.jpg,.jpeg" onChange={handleFiles} />
-                                <label htmlFor="img-input" className="img-input-label">Select Images</label>
+                                <label htmlFor="img-input"></label>
                             </div>
                         </div>
                         {/* {yearError && <div className="errors_style">{yearError}</div>} */}
